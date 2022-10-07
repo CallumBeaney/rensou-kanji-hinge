@@ -1,0 +1,27 @@
+div {
+    /* color: rgb(255, 187, 187); */
+    padding: 1%;
+}
+.resultsboxes {
+    background-color:#ecf2ff;
+    display:flex;
+    text-align: center;
+    /* border-color: blue; */
+}
+button.resultbox {
+    border: none;
+    color: white;
+    background-color: #4CAF50;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor:crosshair;
+    flex-grow: 1;
+    border:1px solid black;
+}
+.resultbox:hover {
+    background-color: aqua;
+}

@@ -6,65 +6,68 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- <link rel="stylesheet" href="./style.css"> -->
+        <link rel="stylesheet" href="./style.css">
         <title>Rensou</title>
     </head>
 
     <body>
-        <h2 id="demo">Demo</h2>
         <div>
             <span style="display : inline-block">
-            PenSize <span id="lineWidth">3</span><input type="range" id="penSize" min="1" max="30" value="3">
-            <br>
-            <canvas id="canvas" width="400" height="400" style="border: 2px solid; cursor: crosshair;"></canvas>
-            <br>
-            <form>
-                Language:
-                <select id="language">
-                <option value="zh_TW" selected="selected">Chinese</option>
-                <option value="ja">Japanese</option>
-                <option value="en">English</option>
-                </select>
-            </form>
-            <br>
-            <button onclick="canvas.erase();">Erase</button>
-            <button onclick="
-                var e = document.getElementById('language');
-                canvas.setOptions({language: e.options[e.selectedIndex].value});
-                canvas.recognize();
-            ">Send</button>
-            <button onclick="canvas.undo()">Undo</button>
-            <button onclick="canvas.redo()">Redo</button>
-            <br>
-            result: <span id="result"></span>
+                <!-- PenSize <span id="lineWidth">3</span><input type="range" id="penSize" min="1" max="30" value="3"> -->
+                <br>
+
+                <div class="resultsboxes">
+                    <button class="resultbox" id="rb0" onclick="pushKanji(this.innerHTML)">・</button>              
+                    <button class="resultbox" id="rb1" onclick="pushKanji(this.innerHTML)">・</button>              
+                    <button class="resultbox" id="rb2" onclick="pushKanji(this.innerHTML)">・</button>              
+                    <button class="resultbox" id="rb3" onclick="pushKanji(this.innerHTML)">・</button>              
+                    <button class="resultbox" id="rb4" onclick="pushKanji(this.innerHTML)">・</button>              
+                    <button class="resultbox" id="rb5" onclick="pushKanji(this.innerHTML)">・</button>         
+                </div>
+
+                <canvas id="canvas" width="400" height="400" style="border: 2px solid; cursor: crosshair;"></canvas>
+
+                <br>
+                <button onclick="canvas.erase();">Erase</button>
+                <button onclick="canvas.recognize(); ">Send</button>
+                <button onclick="canvas.undo()">Undo</button>
+                <br>
+
             </span>
 
             <script type="text/javascript" src="handwriting.canvas.js"></script>
-            <script type="text/javascript" defer="">
-            var canvas = new handwriting.Canvas(document.getElementById('canvas'), 3);
-            var width = document.getElementById("demo").clientWidth;
-            canvas.cxt.canvas.width  = width < 400 ? width : 400;
-            canvas.cxt.canvas.height = width < 400 ? width : 400;
-            canvas.setCallBack(function(data, err) {
-                if (err) throw err;
-                else document.getElementById("result").innerHTML = data;
-            });
-            canvas.set_Undo_Redo(true, true);
-            var penSize = document.getElementById("penSize");
-            penSize.addEventListener("mousemove", function() {
-                document.getElementById("lineWidth").innerHTML = penSize.value;
-            });
-            penSize.addEventListener("change", function(){
-                canvas.setLineWidth(penSize.value);
-            });
+            
+            <script type="text/javascript" defer="">    // PROVIDE SETTINGS FOR HANDWRITING CANVAS
 
-            var options = {
-            width : 800,         //int, width of the writing area, default: undefined
-            height : 800,        //int, height of the writing area, default: undefined
-            language : "jp",  //string, language of input trace, default: "zh_TW"
-            numOfWords : 1,      //int, number of words of input trace, default: undefined
-            numOfReturn : 5,     //int, number of maximum returned results, default: undefined
-            };
+                var canvas = new handwriting.Canvas(document.getElementById('canvas'), 3);
+                    canvas.setOptions({language: "ja", numOfWords: 1, numOfReturn: 6,});
+
+                // なんであるか
+                // var width = document.getElementById("demo").clientWidth;    
+                // canvas.cxt.canvas.width  = width < 400 ? width : 400;
+                // canvas.cxt.canvas.height = width < 400 ? width : 400;
+                
+                canvas.set_Undo_Redo(true, false);  //ONLY TURN ON UNDO FUNCTIONALITY
+                canvas.setLineWidth(10);
+                
+                // THIS CODE LOADS THE "results" <BUTTONs> WITH INFO
+                // see lines 230-237 in handwriting.canvas.js
+                canvas.setCallBack(function(data, err) {  
+                    if (err) {                           
+                        throw err;
+                    }
+                    else 
+                    {   // see <BUTTON> class "resultsboxes"
+                        for (i=0;i<6;i++) {
+                            document.getElementById("rb" + i).innerHTML = data[i];
+                        }
+                    }       
+                });
+
+                function pushKanji(kanji)
+                {
+                    console.log(kanji);
+                }
 
             </script>
         </div>
