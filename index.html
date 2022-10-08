@@ -17,15 +17,16 @@
                 <br>
 
                 <div class="resultsboxes">
-                    <button class="resultbox" id="rb0" onclick="pushKanji(this.innerHTML)">・</button>              
-                    <button class="resultbox" id="rb1" onclick="pushKanji(this.innerHTML)">・</button>              
-                    <button class="resultbox" id="rb2" onclick="pushKanji(this.innerHTML)">・</button>              
-                    <button class="resultbox" id="rb3" onclick="pushKanji(this.innerHTML)">・</button>              
-                    <button class="resultbox" id="rb4" onclick="pushKanji(this.innerHTML)">・</button>              
-                    <button class="resultbox" id="rb5" onclick="pushKanji(this.innerHTML)">・</button>         
+                    <button class="resultbox" id="rb0" onclick="pushKanji(this.innerHTML)">　</button>              
+                    <button class="resultbox" id="rb1" onclick="pushKanji(this.innerHTML)">　</button>              
+                    <button class="resultbox" id="rb2" onclick="pushKanji(this.innerHTML)">　</button>              
+                    <button class="resultbox" id="rb3" onclick="pushKanji(this.innerHTML)">　</button>              
+                    <button class="resultbox" id="rb4" onclick="pushKanji(this.innerHTML)">　</button>              
+                    <button class="resultbox" id="rb5" onclick="pushKanji(this.innerHTML)">　</button>         
                 </div>
 
-                <canvas id="canvas" width="400" height="400" style="border: 2px solid; cursor: crosshair;"></canvas>
+                <!-- CANVAS SIZING INFO: https://stackoverflow.com/questions/4938346/canvas-width-and-height-in-html5 -->
+                <canvas id="canvas" width="200" height="300" style="border: 2px solid; cursor: crosshair;"></canvas>
 
                 <br>
                 <button onclick="canvas.erase();">Erase</button>
@@ -34,9 +35,10 @@
                 <br>
 
             </span>
+            <p id="checker"></p>
 
             <script type="text/javascript" src="handwriting.canvas.js"></script>
-            
+
             <script type="text/javascript" defer="">    // PROVIDE SETTINGS FOR HANDWRITING CANVAS
 
                 var canvas = new handwriting.Canvas(document.getElementById('canvas'), 3);
@@ -52,6 +54,7 @@
                 
                 // THIS CODE LOADS THE "results" <BUTTONs> WITH INFO
                 // see lines 230-237 in handwriting.canvas.js
+                
                 canvas.setCallBack(function(data, err) {  
                     if (err) {                           
                         throw err;
@@ -64,12 +67,17 @@
                     }       
                 });
 
-                function pushKanji(kanji)
-                {
-                    console.log(kanji);
-                }
+                // canvas.addEventListener('touchend',ended, false);
+
+                // canvas.addEventListener("touchend", function (e) {
+                //     var mouseEvent = new MouseEvent("mouseup", {});
+                //     canvas.dispatchEvent(mouseEvent);
+                //     }, false);
 
             </script>
+
+            <script src="./helpers.js"></script>
+
         </div>
     </body>
 </html>

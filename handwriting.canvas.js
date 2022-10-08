@@ -38,9 +38,11 @@
         cvs.addEventListener("touchstart", this.touchStart.bind(this));
         cvs.addEventListener("touchmove", this.touchMove.bind(this));
         cvs.addEventListener("touchend", this.touchEnd.bind(this));
+                
         this.callback = undefined;
         this.recognize = handwriting.recognize;
     };
+
     /**
      * [toggle_Undo_Redo description]
      * @return {[type]} [description]
@@ -139,6 +141,7 @@
         this.cxt.lineTo(x, y);
         this.cxt.stroke();
     };
+    
 
     handwriting.Canvas.prototype.touchEnd = function(e) {
         var w = [];
@@ -146,8 +149,17 @@
         w.push(this.handwritingY);
         w.push([]);
         this.trace.push(w);
-        if (this.allowUndo) this.step.push(this.canvas.toDataURL());
+        if (this.allowUndo) 
+        {
+            this.step.push(this.canvas.toDataURL());
+        }        
+        document.getElementById('checker').innerHTML="done";
+
+        // THIS CODE ADDED: reads the user input --each time-- the user finishes a finger-stroke
+        this.recognize(this.trace, this.options, this.callback);
     };
+
+ 
 
     handwriting.Canvas.prototype.undo = function() {
         if (!this.allowUndo || this.step.length <= 0) return;
@@ -236,7 +248,6 @@
                         callback(undefined, new Error("can't connect to recognition server"));
                         break;
                 }
-
 
             }
         });
