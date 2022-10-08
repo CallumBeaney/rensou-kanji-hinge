@@ -5,11 +5,19 @@ function pushKanji(kanji)
 
     canvas.erase();
 
+
+    // if (kanji passes condition check)
+    document.getElementById("nk").innerHTML = kanji;
+
     // Replace <button> contents
     for (i=0;i<6;i++) {
         document.getElementById("rb" + i).innerHTML = "　";
     }
+}
 
+function kanjiInfo(kanji)
+{
+    console.log("asked for info");
 }
 
 /*                    JSON LIBRARY FIELDS EXAMPLE

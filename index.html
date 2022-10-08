@@ -13,9 +13,17 @@
     <body>
         <div>
             <span style="display : inline-block">
-                <!-- PenSize <span id="lineWidth">3</span><input type="range" id="penSize" min="1" max="30" value="3"> -->
-                <br>
+                
+                <div id = outputboxes> 
+                
+                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">米</button>
+                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">酸</button>
+                
+                </div>
+                
+                <button class="newestKanji" id="nk" onclick="kanjiInfo(this.innerHTML)">私</button>
 
+                <br>
                 <div class="resultsboxes">
                     <button class="resultbox" id="rb0" onclick="pushKanji(this.innerHTML)">　</button>              
                     <button class="resultbox" id="rb1" onclick="pushKanji(this.innerHTML)">　</button>              
@@ -26,7 +34,7 @@
                 </div>
 
                 <!-- CANVAS SIZING INFO: https://stackoverflow.com/questions/4938346/canvas-width-and-height-in-html5 -->
-                <canvas id="canvas" width="200" height="300" style="border: 2px solid; cursor: crosshair;"></canvas>
+                <canvas id="canvas" width="250" height="250" style="border: 2px solid; cursor: crosshair;"></canvas>
 
                 <br>
                 <button onclick="canvas.erase();">Erase</button>
@@ -54,15 +62,24 @@
                 
                 // THIS CODE LOADS THE "results" <BUTTONs> WITH INFO
                 // see lines 230-237 in handwriting.canvas.js
-                
+                // see <BUTTON> class "resultsboxes"
+
                 canvas.setCallBack(function(data, err) {  
                     if (err) {                           
                         throw err;
                     }
                     else 
-                    {   // see <BUTTON> class "resultsboxes"
-                        for (i=0;i<6;i++) {
-                            document.getElementById("rb" + i).innerHTML = data[i];
+                    {   
+                        for (i=0;i<6;i++) 
+                        {
+                            if (data[i] == null ) 
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                document.getElementById("rb" + i).innerHTML = data[i];
+                            }
                         }
                     }       
                 });

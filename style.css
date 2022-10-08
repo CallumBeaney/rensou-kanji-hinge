@@ -1,28 +1,97 @@
+html, body {
+    height: 100%;
+    background-color: #ffffff;
+}
+html {
+    display: table;
+    margin: auto;
+}
+body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+/* INPUT AREA BOTTOM OF SCREEN */
 
 div {
     /* color: rgb(255, 187, 187); */
-    padding: 1%;
+    padding: 0%;
+    /* border:1px solid rgb(133, 133, 133); */
+    padding-bottom: 2%;
 }
 .resultsboxes {
-    background-color:#ecf2ff;
+    background-color:#ffffff;
     display:flex;
     text-align: center;
     /* border-color: blue; */
 }
 button.resultbox {
     border: none;
-    color: white;
-    background-color: #4CAF50;
-    padding: 5px 5px;
+    color: #666666;
+    background-color: #ededed;
+    /* padding: 5px 5px; */
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    font-size: 18px;
+    aspect-ratio: 1 / 1;
+    /* margin: 4px 2px; */
     cursor:crosshair;
-    flex-grow: 1;
-    border:1px solid black;
+    flex: 1 1 0;
+    /* border:1px solid rgb(133, 133, 133); */
 }
 .resultbox:hover {
-    background-color: aqua;
+    background-color: rgb(66, 66, 66);
+    color: #ededed;
 }
+
+
+
+/* OUTPUT AREA TOP OF SCREEN */
+
+div.outputboxes {
+    background-color:#ffffff;
+    display:flex;
+    text-align: center;
+    flex: 1 1 0;
+    overflow: auto;
+
+}
+
+button.newestKanji {    
+    margin:0 auto;
+    display:block;
+    border: none;
+    font-size: 30px;
+    color: #666666;
+    background-color: #ededed;
+    
+    /* padding: 5px 5px; */
+    text-align: center;
+    text-decoration: none;
+    aspect-ratio: 1 / 1;
+
+}
+
+button.kanjiList {
+    margin:0 auto;
+    display:block;
+    border: none;
+    font-size: 17px;
+    color: #666666;
+    background-color: #ededed;
+    text-align: center;
+    text-decoration: none;
+    aspect-ratio: 1 / 1;
+    
+    border:1px solid rgb(255, 255, 255);
+
+}
+
+/* 
+@media(max-width:640px){
+
+
+
+} */
