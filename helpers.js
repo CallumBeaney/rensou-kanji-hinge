@@ -5,7 +5,7 @@ function pushKanji(kanji)
     // if (kanji != null) {
     //      do thing
     // }
-        
+
     // TODO:
     // Compare kanji with dictionary
 

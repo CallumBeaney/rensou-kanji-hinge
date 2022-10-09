@@ -15,19 +15,18 @@
             <span style="display : inline-block">
                 
                 <div class=outputboxes id = outputboxes> 
-                
                     <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">犬</button>
                     <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">奇</button>
                     <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">可</button>
                     <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">歌</button>
                     <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">飲</button>
                     <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">蝕</button>
-                
                 </div>
                 
                 <button class="newestKanji" id="nk" onclick="kanjiInfo(this.innerHTML)">　</button>
-
+                
                 <br>
+
                 <div class="resultsboxes">
                     <button class="resultbox" id="rb0" onclick="pushKanji(this.innerHTML)"></button>              
                     <button class="resultbox" id="rb1" onclick="pushKanji(this.innerHTML)"></button>              
@@ -48,6 +47,9 @@
 
             </span>
             <p id="checker"></p>
+
+            <!-- LOAD DICTIONARY
+            <script type="json" src="./KanjiDictionary.json"></script> -->
 
             <script type="text/javascript" src="handwriting.canvas.js"></script>
 
@@ -87,14 +89,7 @@
                         }
                     }       
                 });
-
-                // canvas.addEventListener('touchend',ended, false);
-
-                // canvas.addEventListener("touchend", function (e) {
-                //     var mouseEvent = new MouseEvent("mouseup", {});
-                //     canvas.dispatchEvent(mouseEvent);
-                //     }, false);
-
+                
             </script>
 
             <script src="./helpers.js"></script>
