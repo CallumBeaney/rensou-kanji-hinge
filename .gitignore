@@ -1,2 +1,4 @@
 .DS_Store
 dictionarySyntax.js
+dictionaries/dictionaryJSObject.js
+dictionaries/KanjiDictionary.json
