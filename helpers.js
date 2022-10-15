@@ -1,21 +1,42 @@
-updateScroll(); // call on loadup
+updateScroll(); // call on loadup to bring user-input scrollbar to bottom
 
-function pushKanji(kanji)
+function pushKanji(newKanji)
 {
-    // if (kanji != null) {
-    //      do thing
-    // }
+    let prevKanji = document.getElementById("nk").innerHTML;
 
-    // TODO:
-    // Compare kanji with dictionary
+    if (prevKanji === newKanji) 
+    {
+        return;
+    }
 
-    /*  Firstly you'll need to read the JSON, like const myObject = JSON.parse(myJsonString);. 
-        That will give you an object. 
-        Then you can index into the object like const myValue = myObject[myKey];. 
-        If myValue is undefined, the key didn't exist in the object.
-    */
+    // Need Array: not all kanji's components > 1 
+    let thisBushu = Array.from(dictionary[newKanji].bushu); 
 
-    // 1. Clear handwriting input box; 2. Replace suggestion <button> contents.
+    if (prevKanji === "　")
+    {
+        passKanji(newKanji);
+    }
+    if (prevKanji != "　")
+    {
+        let prevBushu = Array.from(dictionary[prevKanji].bushu);
+        // console.log(prevBushu);
+        let result = findCommonBushu(thisBushu, prevBushu);
+        if (result == true)
+        {
+            console.log("common!");
+            passKanji(newKanji);
+        }
+        else {
+            // TODO: Change CSS colour to red failure colour on <id=rb> HTML objects?
+            console.log("not common!");
+            return;
+        }
+    }
+}
+
+
+function passKanji(kanji)
+{
     canvas.erase();
     for (i=0; i<6; i++) {
         document.getElementById("rb" + i).innerHTML = ""; 
@@ -27,6 +48,13 @@ function pushKanji(kanji)
     updateScroll();
 }
 
+function findCommonBushu(thisBushu, prevBushu) 
+{
+    /* Iterate through each element in the first array and if some of 
+    them include the elements in the secondarray then return true. */
+    return thisBushu.some(item => prevBushu.includes(item))
+}    
+
 function updateScroll() 
 {
     var element = document.getElementById("outputboxes");
@@ -36,36 +64,19 @@ function updateScroll()
 function kanjiInfo(kanji)
 {
     console.log("asked for info");
-}
 
-/*                    JSON LIBRARY FIELDS EXAMPLE
-    "年": {
-        "bushu": [
-        "ノ",
-        "一",
-        "干"
-        ],
-        "wiki": 2082013,
-        "eigo": "year",
-        "jikaku": 6,
-        "heisig": 1036,
-        "kanjidicBan": 2177,
-        "yomikata": [
-        "ネン",
-        "とし",
-        ""
-        ],
-        "onyomiKanji": [
-        "年代",
-        "少年",
-        "豊年"
-        ],
-        "onyomiKana": [
-        "ねんだい",
-        "しょうねん",
-        "ほうねん"
-        ],
-        "kunyomiKanji": "年",
-        "kunyomiKana": "とし"
-    }, 
-                            */
+    // TODO: construct html popup
+    
+    /*  bushu        = 部首      = radicals (components of the kanji)
+        eigo         = 英語      = kanji's english meaning
+        jikaku       = 字画      = kanji stroke count
+        heisig       = ・・      = Heisig's index number
+        kanjidicBan  = ・・      = The number for the EDRGD "KANJIDIC" dictionary **
+        yomikata     = 読み方    = The entry kanji's pronunciations.
+        onyomiKanji  = 音読み漢字 = Words using the kanji's onyomi, in kanji form
+        onyomiKana   = 音読み仮名 = Words using the kanji's onyomi, in kana form
+        kunyomiKanji = 訓読み漢字 = Words using the kanji's kunyomi, in kanji form
+        kunyomiKana  = 訓読み仮名 = Words using the kanji's kunyomi, in kana form 
+    */
+    
+}

@@ -48,9 +48,7 @@
             </span>
             <p id="checker"></p>
 
-            <!-- LOAD DICTIONARY
-            <script type="json" src="./KanjiDictionary.json"></script> -->
-
+    <!-- ADD HANDWRITING INPUT CANVAS & FUNCTIONS -->
             <script type="text/javascript" src="handwriting.canvas.js"></script>
 
             <script type="text/javascript" defer="">    // PROVIDE SETTINGS FOR HANDWRITING CANVAS
@@ -74,16 +72,12 @@
                     if (err) {                           
                         throw err;
                     }
-                    else 
-                    {   
-                        for (i=0;i<6;i++) 
-                        {
-                            if (data[i] == null ) 
-                            {
+                    else {   
+                        for (i=0;i<6;i++) {
+                            if (data[i] == null ) {
                                 continue;
                             }
-                            else
-                            {
+                            else {
                                 document.getElementById("rb" + i).innerHTML = data[i];
                             }
                         }
@@ -92,7 +86,10 @@
                 
             </script>
 
+    <!-- ADD DICTIONARY AND HELPER FUNCTIONS -->
+            <script type="text/javascript" src="./minifiedDictionary.js"></script>
             <script src="./helpers.js"></script>
+
 
         </div>
     </body>
