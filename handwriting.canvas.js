@@ -153,7 +153,6 @@
         {
             this.step.push(this.canvas.toDataURL());
         }        
-        document.getElementById('checker').innerHTML="done";
 
         // THIS CODE ADDED: reads the user input --each time-- the user finishes a finger-stroke
         this.recognize(this.trace, this.options, this.callback);
