@@ -28,20 +28,20 @@
                 <br>
 
                 <div class="resultsboxes">
-                    <button class="resultbox" id="rb0" onclick="pushKanji(this.innerHTML)"></button>              
-                    <button class="resultbox" id="rb1" onclick="pushKanji(this.innerHTML)"></button>              
-                    <button class="resultbox" id="rb2" onclick="pushKanji(this.innerHTML)"></button>              
-                    <button class="resultbox" id="rb3" onclick="pushKanji(this.innerHTML)"></button>              
-                    <button class="resultbox" id="rb4" onclick="pushKanji(this.innerHTML)"></button>              
-                    <button class="resultbox" id="rb5" onclick="pushKanji(this.innerHTML)"></button>         
+                    <button class="resultbox pass" id="rb0" onclick="pushKanji(this.innerHTML, this.id)"></button>              
+                    <button class="resultbox pass" id="rb1" onclick="pushKanji(this.innerHTML, this.id)"></button>             
+                    <button class="resultbox pass" id="rb2" onclick="pushKanji(this.innerHTML, this.id)"></button>        
+                    <button class="resultbox pass" id="rb3" onclick="pushKanji(this.innerHTML, this.id)"></button>        
+                    <button class="resultbox pass" id="rb4" onclick="pushKanji(this.innerHTML, this.id)"></button>         
+                    <button class="resultbox pass" id="rb5" onclick="pushKanji(this.innerHTML, this.id)"></button> 
                 </div>
 
                 <!-- CANVAS SIZING INFO: https://stackoverflow.com/questions/4938346/canvas-width-and-height-in-html5 -->
                 <canvas id="canvas" width="250" height="250" style="border: 2px solid; cursor: crosshair;"></canvas>
 
                 <br>
-                <button onclick="canvas.erase();">Erase</button>
-                <button onclick="canvas.recognize(); ">Send</button>
+                <button onclick="resetColours(); canvas.erase();">Erase</button>
+                <button onclick="resetColours(); canvas.recognize();">Send</button>
                 <button onclick="canvas.undo()">Undo</button>
                 <br>
 

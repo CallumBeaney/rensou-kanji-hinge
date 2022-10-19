@@ -26,10 +26,9 @@ div {
     text-align: center;
     /* border-color: blue; */
 }
+
 button.resultbox {
     border: none;
-    color: #666666;
-    background-color: #ededed;
     /* padding: 5px 5px; */
     text-align: center;
     text-decoration: none;
@@ -41,10 +40,14 @@ button.resultbox {
     flex: 1 1 0;
     /* border:1px solid rgb(133, 133, 133); */
 }
-.resultbox:hover {
-    background-color: rgb(66, 66, 66);
-    color: #ededed;
-}
+    button.resultbox.pass {
+        color: #666666;
+        background-color: #ededed;
+    }
+    button.resultbox.failure {
+    background-color: #f74040;
+    color: #f7f7f7;
+    }
 
 
 

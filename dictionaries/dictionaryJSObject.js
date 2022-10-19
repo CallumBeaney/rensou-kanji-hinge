@@ -18,6 +18,13 @@
       ** This variable is essential for maintaining order when referencing the CKRD and when cross-referencing other dictionaries using the EDRGD KANJIDIC system
 */
 
+/* To make edits, 
+
+  UNMINIFIY: https://unminify.com/
+  MINIFY:    https://codebeautify.org/minify-js
+
+*/
+
 dictionaryObject = {
     年: {
       bushu: ["ノ", "一", "干"],
@@ -1400,7 +1407,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     言: {
-      bushu: "言",
+      // bushu: ["言", "口"]
       wiki: 209715,
       eigo: "say",
       jikaku: 7,
@@ -5365,7 +5372,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     良: {
-      bushu: "艮",
+      bushu: ["艮", "衣", "日"],
       wiki: 68684,
       eigo: ["good", "pleasing", "skilled"],
       jikaku: 7,
@@ -6093,7 +6100,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     足: {
-      bushu: ["口", "足"],
+      bushu: ["口", "足", "止","疋"],
       wiki: 57772,
       eigo: ["leg", "foot", "be sufficient", "counter for pairs of footwear"],
       jikaku: 7,
@@ -9981,7 +9988,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     祭: {
-      bushu: ["示", "二", "小", "𠆢", "癶"],
+      bushu: ["示", "二", "小", "𠆢", "癶", "肉", "夕"],
       wiki: 29428,
       eigo: ["ritual", "offer prayers", "celebrate", "deify", "enshrine", "worship"],
       jikaku: 11,
@@ -44721,7 +44728,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     艮: {
-      bushu: "艮",
+      bushu: ["艮", "衣", "日"],
       wiki: 152,
       eigo: ["northeast (Oriental zodiac)", "stopping", "good radical (no. 138)"],
       jikaku: 6,
@@ -63287,8 +63294,8 @@ dictionaryObject = {
       kunyomiKanji: null,
       kunyomiKana: null
     },
-    縱: {
-      bushu: ["⺅", "糸", "幺", "小", "人", "走", "土", "彳"],
+    縱　: {
+      bushu: ["⺅", "糸", "幺", "小", "人", "走", "土", "彳", "止", "疋"],
       wiki: 14,
       eigo: ["indulge in", "give free reign to"],
       jikaku: 17,

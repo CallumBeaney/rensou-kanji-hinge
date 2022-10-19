@@ -1,3 +1,5 @@
+// Code added lines 169-161
+
 (function(window, document) {
 
     // Establish the root object, `window` (`self`) in the browser, 
@@ -155,6 +157,7 @@
         }        
 
         // THIS CODE ADDED: reads the user input --each time-- the user finishes a finger-stroke
+        resetColours();
         this.recognize(this.trace, this.options, this.callback);
     };
 
