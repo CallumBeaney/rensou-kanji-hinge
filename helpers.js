@@ -1,6 +1,6 @@
-updateScroll(); // call on loadup to bring user-input scrollbar to bottom
+updateScroll(); // call on loadup to bring user-input scrollbar to bottom -- rm when done
 
-function pushKanji(newKanji)
+function pushKanji(newKanji, buttonid)
 {
     let prevKanji = document.getElementById("nk").innerHTML;
 
@@ -9,8 +9,19 @@ function pushKanji(newKanji)
         return;
     }
 
-    // Need Array: not all kanji's components > 1 
-    let thisBushu = Array.from(dictionary[newKanji].bushu); 
+    // Need Array: not all kanji have >1 components 
+    let thisBushu = [];
+    
+    try
+    {
+        thisBushu = Array.from(dictionary[newKanji].bushu); 
+    }
+    catch(err) 
+    {
+        // Change CSS colour to red failure colour on <id=rb_> HTML objects?
+        document.getElementById(buttonid).className = "resultbox failure";
+        return;
+    }
 
     if (prevKanji === "　")
     {
@@ -19,16 +30,16 @@ function pushKanji(newKanji)
     if (prevKanji != "　")
     {
         let prevBushu = Array.from(dictionary[prevKanji].bushu);
-        // console.log(prevBushu);
+
         let result = findCommonBushu(thisBushu, prevBushu);
         if (result == true)
         {
-            console.log("common!");
+            resetColours();
             passKanji(newKanji);
         }
         else {
-            // TODO: Change CSS colour to red failure colour on <id=rb> HTML objects?
-            console.log("not common!");
+            // Change CSS colour to red failure colour on <id=rb_> HTML objects?
+            document.getElementById(buttonid).className = "resultbox failure";
             return;
         }
     }
@@ -38,7 +49,8 @@ function pushKanji(newKanji)
 function passKanji(kanji)
 {
     canvas.erase();
-    for (i=0; i<6; i++) {
+
+    for (i = 0; i < 6; i++) {
         document.getElementById("rb" + i).innerHTML = ""; 
     }
 
@@ -48,10 +60,17 @@ function passKanji(kanji)
     updateScroll();
 }
 
+function resetColours()
+{
+        for (i = 0; i < 6; i++) {
+            document.getElementById("rb" + i).className = "resultbox pass";
+        }
+}
+
 function findCommonBushu(thisBushu, prevBushu) 
 {
     /* Iterate through each element in the first array and if some of 
-    them include the elements in the secondarray then return true. */
+    them include the elements in the second　array then return true */
     return thisBushu.some(item => prevBushu.includes(item))
 }    
 
