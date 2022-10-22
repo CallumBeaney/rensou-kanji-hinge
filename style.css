@@ -14,10 +14,17 @@ body {
 
 /* INPUT AREA BOTTOM OF SCREEN */
 
+#canvas 
+{
+    width: 250px; 
+    height: 250px;
+    border: 2px solid;
+    cursor: crosshair;
+}
+
 div {
-    /* color: rgb(255, 187, 187); */
     padding: 0%;
-    /* border:1px solid rgb(133, 133, 133); */
+    border:1px solid rgb(133, 133, 133);
     padding-bottom: 2%;
 }
 .resultsboxes {
@@ -46,8 +53,8 @@ button.resultbox {
         background-color: #ededed;
     }
     button.resultbox.failure {
-    background-color: #f74040;
-    color: #f7f7f7;
+        background-color: #f74040;
+        color: #f7f7f7;
     }
 
 
@@ -61,13 +68,13 @@ button.resultbox {
 div.outputboxes {
     overflow-y: scroll;    
     height: 25vh;
+    width:65%;
     padding-bottom: 3vh;
 }
 div.actionButtons {
     display: inline-table;
     margin:0 auto;
-    vertical-align:middle;
-
+    /* vertical-align:middle; */
 }
 
 button.newestKanji {    
@@ -77,8 +84,6 @@ button.newestKanji {
     font-size: 30px;
     color: #666666;
     background-color: #ededed;
-    
-    /* padding: 5px 5px; */
     text-align: center;
     text-decoration: none;
     aspect-ratio: 1 / 1;
@@ -89,12 +94,11 @@ button.kanjiList {
     margin:0 auto;
     display:block;
     border: none;
-    font-size: 17px;
+    font-size: 20px; /* originally 17 */
     color: #666666;
     background-color: #ededed;
     text-align: center;
     aspect-ratio: 1 / 1;
-    
     border:1px solid rgb(255, 255, 255);
 
 }
@@ -103,12 +107,23 @@ button.commaButton {
     margin:0 auto;
     display:table;
     border: none;
-    font-size: 18px;
-    color: #AAFFAA;
-    background-color: #00AA00;
+    font-size: 20px;
+    color: #ededed;
+    background-color: #666666;
     text-align: center;
     aspect-ratio: 1 / 1;
     max-height:fit-content;  /* keeps button to square when using flex*/
     border:1px solid rgb(255, 255, 255);
-    
+}
+
+
+@media(max-width:640px) {
+
+    #canvas {
+        width: 100%; 
+        height: 100%;
+        border: 2px solid;
+        cursor: crosshair;
+    }
+
 }

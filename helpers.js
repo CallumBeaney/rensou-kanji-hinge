@@ -6,7 +6,7 @@ function pushKanji(newKanji, buttonid)
     if (buttonid === "stopButton")  // 。 button
     {
         passKanji(newKanji);
-        // TODO: clipboard copy from <outputboxes> + popup window to let user know
+        // TODO: clipboard copy from <outputboxes> + popup window to let user
         return;
     }
     if (buttonid === "commaButton")  // 、 button
@@ -42,7 +42,8 @@ function pushKanji(newKanji, buttonid)
         passKanji(newKanji);
         return;
     }
-    if (    !(exceptions.includes(prevKanji))   ) // TODO: is there ANY incidence where this being an Else is invalid?
+    // if (    !(exceptions.includes(prevKanji))   ) // TODO: is there ANY incidence where this being an Else is invalid?
+    else
     {
         let prevBushu = Array.from(dictionary[prevKanji].bushu);
 
