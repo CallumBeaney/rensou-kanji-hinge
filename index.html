@@ -46,8 +46,8 @@
                 </div>
 
                 <!-- CANVAS SIZING INFO: https://stackoverflow.com/questions/4938346/canvas-width-and-height-in-html5 -->
-                <canvas id="canvas" width="250" height="250" style="border: 2px solid; cursor: crosshair;"></canvas>
-
+                <canvas id="canvas"></canvas>
+                   
                 <br>
                 <button onclick="resetColours(); canvas.erase();">Erase</button>
                 <button onclick="resetColours(); canvas.recognize();">Send</button>
@@ -72,19 +72,6 @@
                 
                 canvas.set_Undo_Redo(true, false);  //ONLY TURN ON UNDO FUNCTIONALITY
                 canvas.setLineWidth(8);
-
-            /*
-                fitToContainer(canvas);
-
-                function fitToContainer(canvas){
-                // Make it visually fill the positioned parent
-                canvas.style.width ='100%';
-                canvas.style.height='100%';
-                // ...then set the internal size to match
-                canvas.width  = canvas.offsetWidth;
-                canvas.height = canvas.offsetHeight;
-                } 
-                                                    */
                 
 
                 // THIS CODE LOADS THE "results" <BUTTONs> WITH INFO
