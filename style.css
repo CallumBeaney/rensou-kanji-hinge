@@ -14,14 +14,6 @@ body {
 
 /* INPUT AREA BOTTOM OF SCREEN */
 
-/* #canvas 
-{
-    width: 250px; 
-    height: 250px;
-    border: 2px solid;
-    cursor: crosshair;
-} */
-
 div {
     padding: 0%;
     /* border:1px solid rgb(133, 133, 133); */
@@ -33,7 +25,6 @@ div {
     width: auto;
     text-align: center;
     justify-content: space-between;
-    padding-bottom: 0% !important;
 }
 
 
@@ -67,14 +58,18 @@ button.resultbox {
 
 div.outputboxes {
     overflow-y: scroll;    
-    height: 25vh;
+    height: 30vh;
     width:65%;
-    padding-bottom: 3vh;
+    padding-bottom: 2vh;
 }
 div.actionButtons {
     display: inline-table;
-    margin:0 auto;
-    /* vertical-align:middle; */
+    margin: 0 auto;
+}
+div.canvasButtons {
+    display: flex;
+    flex-direction:row;
+    align-items: flex-end;
 }
 
 button.newestKanji {    
@@ -101,14 +96,28 @@ button.kanjiList {
     text-align: center;
     aspect-ratio: 1 / 1;
     border:1px solid rgb(255, 255, 255);
-
 }
 
 button.topButton {
-    margin:0 auto;
+    /* margin:0 auto; */
+    margin-bottom: 1%;
     display:table;
     border: none;
     /* font-size: 20px; */
+    font-size: 1.4rem;
+    color: #ededed;
+    background-color: #666666;
+    text-align: center;
+    aspect-ratio: 1 / 1;
+    max-height:fit-content;  /* keeps button to square when using flex*/
+    border:1px solid rgb(255, 255, 255);
+}
+
+
+button.bottomButton {
+    margin:0 auto;
+    /* display:table; */
+    border: none;
     font-size: 1.2rem;
     color: #ededed;
     background-color: #666666;

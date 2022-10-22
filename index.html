@@ -11,14 +11,16 @@
 
     <body>
         <div>
-            <span style="display : inline-block" id="spanner">
+            <span style="display : inline-block">
                 
                 <div class="resultsboxes">
                     
-                    <div class="actionButtons">
-                        <button class="topButton" id="eraseButton" onclick="resetColours(); canvas.erase();">消</button>
+                    <div class="actionButtons"> 
+                        <!-- TODO: DL Button -->
+                        <button class="topButton" style="visibility:hidden">・</button>
+                        <!-- <button class="topButton" id="eraseButton" onclick="resetColours(); canvas.erase();">消</button>
                         <button class="topButton" id="undoButton"  onclick="resetColours(); canvas.undo();">戻</button>
-                        <button class="topButton" id="sendButton"  onclick="resetColours(); canvas.recognize();">出</button>
+                        <button class="topButton" id="sendButton"  onclick="resetColours(); canvas.recognize();">出</button> -->
                     </div>
 
                     <div class=outputboxes id = outputboxes> 
@@ -34,8 +36,8 @@
                         <button class="topButton" id="commaButton" onclick="pushKanji(this.innerHTML, this.id);resetColours();">、</button>
                         <button class="topButton" id="stopButton"  onclick="pushKanji(this.innerHTML, this.id);resetColours();">。</button>
                     </div>
+
                 </div>
-              
                 
                 <button class="newestKanji" id="nk" onclick="kanjiInfo(this.innerHTML)">　</button>
                 
@@ -54,17 +56,15 @@
                 <!-- CANVAS SIZING INFO: https://stackoverflow.com/questions/4938346/canvas-width-and-height-in-html5 -->
                 <canvas id="canvas" width="300" height="300" style="border: 2px solid; cursor: crosshair;"></canvas>
 
-                   
-                <!-- <button onclick="resetColours(); canvas.erase();">Erase</button> -->
-                <!-- <button onclick="resetColours(); canvas.recognize();">Send</button> -->
-                <!-- <button onclick="canvas.undo()">Undo</button> -->
+                <br>
                 
+                <div class="canvasButtons">
+                    <button class="bottomButton" id="eraseButton" onclick="resetColours(); canvas.erase();">消</button>
+                    <button class="bottomButton" id="undoButton"  onclick="resetColours(); canvas.undo();">戻</button>
+                    <button class="bottomButton" id="sendButton"  onclick="resetColours(); canvas.recognize();">出</button>   
+                </div>
             </span>
-            
-            <!--        <p id="checker"></p> 
-                        TODO: Why this here?       --> 
-
-    
+        
             <script type="text/javascript" src="handwriting.canvas.js"></script>
 
             <script type="text/javascript" defer="">    // PROVIDE SETTINGS FOR HANDWRITING CANVAS
@@ -99,14 +99,10 @@
                         }
                     }       
                 });
-                
             </script>
-
-    <!-- ADD DICTIONARY AND HELPER FUNCTIONS -->
-            <script type="text/javascript" src="./minifiedDictionary.js"></script>
+            <!-- ADD DICTIONARY AND HELPER FUNCTIONS -->
+            <script type="text/javascript" src="./minifiedDictionary.js"></script>  
             <script src="./helpers.js"></script>
-
-
         </div>
     </body>
 </html>
