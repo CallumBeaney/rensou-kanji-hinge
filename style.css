@@ -14,39 +14,39 @@ body {
 
 /* INPUT AREA BOTTOM OF SCREEN */
 
-#canvas 
+/* #canvas 
 {
     width: 250px; 
     height: 250px;
     border: 2px solid;
     cursor: crosshair;
-}
+} */
 
 div {
     padding: 0%;
-    border:1px solid rgb(133, 133, 133);
-    padding-bottom: 2%;
+    /* border:1px solid rgb(133, 133, 133); */
+    padding-bottom: 1%;
 }
 .resultsboxes {
     background-color:#ffffff;
     display:flex;
+    width: auto;
     text-align: center;
-    /* border-color: blue; */
+    justify-content: space-between;
+    padding-bottom: 0% !important;
 }
 
 
 button.resultbox {
     border: none;
-    /* padding: 5px 5px; */
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
     aspect-ratio: 1 / 1;
-    /* margin: 4px 2px; */
-    cursor:crosshair;
+    /* text-decoration: none; */
+    display: inline-block;
+    font-size: 1.3rem;
     flex: 1 1 0;
-    /* border:1px solid rgb(133, 133, 133); */
+    margin-left: 1%;
+    margin-right: 1%;
 }
     button.resultbox.pass {
         color: #666666;
@@ -81,7 +81,7 @@ button.newestKanji {
     margin:0 auto;
     display:block;
     border: none;
-    font-size: 30px;
+    font-size: 2.3rem;
     color: #666666;
     background-color: #ededed;
     text-align: center;
@@ -94,7 +94,8 @@ button.kanjiList {
     margin:0 auto;
     display:block;
     border: none;
-    font-size: 20px; /* originally 17 */
+    /* font-size: 20px; */
+    font-size: 1.3rem;
     color: #666666;
     background-color: #ededed;
     text-align: center;
@@ -103,11 +104,12 @@ button.kanjiList {
 
 }
 
-button.commaButton {
+button.topButton {
     margin:0 auto;
     display:table;
     border: none;
-    font-size: 20px;
+    /* font-size: 20px; */
+    font-size: 1.2rem;
     color: #ededed;
     background-color: #666666;
     text-align: center;
@@ -116,8 +118,7 @@ button.commaButton {
     border:1px solid rgb(255, 255, 255);
 }
 
-
-@media(max-width:640px) {
+/* @media(max-width:640px) {
 
     #canvas {
         width: 100%; 
@@ -126,4 +127,4 @@ button.commaButton {
         cursor: crosshair;
     }
 
-}
+} */

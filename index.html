@@ -1,3 +1,5 @@
+<!-- TODO: https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser -->
+<!-- TODO: style="visibility: hidden" -->
 <!doctype html>
 <html lang="en">
     <head>
@@ -13,8 +15,11 @@
                 
                 <div class="resultsboxes">
                     
-                    <button class="commaButton" style="visibility: hidden;">　</button>
-
+                    <div class="actionButtons">
+                        <button class="topButton" id="eraseButton" onclick="resetColours(); canvas.erase();">消</button>
+                        <button class="topButton" id="undoButton"  onclick="resetColours(); canvas.undo();">戻</button>
+                        <button class="topButton" id="sendButton"  onclick="resetColours(); canvas.recognize();">出</button>
+                    </div>
 
                     <div class=outputboxes id = outputboxes> 
                         <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">連</button>
@@ -26,8 +31,8 @@
                     </div>
 
                     <div class="actionButtons">
-                        <button class="commaButton" id="commaButton" onclick="pushKanji(this.innerHTML, this.id);resetColours();">、</button>
-                        <button class="commaButton" id="stopButton"  onclick="pushKanji(this.innerHTML, this.id);resetColours();">。</button>
+                        <button class="topButton" id="commaButton" onclick="pushKanji(this.innerHTML, this.id);resetColours();">、</button>
+                        <button class="topButton" id="stopButton"  onclick="pushKanji(this.innerHTML, this.id);resetColours();">。</button>
                     </div>
                 </div>
               
@@ -37,27 +42,29 @@
                 <br>
 
                 <div class="resultsboxes">
+                   
                     <button class="resultbox pass" id="rb0" onclick="pushKanji(this.innerHTML, this.id)"></button>              
                     <button class="resultbox pass" id="rb1" onclick="pushKanji(this.innerHTML, this.id)"></button>             
                     <button class="resultbox pass" id="rb2" onclick="pushKanji(this.innerHTML, this.id)"></button>        
                     <button class="resultbox pass" id="rb3" onclick="pushKanji(this.innerHTML, this.id)"></button>        
                     <button class="resultbox pass" id="rb4" onclick="pushKanji(this.innerHTML, this.id)"></button>         
-                    <button class="resultbox pass" id="rb5" onclick="pushKanji(this.innerHTML, this.id)"></button> 
+                    <button class="resultbox pass" id="rb5" onclick="pushKanji(this.innerHTML, this.id)"></button>
                 </div>
 
                 <!-- CANVAS SIZING INFO: https://stackoverflow.com/questions/4938346/canvas-width-and-height-in-html5 -->
-                <canvas id="canvas"></canvas>
+                <canvas id="canvas" width="300" height="300" style="border: 2px solid; cursor: crosshair;"></canvas>
+
                    
-                <br>
-                <button onclick="resetColours(); canvas.erase();">Erase</button>
-                <button onclick="resetColours(); canvas.recognize();">Send</button>
-                <button onclick="canvas.undo()">Undo</button>
-                <br>
-
+                <!-- <button onclick="resetColours(); canvas.erase();">Erase</button> -->
+                <!-- <button onclick="resetColours(); canvas.recognize();">Send</button> -->
+                <!-- <button onclick="canvas.undo()">Undo</button> -->
+                
             </span>
-            <p id="checker"></p>
+            
+            <!--        <p id="checker"></p> 
+                        TODO: Why this here?       --> 
 
-    <!-- ADD HANDWRITING INPUT CANVAS & FUNCTIONS -->
+    
             <script type="text/javascript" src="handwriting.canvas.js"></script>
 
             <script type="text/javascript" defer="">    // PROVIDE SETTINGS FOR HANDWRITING CANVAS
