@@ -27,6 +27,7 @@ div {
     /* border-color: blue; */
 }
 
+
 button.resultbox {
     border: none;
     /* padding: 5px 5px; */
@@ -53,10 +54,20 @@ button.resultbox {
 
 /* OUTPUT AREA TOP OF SCREEN */
 
+::-webkit-scrollbar {       /* HIDE SCROLLBAR */
+    display: none;
+}
+
 div.outputboxes {
     overflow-y: scroll;    
     height: 25vh;
     padding-bottom: 3vh;
+}
+div.actionButtons {
+    display: inline-table;
+    margin:0 auto;
+    vertical-align:middle;
+
 }
 
 button.newestKanji {    
@@ -88,9 +99,16 @@ button.kanjiList {
 
 }
 
-/* 
-@media(max-width:640px){
-
-
-
-} */
+button.commaButton {
+    margin:0 auto;
+    display:table;
+    border: none;
+    font-size: 18px;
+    color: #AAFFAA;
+    background-color: #00AA00;
+    text-align: center;
+    aspect-ratio: 1 / 1;
+    max-height:fit-content;  /* keeps button to square when using flex*/
+    border:1px solid rgb(255, 255, 255);
+    
+}

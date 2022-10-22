@@ -1,6 +1,3 @@
-
-<!-- VERY VERY BASIC FUNCTIONALITY. ALLOWS MOBILE HAND-DRAWING. CURRENTLY LINKING UP DICTIONARY WITH USER INPUT.  -->
-
 <!doctype html>
 <html lang="en">
     <head>
@@ -12,16 +9,28 @@
 
     <body>
         <div>
-            <span style="display : inline-block">
+            <span style="display : inline-block" id="spanner">
                 
-                <div class=outputboxes id = outputboxes> 
-                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">犬</button>
-                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">奇</button>
-                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">可</button>
-                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">歌</button>
-                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">飲</button>
-                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">蝕</button>
+                <div class="resultsboxes">
+                    
+                    <button class="commaButton" style="visibility: hidden;">　</button>
+
+
+                    <div class=outputboxes id = outputboxes> 
+                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">連</button>
+                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">想</button>
+                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">漢</button>
+                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">字</button>
+                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">蝶</button>
+                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">番</button>
+                    </div>
+
+                    <div class="actionButtons">
+                        <button class="commaButton" id="commaButton" onclick="pushKanji(this.innerHTML, this.id);resetColours();">、</button>
+                        <button class="commaButton" id="stopButton"  onclick="pushKanji(this.innerHTML, this.id);resetColours();">。</button>
+                    </div>
                 </div>
+              
                 
                 <button class="newestKanji" id="nk" onclick="kanjiInfo(this.innerHTML)">　</button>
                 
@@ -62,12 +71,25 @@
                 // canvas.cxt.canvas.height = width < 400 ? width : 400;
                 
                 canvas.set_Undo_Redo(true, false);  //ONLY TURN ON UNDO FUNCTIONALITY
-                canvas.setLineWidth(10);
+                canvas.setLineWidth(8);
+
+            /*
+                fitToContainer(canvas);
+
+                function fitToContainer(canvas){
+                // Make it visually fill the positioned parent
+                canvas.style.width ='100%';
+                canvas.style.height='100%';
+                // ...then set the internal size to match
+                canvas.width  = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+                } 
+                                                    */
                 
+
                 // THIS CODE LOADS THE "results" <BUTTONs> WITH INFO
                 // see lines 230-237 in handwriting.canvas.js
                 // see <BUTTON> class "resultsboxes"
-
                 canvas.setCallBack(function(data, err) {  
                     if (err) {                           
                         throw err;
