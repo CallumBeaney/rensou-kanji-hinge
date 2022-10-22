@@ -2,16 +2,28 @@ updateScroll(); // call on loadup to bring user-input scrollbar to bottom -- rm 
 
 function pushKanji(newKanji, buttonid)
 {
-    let prevKanji = document.getElementById("nk").innerHTML;
 
-    if (prevKanji === newKanji) 
+    if (buttonid === "stopButton")  // 。 button
     {
+        passKanji(newKanji);
+        // TODO: clipboard copy from <outputboxes> + popup window to let user know
+        return;
+    }
+    if (buttonid === "commaButton")  // 、 button
+    {
+        // This just lets the user move to a different kanji if they get stuck
+        passKanji(newKanji);
         return;
     }
 
-    // Need Array: not all kanji have >1 components 
-    let thisBushu = [];
-    
+    let prevKanji = document.getElementById("nk").innerHTML;
+    if (prevKanji === newKanji)
+    {
+        // user has input same character twice
+        return;
+    }
+
+    let thisBushu = [];     // Need Array: not all kanji have >1 components 
     try
     {
         thisBushu = Array.from(dictionary[newKanji].bushu); 
@@ -23,11 +35,14 @@ function pushKanji(newKanji, buttonid)
         return;
     }
 
-    if (prevKanji === "　")
+    const exceptions = ["　", "。", "、"];
+    if (exceptions.includes(prevKanji))
     {
+        resetColours();
         passKanji(newKanji);
+        return;
     }
-    if (prevKanji != "　")
+    if (    !(exceptions.includes(prevKanji))   ) // TODO: is there ANY incidence where this being an Else is invalid?
     {
         let prevBushu = Array.from(dictionary[prevKanji].bushu);
 
@@ -36,9 +51,9 @@ function pushKanji(newKanji, buttonid)
         {
             resetColours();
             passKanji(newKanji);
+            return;
         }
         else {
-            // Change CSS colour to red failure colour on <id=rb_> HTML objects?
             document.getElementById(buttonid).className = "resultbox failure";
             return;
         }
@@ -79,6 +94,7 @@ function updateScroll()
     var element = document.getElementById("outputboxes");
     element.scrollTop = element.scrollHeight;
 }
+
 
 function kanjiInfo(kanji)
 {
