@@ -1,27 +1,29 @@
 <!-- TODO: https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser -->
-<!-- TODO: style="visibility: hidden" -->
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./style.css">
-        <title>Rensou</title>
+        <title>Rensou Kanji Hinge</title>
     </head>
 
     <body>
-        <div>
+        <div> <!-- TODO: IS THIS DIV ESSENTIAL? -->
+
+            <!-- N.B. This is for a popup overlay! -->
+            <div id="overlay" onclick="turnOverlayOff();">
+                <div id="overlayText"></div>
+            </div>
+
             <span style="display : inline-block">
                 
                 <div class="resultsboxes">
                     
                     <div class="actionButtons"> 
                         <!-- TODO: DL Button -->
-                        <button class="topButton" style="visibility:hidden">・</button>
-                        <!-- <button class="topButton" id="eraseButton" onclick="resetColours(); canvas.erase();">消</button>
-                        <button class="topButton" id="undoButton"  onclick="resetColours(); canvas.undo();">戻</button>
-                        <button class="topButton" id="sendButton"  onclick="resetColours(); canvas.recognize();">出</button> -->
-                    </div>
+                        <button class="actionButton" style="visibility:hidden">・</button>   
+                        </div>
 
                     <div class=outputboxes id = outputboxes> 
                         <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">連</button>
@@ -33,36 +35,50 @@
                     </div>
 
                     <div class="actionButtons">
-                        <button class="topButton" id="commaButton" onclick="pushKanji(this.innerHTML, this.id);resetColours();">、</button>
-                        <button class="topButton" id="stopButton"  onclick="pushKanji(this.innerHTML, this.id);resetColours();">。</button>
-                    </div>
+                        <button class="actionButton" id="outputButton" onclick="output();">〒</button>
+                        <button class="actionButton" id="helpButton" onclick="help();">？</button>
+                     </div>
 
                 </div>
+
+                <div class="newKanji">
+
+                    <!-- TODO: fix up NK -->
+                    <button class="NKactionButton" id="commaButton" onclick="submitKanji(this.innerHTML, this.id);">、</button>
+                    <button class="newestKanji" id="nk" onclick="kanjiInfo(this.innerHTML)">　</button>
+                    <button class="NKactionButton" id="stopButton"  onclick="submitKanji(this.innerHTML, this.id);">。</button>
+
+                </div>  
                 
-                <button class="newestKanji" id="nk" onclick="kanjiInfo(this.innerHTML)">　</button>
-                
-                <br>
+                    <br>
 
                 <div class="resultsboxes">
                    
-                    <button class="resultbox pass" id="rb0" onclick="pushKanji(this.innerHTML, this.id)"></button>              
-                    <button class="resultbox pass" id="rb1" onclick="pushKanji(this.innerHTML, this.id)"></button>             
-                    <button class="resultbox pass" id="rb2" onclick="pushKanji(this.innerHTML, this.id)"></button>        
-                    <button class="resultbox pass" id="rb3" onclick="pushKanji(this.innerHTML, this.id)"></button>        
-                    <button class="resultbox pass" id="rb4" onclick="pushKanji(this.innerHTML, this.id)"></button>         
-                    <button class="resultbox pass" id="rb5" onclick="pushKanji(this.innerHTML, this.id)"></button>
+                    <button class="resultbox startup" id="rb1" onclick="submitKanji(this.innerHTML, this.id)">字</button>             
+                    <button class="resultbox startup" id="rb2" onclick="submitKanji(this.innerHTML, this.id)">を</button>        
+                    <button class="resultbox startup" id="rb3" onclick="submitKanji(this.innerHTML, this.id)">書</button>        
+                    <button class="resultbox startup" id="rb4" onclick="submitKanji(this.innerHTML, this.id)">い</button>         
+                    <button class="resultbox startup" id="rb0" onclick="submitKanji(this.innerHTML, this.id)">漢</button>              
+                    <button class="resultbox startup" id="rb5" onclick="submitKanji(this.innerHTML, this.id)">て</button>
+                
                 </div>
 
-                <!-- CANVAS SIZING INFO: https://stackoverflow.com/questions/4938346/canvas-width-and-height-in-html5 -->
+
                 <canvas id="canvas" width="300" height="300" style="border: 2px solid; cursor: crosshair;"></canvas>
+                <!-- CANVAS SIZING INFO:    https://stackoverflow.com/questions/43436661/how-to-scale-canvas-on-mobile-and-desktop-devices
+                                            https://stackoverflow.com/questions/4938346/canvas-width-and-height-in-html5 -->
 
                 <br>
                 
                 <div class="canvasButtons">
-                    <button class="bottomButton" id="eraseButton" onclick="resetColours(); canvas.erase();">消</button>
-                    <button class="bottomButton" id="undoButton"  onclick="resetColours(); canvas.undo();">戻</button>
-                    <button class="bottomButton" id="sendButton"  onclick="resetColours(); canvas.recognize();">出</button>   
+
+                    <!-- TODO: detect mobile browser & disable sendButton in such cases : https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser -->
+                    <button class="bottomButton" id="eraseButton" onclick="resetColours(); canvas.erase();">消去</button>
+                    <button class="bottomButton" id="sendButton"  onclick="resetColours(); canvas.recognize();">送信</button>   
+                    <button class="bottomButton" id="undoButton"  onclick="resetColours(); canvas.undo();">取消</button>
+                
                 </div>
+
             </span>
         
             <script type="text/javascript" src="handwriting.canvas.js"></script>
@@ -72,18 +88,15 @@
                 var canvas = new handwriting.Canvas(document.getElementById('canvas'), 3);
                     canvas.setOptions({language: "ja", numOfWords: 1, numOfReturn: 6,});
 
-                // なんであるか
+                // TODO: なんであるか
                 // var width = document.getElementById("demo").clientWidth;    
                 // canvas.cxt.canvas.width  = width < 400 ? width : 400;
                 // canvas.cxt.canvas.height = width < 400 ? width : 400;
                 
                 canvas.set_Undo_Redo(true, false);  //ONLY TURN ON UNDO FUNCTIONALITY
                 canvas.setLineWidth(8);
-                
-
-                // THIS CODE LOADS THE "results" <BUTTONs> WITH INFO
-                // see lines 230-237 in handwriting.canvas.js
-                // see <BUTTON> class "resultsboxes"
+            
+            /*  THIS CODE LOADS THE "resultbox" <BUTTONs> WITH INFO: see lines 230-237 in handwriting.canvas.js and see buttons in <DIV> class "resultsboxes" above */
                 canvas.setCallBack(function(data, err) {  
                     if (err) {                           
                         throw err;
@@ -100,9 +113,11 @@
                     }       
                 });
             </script>
+
             <!-- ADD DICTIONARY AND HELPER FUNCTIONS -->
             <script type="text/javascript" src="./minifiedDictionary.js"></script>  
             <script src="./helpers.js"></script>
+
         </div>
     </body>
 </html>
