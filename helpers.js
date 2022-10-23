@@ -100,20 +100,39 @@ function updateScroll()
 
 function help()
 {
-    // TODO: popup window &/ canvas simulation
+    document.getElementById("overlayText").innerHTML = "";
     turnOverlayOn();
-    document.getElementById("overlayText").innerHTML = "<br>これは「連想漢字蝶番」即ち ｢Associative Kanji Hinge｣、 漢字の部首を連想することで日本語漢字の手習いの為の携帯サイトです。<br>This is Associative Kanji Hinge, or '連想漢字蝶番', a mobile site for learning Chinese characters used in Japanese by drawing associations between their sub-components or 'radicals'. <br><br>白いボックスに描きながら、直上の六つの四角に自動手書き認識ソフトはあなたが描いた漢字を推測します。選びが成功すれば、成功欄に追加されます。部首を共有する漢字を思い出せない場合「、」と「。」ボタンを押して新しい一連を始めます。<br>Automatic handwriting recognition software will guess the kanji you write and give suggestions in the six boxes immediately above the input box. Successful choices will be added to the kanji column. Use the 、and 。buttons when you can't think of any more valid characters to start a new sequence.<br><br>漢字の情報が欲しければ漢字を押してください。<br>If you want to know about a kanji, tap on it!<br><br>ABOUT<br><p style='font-size:0.8rem;'>This program was conceived and written by <a href='https://callumbeaney.github.io/website/'>Callum Beaney</a> based on how he used to practice kanji on a notepad at work, writing as many as he could remember by linking them together. The reference dictionary is primarily built from EDRDG's <a href='http://www.edrdg.org/wiki/index.php/KANJIDIC_Project'>KANJIDIC</a> dictionary, and Raine/Breen's <a href='http://www.edrdg.org/krad/kradinf.html'>RADKFILE/KRADFILE</a>. The canvas API is the excellent Chen-Yu Ho's <a href='https://www.chenyuho.com/project/handwritingjs/'>Handwriting.JS</a>. Read the <a href='https://github.com/CallumBeaney/rensou-kanji-hinge'>source code on Github</a>.</p>";
+    document.getElementById("overlayText").innerHTML = "<br>これは｢連想漢字蝶番｣、 部首を連想することで漢字の手習いの為の携帯サイトです。This is Associate Kanji Hinge, a mobile site for practicing writing by linking kanji radicals. <br><br>描きながら、直上の六つの四角に自動手書き認識ソフトは描いた漢字を推測します。選びが成功すれば、成功欄に追加されます。部首を共有する漢字を思い出せない場合｢、｣と｢。｣ボタンを押して新しい一連を始めます。The program will guess the kanji you write in the boxes immediately above the input box. Successful choices are added to the kanji column. Use the 、and 。buttons to start a new kanji sequence.<br><br>漢字の情報が欲しければ漢字を押してください。<br>If you want to know about a kanji, tap on it!<br><br>This was made by <a href='https://callumbeaney.github.io/website/'>Callum Beaney</a> based on how he used to practice kanji on a notepad at work. The reference dictionary is built from <a href='http://www.edrdg.org/wiki/index.php/KANJIDIC_Project'>KANJIDIC</a> dictionary, and <a href='http://www.edrdg.org/krad/kradinf.html'>RADKFILE/KRADFILE</a>. The canvas API is Chen-Yu Ho's <a href='https://www.chenyuho.com/project/handwritingjs/'>Handwriting.JS</a>. Read the <a href='https://github.com/CallumBeaney/rensou-kanji-hinge'>source code on Github</a>.";
 }
 
 
 function output()
-{
+{   
+    document.getElementById("overlayText").innerHTML = "";
+
+    let elements = document.querySelectorAll('.kanjiList');    
+    Array.from(elements).forEach((element, index) => {
+        kanjiInfo(element.innerHTML, "externalOutput");
+    });
+
     turnOverlayOn();
+    
     // TODO: clipboard copy from <outputboxes>: https://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
 }
 
-function kanjiInfo(kanji)
-{        
+function kanjiInfo(kanji, mode)
+{    
+
+    // TODO: fix up kanjiInfo() and output() functions
+    // for external output mode
+    if (kanji === "。" || kanji === "、")
+    {
+        let toSend = [kanji];
+        document.getElementById("overlayText").innerHTML += toSend;
+        console.log(toSend);
+        return;
+    }
+
     let heisigIndex;
     if (dictionary[kanji].heisig === undefined) {   
         heisigIndex = ">3007th place"   
@@ -134,11 +153,11 @@ function kanjiInfo(kanji)
         translation = dictionary[kanji].eigo;
     }
 
-    if (typeof dictionary[kanji].eigo === 'object') {
-        translation = dictionary[kanji].eigo.join("・");
-    } else {
-        translation = dictionary[kanji].eigo;
-    }
+    // if (typeof dictionary[kanji].eigo === 'object') {
+    //     translation = dictionary[kanji].eigo.join("・");
+    // } else {
+    //     translation = dictionary[kanji].eigo;
+    // }
 
     let bushu;
     if (typeof dictionary[kanji].bushu === 'object') {
@@ -147,15 +166,28 @@ function kanjiInfo(kanji)
         bushu = dictionary[kanji].bushu;
     }
 
-    let output = "<p style='font-size: 5rem; margin:0 auto;' align='center'>" + kanji 
-               + "</p><br><p style='font-size: 1rem' align='center'>" 
-               + "Meaning: " + translation 
-               + "<br>Pronunciation: " + yomikata 
-               + "<br>Radicals: " + bushu
-               + "<br>Stroke Count: " + dictionary[kanji].jikaku.toString()
-               + "<br>Instances on JP Wikipedia: " + dictionary[kanji].wiki.toString() 
-               + "<br>Heisig Index: " + heisigIndex 
-               + "</p>";
+    if (mode === "browser")
+    {
+        let output = "<p style='font-size: 5rem; margin:0 auto;' align='center'>" + kanji 
+        + "</p><br><p style='font-size: 1rem' align='center'>" 
+        + "Meaning: " + translation 
+        + "<br>Pronunciation: " + yomikata 
+        + "<br>Radicals: " + bushu
+        + "<br>Stroke Count: " + dictionary[kanji].jikaku.toString()
+        + "<br>Instances on JP Wikipedia: " + dictionary[kanji].wiki.toString() 
+        + "<br>Heisig Index: " + heisigIndex 
+        + "</p>";
+
+        document.getElementById("overlayText").innerHTML = output;
+    }
+
+    if (mode === "externalOutput")
+    {
+            let toSend = [kanji, translation, yomikata, bushu, dictionary[kanji].jikaku.toString(), dictionary[kanji].wiki.toString(), heisigIndex];    
+            document.getElementById("overlayText").innerHTML += toSend;
+            console.log(toSend);
+            return;
+    }
 
     // TODO: Sort out on/kun-yomi output
     
@@ -171,7 +203,6 @@ function kanjiInfo(kanji)
         kunyomiKana  = 訓読み仮名 = Words using the kanji's kunyomi, in kana form 
     */
 
-        document.getElementById("overlayText").innerHTML = output;
         turnOverlayOn();
 
 }

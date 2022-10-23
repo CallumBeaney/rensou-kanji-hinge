@@ -51,7 +51,7 @@ div.resultsboxes {          /* THE 6 BUTTONS ABOVE THE CANVAS */
         }
         button.resultbox.pass {
             color: #ffffff;
-            background-color: #22ea2f;
+            background-color: #1bc459;
         }
         button.resultbox.failure {
             background-color: #f74040;
@@ -92,7 +92,7 @@ div.outputboxes {               /* THE SCROLLABLE, VERTICAL LIST OF INPUTTED KAN
         margin:0 auto;
         display:block;
         border: none;
-        font-size: 1.3rem;
+        font-size: 1.4rem;
         color: #666666;
         background-color: #ededed;
         text-align: center;
@@ -113,7 +113,7 @@ div.actionButtons {             /* THE ADMIN BUTTONS IN THE TOP CORNER OF THE SC
         font-size: 1.4rem;
         color: #ededed;
         background-color: #666666;
-        text-align: center;
+        text-align: center !important;
         aspect-ratio: 1 / 1;
         max-height:fit-content;  
         /* ^keeps button to square when using flex */
@@ -124,9 +124,10 @@ div.newKanji {                  /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
     display: inline-block;
     width: 100%;
     text-align: center;
+    margin-bottom: 1%;
     }
     button.NKactionButton {
-        margin-top: 3%;
+        margin-top: 4%;
         margin-bottom: 5%;
         margin-inline: 14%;
         /* display:inline-flex; */
@@ -141,9 +142,8 @@ div.newKanji {                  /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
         /* border:1px solid rgb(255, 255, 255); */
     }
     button.newestKanji {    
-
-        margin: auto;
-        margin-bottom: 3%;
+        /* margin: auto; */
+        /* margin-bottom: 3%; */
         border: hidden;
         font-size: 2.5rem;
         color: #666666;
@@ -155,25 +155,31 @@ div.newKanji {                  /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
 
 /* OVERLAY FOR INFORMATION */
 
+/* .over { 
+        overflow-y:auto;
+        height:100%;   
+    } */
 #overlay {
     position: fixed; /* Sit on top of the page content */
     display: none; /* Hidden by default */
     width: 100%; /* Full width (cover the whole page) */
     height: 100%; /* Full height (cover the whole page) */
+    /* padding-top: 3%;
+    padding-bottom: 3%; */
     top: 0; 
     left: 0;
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.95); /* Black background with opacity */
-    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
-    overflow-y: scroll;    
+    /* overflow-y: scroll !important; */
+
   }
   #overlayText{
     position: absolute;
     top: 50%;
     left: 50%;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-family: Hiragino Kaku Gothic Pro, Hiragino Sans, Meiryo, sans-serif;
     color: white;
     transform: translate(-50%,-50%);
@@ -182,4 +188,17 @@ div.newKanji {                  /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
     /* margin-top: 5%; */
     /* margin-bottom: 5%; */
   }
- 
+/*                  ALT SPACING (TODO: BUGGY)
+  #overlayText{
+    position: absolute;
+    top: 10%;
+    left: 19%;
+    bottom: 60%;
+    font-size: 0.9rem;
+    font-family: Hiragino Kaku Gothic Pro, Hiragino Sans, Meiryo, sans-serif;
+    color: white;
+    transform: translate(-12%,-25%);
+    -ms-transform: translate(-20%,-20%);
+    text-align: justify;
+
+  } */

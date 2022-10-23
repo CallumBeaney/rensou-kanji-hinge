@@ -52,9 +52,11 @@
                         break;
                     case 403:
                         callback(undefined, new Error("access denied"));
+                        console.log("403 error");
                         break;
                     case 503:
                         callback(undefined, new Error("can't connect to recognition server"));
+                        console.log("503 error");
                         break;
                 }
 
