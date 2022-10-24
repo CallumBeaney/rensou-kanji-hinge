@@ -2,19 +2,20 @@ function submitKanji(newKanji, buttonid)
 {
 
     /* These just let the user move to a different kanji if they get stuck and break up their kanji list */
-    if (buttonid === "stopButton")  // 。 button
+    if (buttonid === "stopButton")
     {
         passKanji(newKanji);
         return;
     }
-    if (buttonid === "commaButton")  // 、 button
+    if (buttonid === "commaButton")
     {
         passKanji(newKanji);
         return;
     }
 
     let prevKanji = document.getElementById("nk").innerHTML;
-    if (prevKanji === newKanji) {    // user has input same character twice
+    if (prevKanji === newKanji) {
+        // user has input same character twice
         return; 
     }
 
@@ -25,7 +26,7 @@ function submitKanji(newKanji, buttonid)
     // }
 
 
-    let thisBushu = [];     // Need Array: not all kanji have >1 components 
+    let thisBushu = [];     // Need Array: not all kanji entries have >1 components 
     try
     {
         thisBushu = Array.from(dictionary[newKanji].bushu); 
@@ -68,7 +69,7 @@ function passKanji(kanji)
     canvas.erase();
     resetColours(); 
     for (i = 0; i < 6; i++) {
-        // Mustn't move this into resetColours() because that gets used by the HTML canvas Undo and Erase buttons
+        // Mustn't refactor this loop into resetColours() because that gets used by the HTML canvas Undo and Erase buttons
         document.getElementById("rb" + i).innerHTML = ""; 
     }
 
@@ -92,42 +93,22 @@ function findCommonBushu(thisBushu, prevBushu)
     return thisBushu.some(item => prevBushu.includes(item))
 }    
 
-function updateScroll() 
-{
-    var element = document.getElementById("outputboxes");
-    element.scrollTop = element.scrollHeight;
-}
 
 function help()
 {
-    document.getElementById("overlayText").innerHTML = "";
-
+    document.getElementById("overlayText").innerHTML = "<br>This is Associate Kanji Hinge or 連想漢字蝶番, a mobile site for practicing writing by linking kanji radicals. The program will guess the kanji you write in the boxes immediately above the input box. Successful choices are added to the kanji column. Use the 、and 。buttons to start a new kanji sequence. If you want to know about a kanji, tap on it!<br><br><a href='https://callumbeaney.github.io/website/'>Callum Beaney</a> made this based on how he used to practice kanji on a notepad at work. The reference dictionary is built from <a href='http://www.edrdg.org/wiki/index.php/KANJIDIC_Project'>KANJIDIC</a>  and <a href='http://www.edrdg.org/krad/kradinf.html'>RADKFILE/KRADFILE</a>. The canvas API is Chen-Yu Ho's <a href='https://www.chenyuho.com/project/handwritingjs/'>Handwriting.JS</a>. Read the <a href='https://github.com/CallumBeaney/rensou-kanji-hinge'>source code here</a>.";
     turnOverlayOn();
-    document.getElementById("overlayText").innerHTML = "<br>This is Associate Kanji Hinge or ｢連想漢字蝶番｣, a mobile site for practicing writing by linking kanji radicals. <br><br>The program will guess the kanji you write in the boxes immediately above the input box. Successful choices are added to the kanji column. Use the 、and 。buttons to start a new kanji sequence.<br><br>If you want to know about a kanji, tap on it!<br><br>This was made by <a href='https://callumbeaney.github.io/website/'>Callum Beaney</a> based on how he used to practice kanji on a notepad at work. The reference dictionary is built from <a href='http://www.edrdg.org/wiki/index.php/KANJIDIC_Project'>KANJIDIC</a> dictionary, and <a href='http://www.edrdg.org/krad/kradinf.html'>RADKFILE/KRADFILE</a>. The canvas API is Chen-Yu Ho's <a href='https://www.chenyuho.com/project/handwritingjs/'>Handwriting.JS</a>. Read the <a href='https://github.com/CallumBeaney/rensou-kanji-hinge'>source code on Github</a>.";
 
     // ORIGINAL
     /* document.getElementById("overlayText").innerHTML = "<br>これは｢連想漢字蝶番｣、 部首を連想することで漢字の手習いの為の携帯サイトです。This is Associate Kanji Hinge, a mobile site for practicing writing by linking kanji radicals. <br><br>描きながら、直上の六つの四角に自動手書き認識ソフトは描いた漢字を推測します。選びが成功すれば、成功欄に追加されます。部首を共有する漢字を思い出せない場合｢、｣と｢。｣ボタンを押して新しい一連を始めます。The program will guess the kanji you write in the boxes immediately above the input box. Successful choices are added to the kanji column. Use the 、and 。buttons to start a new kanji sequence.<br><br>漢字の情報が欲しければ漢字を押してください。<br>If you want to know about a kanji, tap on it!<br><br>This was made by <a href='https://callumbeaney.github.io/website/'>Callum Beaney</a> based on how he used to practice kanji on a notepad at work. The reference dictionary is built from <a href='http://www.edrdg.org/wiki/index.php/KANJIDIC_Project'>KANJIDIC</a> dictionary, and <a href='http://www.edrdg.org/krad/kradinf.html'>RADKFILE/KRADFILE</a>. The canvas API is Chen-Yu Ho's <a href='https://www.chenyuho.com/project/handwritingjs/'>Handwriting.JS</a>. Read the <a href='https://github.com/CallumBeaney/rensou-kanji-hinge'>source code on Github</a>."; */
 }
 
 
-function output()
-{   
-    document.getElementById("overlayText").innerHTML = "";
-
-    let elements = document.querySelectorAll('.kanjiList');    
-    Array.from(elements).forEach((element, index) => {
-        kanjiInfo(element.innerHTML, "externalOutput");
-    });
-
-    turnOverlayOn();
-    
-    // TODO: clipboard copy from <outputboxes>: https://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
-}
 
 function kanjiInfo(kanji, mode)
 {    
-
     // TODO: fix up kanjiInfo() and output() functions
+
     // for external output mode
     if (kanji === "。" || kanji === "、")
     {
@@ -137,78 +118,98 @@ function kanjiInfo(kanji, mode)
         return;
     }
 
+    /*  DICTIONARY ENTRY HANDLING STARTS */
+
     let heisigIndex;
-    if (dictionary[kanji].heisig === undefined) {   
-        heisigIndex = ">3007th place"   
-    } else { heisigIndex = dictionary[kanji].heisig   
-    }
+        if (dictionary[kanji].heisig === undefined) {   
+            heisigIndex = ">3007th place"   
+        } else { 
+            heisigIndex = dictionary[kanji].heisig;   
+        }
 
     let yomikata;
-    if (typeof dictionary[kanji].yomikata === 'object' || dictionary[kanji].yomikata instanceof Object) {
-        yomikata = dictionary[kanji].yomikata.join("、");
-    } else {
-        yomikata = dictionary[kanji].yomikata;        
-    }
-                
+        if (typeof dictionary[kanji].yomikata === 'object') {
+            yomikata = dictionary[kanji].yomikata.join("、<wbr>");
+        } else {
+            yomikata = dictionary[kanji].yomikata;        
+        }
+                    
     let translation;
-    if (typeof dictionary[kanji].eigo === 'object') {
-        translation = dictionary[kanji].eigo.join("・");
-    } else {
-        translation = dictionary[kanji].eigo;
-    }
-
-    // if (typeof dictionary[kanji].eigo === 'object') {
-    //     translation = dictionary[kanji].eigo.join("・");
-    // } else {
-    //     translation = dictionary[kanji].eigo;
-    // }
+        if (typeof dictionary[kanji].eigo === 'object') {
+            translation = dictionary[kanji].eigo.join(", ");
+        } else {
+            translation = dictionary[kanji].eigo;
+        }
 
     let bushu;
-    if (typeof dictionary[kanji].bushu === 'object') {
-        bushu = dictionary[kanji].bushu.join(", ");
-    } else {
-        bushu = dictionary[kanji].bushu;
-    }
+        if (typeof dictionary[kanji].bushu === 'object') {
+            bushu = dictionary[kanji].bushu.join(", ");
+        } else {
+            bushu = dictionary[kanji].bushu;
+        }
+        
+    let onyomiKanji;
+        if (typeof dictionary[kanji].onyomiKanji === 'object') {
+            onyomiKanji = dictionary[kanji].onyomiKanji.join(", ");
+        } else {
+            onyomiKanji = dictionary[kanji].onyomiKanji;
+        }
 
-    if (mode === "browser")
+    /* ___DICTIONARY ENTRY HANDLING ENDS___ */
+
+
+    if (mode === "externalOutput") // User wants to send themselves e.g. a CSV
     {
-        let output = "<p style='font-size: 5rem; margin:0 auto;' align='center'>" + kanji 
-        + "</p><br><p style='font-size: 1rem' align='center'>" 
-        + "Meaning: " + translation 
-        + "<br>Pronunciation: " + yomikata 
-        + "<br>Radicals: " + bushu
-        + "<br>Stroke Count: " + dictionary[kanji].jikaku.toString()
-        + "<br>Instances on JP Wikipedia: " + dictionary[kanji].wiki.toString() 
-        + "<br>Heisig Index: " + heisigIndex 
-        + "</p>";
+            let toSend = [kanji, translation, yomikata, bushu, dictionary[kanji].jikaku.toString(), dictionary[kanji].wiki.toString(), heisigIndex];    
+            document.getElementById("overlayText").innerHTML += toSend;
+
+            // TODO: sort sending -- https://stackoverflow.com/questions/3868315/invoke-click-a-mailto-link-with-jquery-javascript
+
+            return;
+    }
+    else // mode is undefined --> user wants to know about a character
+    {
+        let output = "<p style='font-size: 4.5rem; margin:0 auto;' align='center'>" + kanji + "</p><br>"
+        + "<p class='overlayInfo'>" + "発音：" + yomikata       + "</p>"
+        + "<p class='overlayInfo'>" + "英語：" + translation    + "</p>"
+        + "<p class='overlayInfo'>" + "部首：" + bushu          + "</p>" 
+        + "<p class='overlayInfo'>" + "字画：" + dictionary[kanji].jikaku.toString() + "</p>"
+        + "<p class='overlayInfo'>" + "Heisig：" + heisigIndex + "</p>"
+        + "<p class='overlayInfo'>" + "ウィキ：" + dictionary[kanji].wiki.toString() + " 回出現する" + "</p><br>"
+        + "<p class='overlayInfo'>" + "音読み：" + onyomiKanji + "</p>"
+        + "<p class='overlayInfo'>" + "・・・：" + onyomiKanji + "</p>" // TODO: ADD FURIGANA 
+        + "<p class='overlayInfo'>" + "訓読み：" + onyomiKanji + "</p>"  // SEE: https://github.com/poisa/JVFurigana.js?files=1
+        + "<p class='overlayInfo'>" + "・・・：" + onyomiKanji + "</p>";
 
         document.getElementById("overlayText").innerHTML = output;
     }
 
-    if (mode === "externalOutput")
-    {
-            let toSend = [kanji, translation, yomikata, bushu, dictionary[kanji].jikaku.toString(), dictionary[kanji].wiki.toString(), heisigIndex];    
-            document.getElementById("overlayText").innerHTML += toSend;
-            console.log(toSend);
-            return;
-    }
+    turnOverlayOn();
 
-    // TODO: Sort out on/kun-yomi output
+}
+
+function output()
+{   
+    document.getElementById("overlayText").innerHTML = "";
+
+    let elements = document.querySelectorAll('.kanjiList');    
     
-    /*  bushu        = 部首      = radicals (components of the kanji)
-        eigo         = 英語      = kanji's english meaning
-        jikaku       = 字画      = kanji stroke count
-        heisig       = ・・      = Heisig's index number
-        kanjidicBan  = ・・      = The number for the EDRGD "KANJIDIC" dictionary **
-        yomikata     = 読み方    = The entry kanji's pronunciations.
-        onyomiKanji  = 音読み漢字 = Words using the kanji's onyomi, in kanji form
-        onyomiKana   = 音読み仮名 = Words using the kanji's onyomi, in kana form
-        kunyomiKanji = 訓読み漢字 = Words using the kanji's kunyomi, in kanji form
-        kunyomiKana  = 訓読み仮名 = Words using the kanji's kunyomi, in kana form 
-    */
+    Array.from(elements).forEach((element, index) => {
+        kanjiInfo(element.innerHTML, "externalOutput");
+    });
 
-        turnOverlayOn();
+    turnOverlayOn();
+    
+    // TODO: clipboard copy from <outputboxes>: https://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
+}
 
+
+/*  UI FUNCTIONS  */
+
+function updateScroll() 
+{
+    var element = document.getElementById("outputboxes");
+    element.scrollTop = element.scrollHeight;
 }
 
 function turnOverlayOn() {

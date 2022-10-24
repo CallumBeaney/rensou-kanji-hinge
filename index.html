@@ -1,4 +1,3 @@
-<!-- TODO: https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser -->
 <!doctype html>
 <html lang="en">
     <head>
@@ -11,42 +10,42 @@
     <body>
         <div> <!-- TODO: IS THIS DIV ESSENTIAL? -->
 
-            <!-- N.B. This is for a popup overlay! -->
+            <!-- N.B. This is for a popup overlay -->
             <div id="overlay" onclick="turnOverlayOff();">
-                <!-- <div class="over"> -->
                     <div id="overlayText"></div>
-                <!-- </div> -->
             </div>
 
             <span style="display : inline-block">
                 
+                <!-- UPPER HALF OF SCREEN -->
                 <div class="resultsboxes">
                     
+                    <!-- TOP LEFT (HIDDEN) -->
                     <div class="actionButtons"> 
-                        <!-- TODO: DL Button -->
-                        <button class="actionButton" style="visibility:hidden">・</button>   
-                        </div>
-
-                    <div class=outputboxes id = outputboxes> 
-                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML, 'browser')">想</button>
-                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML, 'browser')">連</button>
-                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML, 'browser')">漢</button>
-                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML, 'browser')">字</button>
-                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML, 'browser')">蝶</button>
-                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML, 'browser')">番</button>
+                        <button class="actionButton" style="visibility:hidden">・</button> 
                     </div>
 
+                    <!-- TOP MIDDLE COLUMN -->
+                    <div class=outputboxes id = outputboxes> 
+                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">想</button>
+                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">連</button>
+                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">漢</button>
+                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">字</button>
+                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">蝶</button>
+                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">番</button>
+                    </div>
+
+                    <!-- TOP RIGHT BUTTONS -->
                     <div class="actionButtons">
                         <button class="actionButton" id="outputButton" onclick="output();">〒</button>
                         <button class="actionButton" style="text-align:center;" id="helpButton" onclick="help();">何</button>
-                        <!-- TODO: text-align needed here?  -->
                      </div>
 
                 </div>
 
+                <!-- MIDDLE 3 BUTTONS -->
                 <div class="newKanji">
 
-                    <!-- TODO: fix up NK -->
                     <button class="NKactionButton" id="commaButton" onclick="submitKanji(this.innerHTML, this.id);">、</button>
                     <button class="newestKanji" id="nk" onclick="kanjiInfo(this.innerHTML, 'browser')">　</button>
                     <button class="NKactionButton" id="stopButton"  onclick="submitKanji(this.innerHTML, this.id);">。</button>
@@ -55,6 +54,7 @@
                 
                     <br>
 
+                <!-- MIDDLE 6 BUTTONS -->
                 <div class="resultsboxes">
                    
                     <button class="resultbox startup" id="rb5" onclick="submitKanji(this.innerHTML, this.id)">漢</button>              
@@ -66,15 +66,15 @@
                 
                 </div>
 
-
+            
                 <canvas id="canvas" width="300" height="300" style="border: 2px solid; cursor: crosshair;"></canvas>
                 <!-- CANVAS SIZING INFO:    https://stackoverflow.com/questions/43436661/how-to-scale-canvas-on-mobile-and-desktop-devices
                                             https://stackoverflow.com/questions/4938346/canvas-width-and-height-in-html5 -->
 
                 <br>
                 
+                <!-- BOTTOM BUTTONS (BELOW CANVAS) -->
                 <div class="canvasButtons">
-
                     <!-- TODO: detect mobile browser & disable sendButton in such cases : https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser -->
                     <button class="bottomButton" id="eraseButton" onclick="resetColours(); canvas.erase();">消去</button>
                     <button class="bottomButton" id="sendButton"  onclick="resetColours(); canvas.recognize();">送信</button>   
@@ -96,7 +96,7 @@
                 // canvas.cxt.canvas.width  = width < 400 ? width : 400;
                 // canvas.cxt.canvas.height = width < 400 ? width : 400;
                 
-                canvas.set_Undo_Redo(true, false);  //ONLY TURN ON UNDO FUNCTIONALITY
+                canvas.set_Undo_Redo(true, false);
                 canvas.setLineWidth(8);
             
             /*  THIS CODE LOADS THE "resultbox" <BUTTONs> WITH INFO: see lines 230-237 in handwriting.canvas.js and see buttons in <DIV> class "resultsboxes" above */
@@ -106,9 +106,9 @@
                     }
                     else {
                         // Z-logic to be commented out if significant difference between mobile handwriting and mousepad input doesn't persist.
-                        // TODO: research JS for loop logic + limited control vs C.
+                        // TODO: research JS for loop syntax + limited control vs C.
                         let z = 5;   
-                        for (i=0;i<6;i++) 
+                        for (i = 0; i < 6; i++) 
                         {
                             if (data[i] == null ) {
                                 continue;

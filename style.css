@@ -13,8 +13,10 @@ body {
 }
 div {
     padding: 0%;
-    /* border:1px solid rgb(133, 133, 133); */
     padding-bottom: 1%;
+
+    /* DEBUGGING */
+    /* border:1px solid rgb(133, 133, 133); */
 }
 a { 
     color:#f74040; 
@@ -164,8 +166,6 @@ div.newKanji {                  /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
     display: none; /* Hidden by default */
     width: 100%; /* Full width (cover the whole page) */
     height: 100%; /* Full height (cover the whole page) */
-    /* padding-top: 3%;
-    padding-bottom: 3%; */
     top: 0; 
     left: 0;
     right: 0;
@@ -179,14 +179,29 @@ div.newKanji {                  /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
     position: absolute;
     top: 50%;
     left: 50%;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-family: Hiragino Kaku Gothic Pro, Hiragino Sans, Meiryo, sans-serif;
     color: white;
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     text-align: justify;
+    line-height: 1.4;
     /* margin-top: 5%; */
     /* margin-bottom: 5%; */
+  }
+  .overlayKanji {
+
+  }
+  .overlayInfo {            /* THE KANJI INFO OVERLAY */
+    display: block; 
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    text-align: left ;
+    text-indent: -50px; /* This reverse-indents each <p> */
+    transform: translate(8%, 0%); /* This compensates for the offset to slightly centre it back */
+    -ms-transform: translate(8%, 0%);
+
   }
                  /* ALT SPACING (TODO: BUGGY) */
   /* #overlayText.help {
