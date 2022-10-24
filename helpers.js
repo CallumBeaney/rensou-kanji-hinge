@@ -1,10 +1,14 @@
+let firstStroke = 0;
+
 function submitKanji(newKanji, buttonid)
 {
-    if (document.getElementById("rb5").className === 'resultbox startup')
+    if (firstStroke === 0)
     {   
         // Clear the title 連想漢字蝶番 upon user input
         document.getElementById("outputboxes").innerHTML = "";
+        firstStroke = 1;
     }
+
 
     /* These just let the user move to a different kanji if they get stuck/break up their kanji list */
     if (buttonid === "stopButton")
@@ -101,14 +105,12 @@ function findCommonBushu(thisBushu, prevBushu)
 
 function help()
 {
-    document.getElementById("overlayText").innerHTML = "<br>This is an app for practicing hand-writing kanji by linking their components. Write a kanji in the white box. Tap your kanji when it appears in one of the grey boxes to add it to the list." 
+    document.getElementById("overlayText").innerHTML = "<br>This is an app for practicing hand-writing kanji by linking their components. Write a kanji in the white box. Tap your kanji when it appears in one of the grey boxes to add it to the list. " 
+    + "Tap ､ or ｡ to start a new sequence. 〒 to export. If you want to know more about a kanji, tap on it!"
     + "<br><br>" 
     + "例：虫虹工紅、寸吋囗吐土"
-    + "<br><br>"
-    + "Tap ､ and ｡ to start a new sequence. 〒 to export. If you want to know more about a kanji, tap on it!"
     + "<br></br>"
-    + "<a href='https://callumbeaney.github.io/website/'>Callum Beaney</a> made this based on how he used to practice kanji on a notepad at work. The kanji dictionary is built from EDRDG's <a href='http://www.edrdg.org/wiki/index.php/KANJIDIC_Project'>KANJIDIC</a> & <a href='http://www.edrdg.org/krad/kradinf.html'>RADKFILE</a> and Shang's <a href='https://docs.google.com/spreadsheets/d/18uV916nNLcGE7FqjWH4SJSxlvuT8mM4J865u0WvqlHU/edit#gid=0'>Kanji Frequency on Wikipedia</a>. The canvas API is Chen-Yu Ho's <a href='https://www.chenyuho.com/project/handwritingjs/'>Handwriting.JS</a>. Read the <a href='https://github.com/CallumBeaney/rensou-kanji-hinge'>source code</a>.";
-
+    + "<a href='https://callumbeaney.github.io/website/'>Callum Beaney</a> made this based on how he used to practice kanji on a notepad at work. The kanji dictionary is built from EDRDG's <a href='http://www.edrdg.org/wiki/index.php/KANJIDIC_Project'>KANJIDIC</a> & <a href='http://www.edrdg.org/krad/kradinf.html'>RADKFILE</a> and Shang's Kanji Frequency on Wikipedia <a href='https://docs.google.com/spreadsheets/d/18uV916nNLcGE7FqjWH4SJSxlvuT8mM4J865u0WvqlHU/edit#gid=0'>spreadsheet</a>. The canvas API is Chen-Yu Ho's <a href='https://www.chenyuho.com/project/handwritingjs/'>Handwriting.JS</a>. Read the <a href='https://github.com/CallumBeaney/rensou-kanji-hinge'>source code</a>.";
 
     turnOverlayOn();
 
@@ -121,6 +123,8 @@ function help()
 function kanjiInfo(kanji, mode)
 {    
     // TODO: fix up kanjiInfo() and output() functions
+    // TODO: ADD FURIGANA TO ON/KUN-YOMI
+    // SEE: https://github.com/poisa/JVFurigana.js?files=1
 
     // for external output mode
     if (kanji === "。" || kanji === "、")
@@ -131,7 +135,7 @@ function kanjiInfo(kanji, mode)
         return;
     }
 
-    /* ------- DICTIONARY ENTRY HANDLING STARTS ------- */
+    /* -------------- DICTIONARY ENTRY HANDLING STARTS -------------- */
 
     let heisigIndex;
         if (dictionary[kanji].heisig === undefined) {   
@@ -142,7 +146,7 @@ function kanjiInfo(kanji, mode)
 
     let yomikata;
         if (typeof dictionary[kanji].yomikata === 'object') {
-            yomikata = dictionary[kanji].yomikata.join("、<wbr>");
+            yomikata = dictionary[kanji].yomikata.join("、");
         } else {
             yomikata = dictionary[kanji].yomikata;        
         }
@@ -165,7 +169,7 @@ function kanjiInfo(kanji, mode)
         if (dictionary[kanji].onyomiKanji === null){
             onyomiKanji = null;
         } else if (typeof dictionary[kanji].onyomiKanji === 'object') {
-            onyomiKanji = dictionary[kanji].onyomiKanji.join(", ");
+            onyomiKanji = dictionary[kanji].onyomiKanji.join("、");
         } else if (typeof dictionary[kanji].onyomiKanji === 'string') {
             onyomiKanji = dictionary[kanji].onyomiKanji;
         } 
@@ -197,7 +201,8 @@ function kanjiInfo(kanji, mode)
             kunyomiKana = dictionary[kanji].kunyomiKana;
         } 
 
-    /* _______ DICTIONARY ENTRY HANDLING ENDS _______ */
+    /* _______________ DICTIONARY ENTRY HANDLING ENDS _______________ */
+
 
     if (mode === "externalOutput") // User wants to send themselves e.g. a CSV
     {
@@ -209,33 +214,51 @@ function kanjiInfo(kanji, mode)
             return;
     }
     else // mode is undefined --> user wants to know about a character
-    {
+    {   
+        // TABLE SYNTAX FROM: https://www.tablesgenerator.com/html_tables#
+    
         let output = "<p style='font-size: 4.5rem; margin:0 auto;' align='center'>" + kanji + "</p><br>"
-        + "<p class='overlayInfo'>" + "発音：" + yomikata       + "</p>"
-        + "<p class='overlayInfo'>" + "英語：" + translation    + "</p>"
-        + "<p class='overlayInfo'>" + "部首：" + bushu          + "</p>" 
-        + "<p class='overlayInfo'>" + "字画：" + dictionary[kanji].jikaku.toString() + "</p>"
-        + "<p class='overlayInfo'>" + "Heisig：" + heisigIndex + "</p>"
-        + "<p class='overlayInfo'>" + "ウィキ：" + dictionary[kanji].wiki.toString() + " 回出現する" + "</p><br>";
-
+        + "<table class='tg'><tbody>"
+        + "<tr>" + '<td class="tg-left">' + "発音" + "</td>" + '<td class="tg-right">' + yomikata + "</td>"
+        + "<tr>" + '<td class="tg-left">' + "英語" + "</td>" + '<td class="tg-right">' + translation + "</td>"
+        + "<tr>" + '<td class="tg-left">' + "部首" + "</td>" + '<td class="tg-right">' + bushu + "</td>"
+        + "<tr>" + '<td class="tg-left">' + "字画" + "</td>" + '<td class="tg-right">' + dictionary[kanji].jikaku.toString() + "</td>"
+        + "<tr>" + '<td class="tg-left">' + "Heisig" + "</td>" + '<td class="tg-right">' + heisigIndex + "</td>"
+        + "<tr>" + '<td class="tg-left">' + "ウィキ" + "</td>" + '<td class="tg-right">' + dictionary[kanji].wiki.toString() + " 回出現する</td>";
+        
         if (onyomiKanji != null)
         {
-            output += "<p class='overlayInfo'>" + "音読み：" + onyomiKanji + "</p>"
-                    + "<p class='overlayInfo'>" + "・・・：" + onyomiKana + "</p>";
-                    // + "<p class='overlayInfo' style='font-size:0.8rem'>" + "　　　　" + onyomiKana + "</p>";
+            output += "<tr>" + '<td class="tg-left">' + "音読み" + "</td>" + '<td class="tg-right">' + onyomiKanji + "</td>"
+                    + "<tr>" + '<td class="tg-left">' + "・・・" + "</td>" + '<td class="tg-right">' + onyomiKana  + "</td>";
         }
         if (kunyomiKanji != null)
         {
-            output += "<p class='overlayInfo'>" + "訓読み：" + kunyomiKanji + "</p>"
-                    + "<p class='overlayInfo'>" + "・・・：" + kunyomiKana  + "</p>";
-        }
+            // TODO: turn back on after testing Github mobile view
+            // output += "<tr>" + '<td class="tg-left">' + "訓読み" + "</td>" + '<td class="tg-right">' + kunyomiKanji + "</td>"
+            //         + "<tr>" + '<td class="tg-left">' + "・・・" + "</td>" + '<td class="tg-right">' + kunyomiKana  + "</td>";
+        } 
 
+        // TODO: Figure out this furigana converter: https://github.com/Victor-Bernabe/nhg-ruby/blob/master/nhg-ruby.js
+        //
+        // if (onyomiKanji != null)
+        // {
+        //     // output += "<tr>" + '<td class="tg-left">' + "音読み" + "</td>" + '<td class="tg-right">'
+        //     //         + '<div class="LitElement" style="display: flex; justify-content: space-between;">'
+        //     //         +   '<nhg-ruby' + 'style="display: block;"'
+        //     //         +       'furigana="' + onyomiKana  + '"'
+        //     //         +       'text="'     + onyomiKanji + '">'
+        //     //         +   '</nhg-ruby></div>'
+        //     //         + '</td>';
+        // }
+
+        output += "</tbody></table>";
+       
         document.getElementById("overlayText").innerHTML = output;
     }
 
     turnOverlayOn();
-
 }
+
 
 function output()
 {   
