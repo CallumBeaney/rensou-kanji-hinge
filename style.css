@@ -64,10 +64,10 @@ div.canvasButtons {         /* THE 3 BUTTONS BELOW THE CANVAS */
     }
     button.bottomButton {
         margin:0 auto;
-        padding-top: 1vh;
-        padding-bottom: 1.2vh;
+        padding-top: 0.8vh;  /* 1vh before*/
+        padding-bottom: 1vh; /* 1.2vh before */
         border: none;
-        font-size: 1.0rem;
+        font-size: 0.9rem;
         color: #ededed;
         background-color: #666666;
         text-align: center;
@@ -188,8 +188,8 @@ div.newKanji {                  /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
     /* margin-top: 5%; */
     /* margin-bottom: 5%; */
   }
-/*                  ALT SPACING (TODO: BUGGY)
-  #overlayText{
+                 /* ALT SPACING (TODO: BUGGY) */
+  /* #overlayText.help {
     position: absolute;
     top: 10%;
     left: 19%;
