@@ -1,7 +1,12 @@
 function submitKanji(newKanji, buttonid)
 {
+    if (document.getElementById("rb5").className === 'resultbox startup')
+    {   
+        // Clear the title 連想漢字蝶番 upon user input
+        document.getElementById("outputboxes").innerHTML = "";
+    }
 
-    /* These just let the user move to a different kanji if they get stuck and break up their kanji list */
+    /* These just let the user move to a different kanji if they get stuck/break up their kanji list */
     if (buttonid === "stopButton")
     {
         passKanji(newKanji);
@@ -96,7 +101,15 @@ function findCommonBushu(thisBushu, prevBushu)
 
 function help()
 {
-    document.getElementById("overlayText").innerHTML = "<br>This is Associate Kanji Hinge or 連想漢字蝶番, a mobile site for practicing writing by linking kanji radicals. The program will guess the kanji you write in the boxes immediately above the input box. Successful choices are added to the kanji column. Use the 、and 。buttons to start a new kanji sequence. If you want to know about a kanji, tap on it!<br><br><a href='https://callumbeaney.github.io/website/'>Callum Beaney</a> made this based on how he used to practice kanji on a notepad at work. The reference dictionary is built from <a href='http://www.edrdg.org/wiki/index.php/KANJIDIC_Project'>KANJIDIC</a>  and <a href='http://www.edrdg.org/krad/kradinf.html'>RADKFILE/KRADFILE</a>. The canvas API is Chen-Yu Ho's <a href='https://www.chenyuho.com/project/handwritingjs/'>Handwriting.JS</a>. Read the <a href='https://github.com/CallumBeaney/rensou-kanji-hinge'>source code here</a>.";
+    document.getElementById("overlayText").innerHTML = "<br>This is an app for practicing hand-writing kanji by linking their components. Write a kanji in the white box. Tap your kanji when it appears in one of the grey boxes to add it to the list." 
+    + "<br><br>" 
+    + "例：虫虹工紅、寸吋囗吐土"
+    + "<br><br>"
+    + "Tap ､ and ｡ to start a new sequence. 〒 to export. If you want to know more about a kanji, tap on it!"
+    + "<br></br>"
+    + "<a href='https://callumbeaney.github.io/website/'>Callum Beaney</a> made this based on how he used to practice kanji on a notepad at work. The kanji dictionary is built from EDRDG's <a href='http://www.edrdg.org/wiki/index.php/KANJIDIC_Project'>KANJIDIC</a> & <a href='http://www.edrdg.org/krad/kradinf.html'>RADKFILE</a> and Shang's <a href='https://docs.google.com/spreadsheets/d/18uV916nNLcGE7FqjWH4SJSxlvuT8mM4J865u0WvqlHU/edit#gid=0'>Kanji Frequency on Wikipedia</a>. The canvas API is Chen-Yu Ho's <a href='https://www.chenyuho.com/project/handwritingjs/'>Handwriting.JS</a>. Read the <a href='https://github.com/CallumBeaney/rensou-kanji-hinge'>source code</a>.";
+
+
     turnOverlayOn();
 
     // ORIGINAL
@@ -118,7 +131,7 @@ function kanjiInfo(kanji, mode)
         return;
     }
 
-    /*  DICTIONARY ENTRY HANDLING STARTS */
+    /* ------- DICTIONARY ENTRY HANDLING STARTS ------- */
 
     let heisigIndex;
         if (dictionary[kanji].heisig === undefined) {   
@@ -149,14 +162,42 @@ function kanjiInfo(kanji, mode)
         }
         
     let onyomiKanji;
-        if (typeof dictionary[kanji].onyomiKanji === 'object') {
+        if (dictionary[kanji].onyomiKanji === null){
+            onyomiKanji = null;
+        } else if (typeof dictionary[kanji].onyomiKanji === 'object') {
             onyomiKanji = dictionary[kanji].onyomiKanji.join(", ");
-        } else {
+        } else if (typeof dictionary[kanji].onyomiKanji === 'string') {
             onyomiKanji = dictionary[kanji].onyomiKanji;
-        }
+        } 
+        
+    let onyomiKana;
+        if (dictionary[kanji].onyomiKana === null){
+            onyomiKana = null;
+        } else if (typeof dictionary[kanji].onyomiKana === 'object') {
+            onyomiKana =  dictionary[kanji].onyomiKana.join(", ");
+        } else if (typeof dictionary[kanji].onyomiKana === 'string') {
+            onyomiKana =  dictionary[kanji].onyomiKana;
+        } 
 
-    /* ___DICTIONARY ENTRY HANDLING ENDS___ */
+    let kunyomiKanji;
+        if (dictionary[kanji].kunyomiKanji === null){
+            kunyomiKanji = null;
+        } else if (typeof  dictionary[kanji].kunyomiKanji === 'object') {
+            kunyomiKanji = dictionary[kanji].kunyomiKanji.join(", ");
+        } else if (typeof  dictionary[kanji].kunyomiKanji === 'string') {
+            kunyomiKanji = dictionary[kanji].kunyomiKanji;
+        } 
 
+    let kunyomiKana;
+        if (dictionary[kanji].kunyomiKana === null){
+            kunyomiKana = null;
+        } else if (typeof dictionary[kanji].kunyomiKana === 'object') {
+            kunyomiKana = dictionary[kanji].kunyomiKana.join(", ");
+        } else if (typeof dictionary[kanji].kunyomiKana === 'string') {
+            kunyomiKana = dictionary[kanji].kunyomiKana;
+        } 
+
+    /* _______ DICTIONARY ENTRY HANDLING ENDS _______ */
 
     if (mode === "externalOutput") // User wants to send themselves e.g. a CSV
     {
@@ -175,11 +216,19 @@ function kanjiInfo(kanji, mode)
         + "<p class='overlayInfo'>" + "部首：" + bushu          + "</p>" 
         + "<p class='overlayInfo'>" + "字画：" + dictionary[kanji].jikaku.toString() + "</p>"
         + "<p class='overlayInfo'>" + "Heisig：" + heisigIndex + "</p>"
-        + "<p class='overlayInfo'>" + "ウィキ：" + dictionary[kanji].wiki.toString() + " 回出現する" + "</p><br>"
-        + "<p class='overlayInfo'>" + "音読み：" + onyomiKanji + "</p>"
-        + "<p class='overlayInfo'>" + "・・・：" + onyomiKanji + "</p>" // TODO: ADD FURIGANA 
-        + "<p class='overlayInfo'>" + "訓読み：" + onyomiKanji + "</p>"  // SEE: https://github.com/poisa/JVFurigana.js?files=1
-        + "<p class='overlayInfo'>" + "・・・：" + onyomiKanji + "</p>";
+        + "<p class='overlayInfo'>" + "ウィキ：" + dictionary[kanji].wiki.toString() + " 回出現する" + "</p><br>";
+
+        if (onyomiKanji != null)
+        {
+            output += "<p class='overlayInfo'>" + "音読み：" + onyomiKanji + "</p>"
+                    + "<p class='overlayInfo'>" + "・・・：" + onyomiKana + "</p>";
+                    // + "<p class='overlayInfo' style='font-size:0.8rem'>" + "　　　　" + onyomiKana + "</p>";
+        }
+        if (kunyomiKanji != null)
+        {
+            output += "<p class='overlayInfo'>" + "訓読み：" + kunyomiKanji + "</p>"
+                    + "<p class='overlayInfo'>" + "・・・：" + kunyomiKana  + "</p>";
+        }
 
         document.getElementById("overlayText").innerHTML = output;
     }

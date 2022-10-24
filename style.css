@@ -201,8 +201,11 @@ div.newKanji {                  /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
     text-indent: -50px; /* This reverse-indents each <p> */
     transform: translate(8%, 0%); /* This compensates for the offset to slightly centre it back */
     -ms-transform: translate(8%, 0%);
-
   }
+  /* .overlayInfo.yomi {
+    font-size: 0.7rem !important;
+  } */
+
                  /* ALT SPACING (TODO: BUGGY) */
   /* #overlayText.help {
     position: absolute;
