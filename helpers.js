@@ -123,8 +123,6 @@ function help()
 function kanjiInfo(kanji, mode)
 {    
     // TODO: fix up kanjiInfo() and output() functions
-    // TODO: ADD FURIGANA TO ON/KUN-YOMI
-    // SEE: https://github.com/poisa/JVFurigana.js?files=1
 
     // for external output mode
     if (kanji === "。" || kanji === "、")
@@ -165,40 +163,26 @@ function kanjiInfo(kanji, mode)
             bushu = dictionary[kanji].bushu;
         }
         
+
     let onyomiKanji;
-        if (dictionary[kanji].onyomiKanji === null){
-            onyomiKanji = null;
-        } else if (typeof dictionary[kanji].onyomiKanji === 'object') {
-            onyomiKanji = dictionary[kanji].onyomiKanji.join("、");
-        } else if (typeof dictionary[kanji].onyomiKanji === 'string') {
-            onyomiKanji = dictionary[kanji].onyomiKanji;
-        } 
-        
     let onyomiKana;
-        if (dictionary[kanji].onyomiKana === null){
-            onyomiKana = null;
-        } else if (typeof dictionary[kanji].onyomiKana === 'object') {
-            onyomiKana =  dictionary[kanji].onyomiKana.join(", ");
-        } else if (typeof dictionary[kanji].onyomiKana === 'string') {
-            onyomiKana =  dictionary[kanji].onyomiKana;
+        if (dictionary[kanji].onyomiKana === null){ 
+            // If .____Kana is X, so is .____Kanji 
+            onyomiKanji = null;
+            onyomiKana  = null;
+        } else {
+            onyomiKanji = dictionary[kanji].onyomiKanji;
+            onyomiKana  = dictionary[kanji].onyomiKana;
         } 
 
     let kunyomiKanji;
-        if (dictionary[kanji].kunyomiKanji === null){
-            kunyomiKanji = null;
-        } else if (typeof  dictionary[kanji].kunyomiKanji === 'object') {
-            kunyomiKanji = dictionary[kanji].kunyomiKanji.join(", ");
-        } else if (typeof  dictionary[kanji].kunyomiKanji === 'string') {
-            kunyomiKanji = dictionary[kanji].kunyomiKanji;
-        } 
-
     let kunyomiKana;
-        if (dictionary[kanji].kunyomiKana === null){
-            kunyomiKana = null;
-        } else if (typeof dictionary[kanji].kunyomiKana === 'object') {
-            kunyomiKana = dictionary[kanji].kunyomiKana.join(", ");
-        } else if (typeof dictionary[kanji].kunyomiKana === 'string') {
-            kunyomiKana = dictionary[kanji].kunyomiKana;
+        if (dictionary[kanji].kunyomiKana === null) {  
+            kunyomiKanji =  null; 
+            kunyomiKana  =  null;
+        } else {
+            kunyomiKanji = dictionary[kanji].kunyomiKanji;
+            kunyomiKana  = dictionary[kanji].kunyomiKana;
         } 
 
     /* _______________ DICTIONARY ENTRY HANDLING ENDS _______________ */
@@ -212,11 +196,12 @@ function kanjiInfo(kanji, mode)
             // TODO: sort sending -- https://stackoverflow.com/questions/3868315/invoke-click-a-mailto-link-with-jquery-javascript
 
             return;
-    }
-    else // mode is undefined --> user wants to know about a character
+    }    
+    else   
     {   
+        // mode is undefined --> user wants to know about a character
+        
         // TABLE SYNTAX FROM: https://www.tablesgenerator.com/html_tables#
-    
         let output = "<p style='font-size: 4.5rem; margin:0 auto;' align='center'>" + kanji + "</p><br>"
         + "<table class='tg'><tbody>"
         + "<tr>" + '<td class="tg-left">' + "発音" + "</td>" + '<td class="tg-right">' + yomikata + "</td>"
@@ -226,33 +211,21 @@ function kanjiInfo(kanji, mode)
         + "<tr>" + '<td class="tg-left">' + "Heisig" + "</td>" + '<td class="tg-right">' + heisigIndex + "</td>"
         + "<tr>" + '<td class="tg-left">' + "ウィキ" + "</td>" + '<td class="tg-right">' + dictionary[kanji].wiki.toString() + " 回出現する</td>";
         
+
+        /* CONDITIONAL FURIGANA APPENDATION */
+        /* Thanks to MysticWhiteDragon on SO for this HTML-only furigana solution: https://stackoverflow.com/a/54324347 */
         if (onyomiKanji != null)
         {
-            output += "<tr>" + '<td class="tg-left">' + "音読み" + "</td>" + '<td class="tg-right">' + onyomiKanji + "</td>"
-                    + "<tr>" + '<td class="tg-left">' + "・・・" + "</td>" + '<td class="tg-right">' + onyomiKana  + "</td>";
+            let addToOutput = buildFurigana(onyomiKanji, onyomiKana, "音読み");
+            output += addToOutput;
         }
         if (kunyomiKanji != null)
         {
-            // TODO: turn back on after testing Github mobile view
-            // output += "<tr>" + '<td class="tg-left">' + "訓読み" + "</td>" + '<td class="tg-right">' + kunyomiKanji + "</td>"
-            //         + "<tr>" + '<td class="tg-left">' + "・・・" + "</td>" + '<td class="tg-right">' + kunyomiKana  + "</td>";
+            let addToOutput = buildFurigana(kunyomiKanji, kunyomiKana, "訓読み");
+            output += addToOutput;
         } 
-
-        // TODO: Figure out this furigana converter: https://github.com/Victor-Bernabe/nhg-ruby/blob/master/nhg-ruby.js
-        //
-        // if (onyomiKanji != null)
-        // {
-        //     // output += "<tr>" + '<td class="tg-left">' + "音読み" + "</td>" + '<td class="tg-right">'
-        //     //         + '<div class="LitElement" style="display: flex; justify-content: space-between;">'
-        //     //         +   '<nhg-ruby' + 'style="display: block;"'
-        //     //         +       'furigana="' + onyomiKana  + '"'
-        //     //         +       'text="'     + onyomiKanji + '">'
-        //     //         +   '</nhg-ruby></div>'
-        //     //         + '</td>';
-        // }
-
-        output += "</tbody></table>";
-       
+        
+        output += "</tbody></table>"; // Closing tags for HTML table
         document.getElementById("overlayText").innerHTML = output;
     }
 
@@ -260,6 +233,32 @@ function kanjiInfo(kanji, mode)
 }
 
 
+function buildFurigana(kanji, kana, type)
+{
+    let adder = "<tr>"    // Start the left-hand of the table entry
+              + '<td class="tg-left">' + type + "</td>";
+                    
+    if (typeof kanji === 'string') // Just one kanji dict entry
+    {
+        adder += '<td class="tg-right">' 
+               + '<fg t="' + kana + '">' + kanji + '</fg>'
+               + '</td>';
+    }
+    if (typeof kanji === 'object') // multiple dict entries
+    {    
+        arrLen = kanji.length;                   
+        adder += '<td class="tg-right">'; // Start the right-hand table entry 
+        
+        for (i = 0; i < arrLen; i++)       // Build the kanji-furigana pairs
+        {
+            adder += '<fg t="' + kana[i] + '"> ' + kanji[i] + '</fg>, ';
+        }
+        adder += '</td>'; // Close On/Kunyomi Kanji cell   
+    }    
+    return adder;
+}
+
+// TODO: clipboard copy from <outputboxes>: https://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
 function output()
 {   
     document.getElementById("overlayText").innerHTML = "";
@@ -270,9 +269,7 @@ function output()
         kanjiInfo(element.innerHTML, "externalOutput");
     });
 
-    turnOverlayOn();
-    
-    // TODO: clipboard copy from <outputboxes>: https://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
+    turnOverlayOn();    
 }
 
 
