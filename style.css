@@ -204,36 +204,44 @@ div.newKanji {                  /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
   }
 
 
-                                      /* KANJI INFO TABLE INFO */
-.tg {
+  fg:before {                                      /* FURIGANA INSIDE KANJI TABLE */
+    content: attr(t);
+    display: block;
+    font-size: 50%;
+    text-align: start;
+    line-height: 1.5;
+}
+fg {
+    display: inline-block;
+    text-indent: 0px;
+    line-height: normal;
+    /* -webkit-text-emphasis: none; */
+    text-align: center;
+    line-height: 1;
+}
+
+
+.tg {                                                /* KANJI INFO TABLE INFO */
     border-collapse:collapse;
     border-spacing:0;
 }
 .tg td {
-    border-color: black;
-    border-style: dotted;
-    border-width: 1px;
-    overflow: hidden;
-    /* padding: 5px 40px;
-    margin: 5px 40px; */
+    border-color: black;    border-style: dotted;
+    border-width: 1px;        overflow: hidden;
+    /* padding: 5px 40px;     margin: 5px 40px; */
     /* word-break: normal; */
 }
 .tg .tg-left {
-    border-color: inherit;
-    text-align: middle;
-    vertical-align: middle;
-    font-size: 0.9rem;
+    border-color: inherit;      text-align: middle;     
+    vertical-align: middle;     font-size: 1.1rem;
     padding: 3px 10px;
     /* margin:  5px 15px; */
 }
 .tg .tg-right {
-    border-color: inherit;
-    text-align: left;
-    vertical-align: middle;
-    font-size: 0.9rem;
+    border-color: inherit;      text-align: left;
+    vertical-align: middle;     font-size: 1rem;
     padding: 3px 5px 3px 10px;
     /* margin:  5px 40px; */
-
 }
 
 
