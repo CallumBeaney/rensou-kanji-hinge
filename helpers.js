@@ -105,12 +105,13 @@ function findCommonBushu(thisBushu, prevBushu)
 
 function help()
 {
-    document.getElementById("overlayText").innerHTML = "<br>This is an app for practicing hand-writing kanji by linking their components. Write a kanji in the white box. Tap your kanji when it appears in one of the grey boxes to add it to the list. " 
+    document.getElementById("overlayText").innerHTML = "<center style='font-size:1.4rem;'><fg t='連想'>RENSOU</fg> <fg t='漢字'>KANJI</fg> <fg t='蝶番'>HINGE</fg></center>"
+    + "<br>This is a mobile webapp for practicing kanji hand-writing  by chaining them by their shared components."
+    + "<center><br>例：虫虹工紅、寸吋囗吐土<br><br></center>"
+    + "Write a kanji in the white box. Tap your kanji when it appears in one of the grey boxes to add it to the list." 
     + "Tap ､ or ｡ to start a new sequence. 〒 to export. If you want to know more about a kanji, tap on it!"
-    + "<br><br>" 
-    + "例：虫虹工紅、寸吋囗吐土"
     + "<br></br>"
-    + "<a href='https://callumbeaney.github.io/website/'>Callum Beaney</a> made this based on how he used to practice kanji on a notepad at work. The kanji dictionary is built from EDRDG's <a href='http://www.edrdg.org/wiki/index.php/KANJIDIC_Project'>KANJIDIC</a> & <a href='http://www.edrdg.org/krad/kradinf.html'>RADKFILE</a> and Shang's Kanji Frequency on Wikipedia <a href='https://docs.google.com/spreadsheets/d/18uV916nNLcGE7FqjWH4SJSxlvuT8mM4J865u0WvqlHU/edit#gid=0'>spreadsheet</a>. The canvas API is Chen-Yu Ho's <a href='https://www.chenyuho.com/project/handwritingjs/'>Handwriting.JS</a>. Read the <a href='https://github.com/CallumBeaney/rensou-kanji-hinge'>source code</a>.";
+    + "<a href='https://callumbeaney.github.io/website/'>Callum Beaney</a> made this based on how he used to practice kanji on a notepad at work. The kanji dictionary is built from EDRDG's <a href='http://www.edrdg.org/wiki/index.php/KANJIDIC_Project'>KANJIDIC</a> & <a href='http://www.edrdg.org/krad/kradinf.html'>RADKFILE</a> and Shang's <em>Kanji Frequency on Wikipedia</em> <a href='https://docs.google.com/spreadsheets/d/18uV916nNLcGE7FqjWH4SJSxlvuT8mM4J865u0WvqlHU/edit#gid=0'>spreadsheet</a>. The canvas API is Chen-Yu Ho's <a href='https://www.chenyuho.com/project/handwritingjs/'>Handwriting.JS</a>. Read the source code <a href='https://github.com/CallumBeaney/rensou-kanji-hinge'>here</a>.";
 
     turnOverlayOn();
 
