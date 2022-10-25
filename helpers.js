@@ -4,7 +4,7 @@ function submitKanji(newKanji, buttonid)
 {
     if (firstStroke === 0)
     {   
-        // Clear the title 連想漢字蝶番 upon user input
+        // Clear the title 連想漢字蝶番 upon first user input
         document.getElementById("outputboxes").innerHTML = "";
         firstStroke = 1;
     }
@@ -106,24 +106,20 @@ function findCommonBushu(thisBushu, prevBushu)
 function help()
 {
     document.getElementById("overlayText").innerHTML = "<center style='font-size:1.4rem;'><fg t='連想'>RENSOU</fg> <fg t='漢字'>KANJI</fg> <fg t='蝶番'>HINGE</fg></center>"
-    + "<br>This is a mobile webapp for practicing kanji hand-writing  by chaining them by their shared components."
+    + "<br>This is a mobile webapp for practicing hand-writing kanji by chaining them by their shared components."
     + "<center><br>例：虫虹工紅、寸吋囗吐土<br><br></center>"
-    + "Write a kanji in the white box. Tap your kanji when it appears in one of the grey boxes to add it to the list." 
+    + "Write a kanji in the white box. Tap your kanji when it appears in one of the grey boxes to add it to the list. " 
     + "Tap ､ or ｡ to start a new sequence. 〒 to export. If you want to know more about a kanji, tap on it!"
     + "<br></br>"
-    + "<a href='https://callumbeaney.github.io/website/'>Callum Beaney</a> made this based on how he used to practice kanji on a notepad at work. The kanji dictionary is built from EDRDG's <a href='http://www.edrdg.org/wiki/index.php/KANJIDIC_Project'>KANJIDIC</a> & <a href='http://www.edrdg.org/krad/kradinf.html'>RADKFILE</a> and Shang's <em>Kanji Frequency on Wikipedia</em> <a href='https://docs.google.com/spreadsheets/d/18uV916nNLcGE7FqjWH4SJSxlvuT8mM4J865u0WvqlHU/edit#gid=0'>spreadsheet</a>. The canvas API is Chen-Yu Ho's <a href='https://www.chenyuho.com/project/handwritingjs/'>Handwriting.JS</a>. Read the source code <a href='https://github.com/CallumBeaney/rensou-kanji-hinge'>here</a>.";
+    + "<a href='https://callumbeaney.github.io/website/'>Callum Beaney</a> made this based on how he used to practice kanji on a notepad at work. The kanji dictionary is built from EDRDG's <a href='http://www.edrdg.org/wiki/index.php/KANJIDIC_Project'>KANJIDIC</a> & <a href='http://www.edrdg.org/krad/kradinf.html'>RADKFILE</a> and Shang's Kanji Frequency <a href='https://docs.google.com/spreadsheets/d/18uV916nNLcGE7FqjWH4SJSxlvuT8mM4J865u0WvqlHU/edit#gid=0'>spreadsheet</a>. The canvas API is Chen-Yu Ho's <a href='https://www.chenyuho.com/project/handwritingjs/'>Handwriting.JS</a>. Read the source code <a href='https://github.com/CallumBeaney/rensou-kanji-hinge'>here</a>. Report a bug <a href='https://github.com/CallumBeaney/rensou-kanji-hinge/issues'>here</a>.";
 
     turnOverlayOn();
-
-    // ORIGINAL
-    /* document.getElementById("overlayText").innerHTML = "<br>これは｢連想漢字蝶番｣、 部首を連想することで漢字の手習いの為の携帯サイトです。This is Associate Kanji Hinge, a mobile site for practicing writing by linking kanji radicals. <br><br>描きながら、直上の六つの四角に自動手書き認識ソフトは描いた漢字を推測します。選びが成功すれば、成功欄に追加されます。部首を共有する漢字を思い出せない場合｢、｣と｢。｣ボタンを押して新しい一連を始めます。The program will guess the kanji you write in the boxes immediately above the input box. Successful choices are added to the kanji column. Use the 、and 。buttons to start a new kanji sequence.<br><br>漢字の情報が欲しければ漢字を押してください。<br>If you want to know about a kanji, tap on it!<br><br>This was made by <a href='https://callumbeaney.github.io/website/'>Callum Beaney</a> based on how he used to practice kanji on a notepad at work. The reference dictionary is built from <a href='http://www.edrdg.org/wiki/index.php/KANJIDIC_Project'>KANJIDIC</a> dictionary, and <a href='http://www.edrdg.org/krad/kradinf.html'>RADKFILE/KRADFILE</a>. The canvas API is Chen-Yu Ho's <a href='https://www.chenyuho.com/project/handwritingjs/'>Handwriting.JS</a>. Read the <a href='https://github.com/CallumBeaney/rensou-kanji-hinge'>source code on Github</a>."; */
 }
-
 
 
 function kanjiInfo(kanji, mode)
 {    
-    // TODO: fix up kanjiInfo() and output() functions
+    // TODO: fix up outputList() function
 
     // for external output mode
     if (kanji === "。" || kanji === "、")
@@ -137,8 +133,8 @@ function kanjiInfo(kanji, mode)
     /* -------------- DICTIONARY ENTRY HANDLING STARTS -------------- */
 
     let heisigIndex;
-        if (dictionary[kanji].heisig === undefined) {   
-            heisigIndex = ">3007th place"   
+        if (dictionary[kanji].heisig === null || dictionary[kanji].heisig === undefined) {   
+            heisigIndex = "unlisted"   
         } else { 
             heisigIndex = dictionary[kanji].heisig;   
         }
@@ -164,11 +160,9 @@ function kanjiInfo(kanji, mode)
             bushu = dictionary[kanji].bushu;
         }
         
-
     let onyomiKanji;
     let onyomiKana;
-        if (dictionary[kanji].onyomiKana === null){ 
-            // If .____Kana is X, so is .____Kanji 
+        if (dictionary[kanji].onyomiKana === null) {  // If .____Kana is X, so is .____Kanji 
             onyomiKanji = null;
             onyomiKana  = null;
         } else {
@@ -192,29 +186,37 @@ function kanjiInfo(kanji, mode)
     if (mode === "externalOutput") // User wants to send themselves e.g. a CSV
     {
             let toSend = [kanji, translation, yomikata, bushu, dictionary[kanji].jikaku.toString(), dictionary[kanji].wiki.toString(), heisigIndex];    
-            document.getElementById("overlayText").innerHTML += toSend;
+            // document.getElementById("overlayText").innerHTML += toSend;
+            document.getElementById("overlayText").innerHTML = "<center style='font-size:1.4rem;'><br><br>in development<br>発展つつある</center>";
 
             // TODO: sort sending -- https://stackoverflow.com/questions/3868315/invoke-click-a-mailto-link-with-jquery-javascript
 
             return;
     }    
-    else   
+    else // mode is undefined --> user wants to know about a character
     {   
-        // mode is undefined --> user wants to know about a character
-        
         // TABLE SYNTAX FROM: https://www.tablesgenerator.com/html_tables#
-        let output = "<p style='font-size: 4.5rem; margin:0 auto;' align='center'>" + kanji + "</p><br>"
-        + "<table class='tg'><tbody>"
-        + "<tr>" + '<td class="tg-left">' + "発音" + "</td>" + '<td class="tg-right">' + yomikata + "</td>"
-        + "<tr>" + '<td class="tg-left">' + "英語" + "</td>" + '<td class="tg-right">' + translation + "</td>"
-        + "<tr>" + '<td class="tg-left">' + "部首" + "</td>" + '<td class="tg-right">' + bushu + "</td>"
-        + "<tr>" + '<td class="tg-left">' + "字画" + "</td>" + '<td class="tg-right">' + dictionary[kanji].jikaku.toString() + "</td>"
-        + "<tr>" + '<td class="tg-left">' + "Heisig" + "</td>" + '<td class="tg-right">' + heisigIndex + "</td>"
-        + "<tr>" + '<td class="tg-left">' + "ウィキ" + "</td>" + '<td class="tg-right">' + dictionary[kanji].wiki.toString() + " 回出現する</td>";
+        
+        let output = "<p style='font-size: 4.5rem; margin:0 auto;' align='center'>" + kanji + "</p><br>" 
+                   + "<table class='tg'><tbody>"
+                   + "<tr>" + '<td class="tg-left">' + "発音" + "</td>";
+
+        if (typeof dictionary[kanji].yomikata === 'object' && dictionary[kanji].yomikata.length >= 7) 
+        {   
+            output += '<td class="tg-right smalltext">' + yomikata + "</td>";
+        } else {
+            output += '<td class="tg-right">' + yomikata + "</td>";
+        }
+
+        output += "<tr>" + '<td class="tg-left">' + "英語" + "</td>" + '<td class="tg-right">' + translation + "</td>"
+                + "<tr>" + '<td class="tg-left">' + "部首" + "</td>" + '<td class="tg-right">' + bushu + "</td>"
+                + "<tr>" + '<td class="tg-left">' + "字画" + "</td>" + '<td class="tg-right">' + dictionary[kanji].jikaku.toString() + "</td>"
+                + "<tr>" + '<td class="tg-left">' + "Heisig" + "</td>" + '<td class="tg-right">' + heisigIndex + "</td>"
+                + "<tr>" + '<td class="tg-left">' + "ウィキ" + "</td>" + '<td class="tg-right">' + dictionary[kanji].wiki.toString() + " 回出現する</td>";
         
 
         /* CONDITIONAL FURIGANA APPENDATION */
-        /* Thanks to MysticWhiteDragon on SO for this HTML-only furigana solution: https://stackoverflow.com/a/54324347 */
+        /* Thanks to MysticWhiteDragon on SO for this HTML/CSS-only furigana solution: https://stackoverflow.com/a/54324347 */
         if (onyomiKanji != null)
         {
             let addToOutput = buildFurigana(onyomiKanji, onyomiKana, "音読み");
@@ -239,30 +241,35 @@ function buildFurigana(kanji, kana, type)
     let adder = "<tr>"    // Start the left-hand of the table entry
               + '<td class="tg-left">' + type + "</td>";
                     
-    if (typeof kanji === 'string') // Just one kanji dict entry
+    if (typeof kanji === 'string') // have just one kanji dict entry
     {
         adder += '<td class="tg-right">' 
                + '<fg t="' + kana + '">' + kanji + '</fg>'
                + '</td>';
     }
-    if (typeof kanji === 'object') // multiple dict entries
+    if (typeof kanji === 'object') // have multiple dict entries
     {    
-        arrLen = kanji.length;                   
-        adder += '<td class="tg-right">'; // Start the right-hand table entry 
-        
-        for (i = 0; i < arrLen; i++)       // Build the kanji-furigana pairs
-        {
+        if (kanji.length >= 8) {
+            adder += '<td class="tg-right smalltext">';
+        } 
+        else {
+            adder += '<td class="tg-right">'; 
+        }
+
+        // Build the kanji-furigana pairs
+        for (i = 0; i < kanji.length; i++) {
             adder += '<fg t="' + kana[i] + '"> ' + kanji[i] + '</fg>, ';
         }
+
         adder += '</td>'; // Close On/Kunyomi Kanji cell   
-    }    
+    }
+     
     return adder;
 }
 
 // TODO: clipboard copy from <outputboxes>: https://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
-function output()
+function outputList()
 {   
-    document.getElementById("overlayText").innerHTML = "";
 
     let elements = document.querySelectorAll('.kanjiList');    
     

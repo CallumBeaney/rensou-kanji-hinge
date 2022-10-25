@@ -1,8 +1,7 @@
 /*  This JS object is built from the JSON file, which is in turn built from the Compiled Kanji Reference Dictionary spreadsheet. 
-    I provide all of them for ease of use by others.
-    Please note that dictionary entries are ordered by the "wiki" variable in each key:value pair 
-    -- that is, 年 is #1 it has the most (2082013) appearances on the Japanese Wikipedia.
 
+Please note that dictionary entries are ordered by the "wiki" variable in each key:value pair 
+    -- that is, 年 is #1 it has the most (2082013) appearances on the Japanese Wikipedia.    
     KEY :
       bushu        = 部首      = radicals (components of the kanji)
       eigo         = 英語      = kanji's english meaning
@@ -19,10 +18,10 @@
 */
 
 /* To make edits, 
-
   UNMINIFIY: https://unminify.com/
   MINIFY:    https://codebeautify.org/minify-js
 
+  Change to "const dictionary = {..." in minified file.
 */
 
 dictionaryObject = {
@@ -2122,7 +2121,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     町: {
-      bushu: ["一", "田", "亅", "xii"],
+      bushu: ["一", "田", "亅"],
       wiki: 161391,
       eigo: ["village", "town", "block", "street"],
       jikaku: 7,
@@ -3383,7 +3382,7 @@ dictionaryObject = {
       kunyomiKana: ["かま.う", "かま.える"]
     },
     状: {
-      bushu: ["犬", "爿"],
+      bushu: ["犬", "爿", "大"],
       wiki: 105206,
       eigo: ["status quo", "conditions", "circumstances", "form", "appearance"],
       jikaku: 7,
@@ -6698,7 +6697,7 @@ dictionaryObject = {
       kunyomiKana: "ころ"
     },
     然: {
-      bushu: ["犬", "夕", "灬", "肉"],
+      bushu: ["犬", "夕", "灬", "肉", "大"],
       wiki: 51610,
       eigo: ["sort of thing", "so", "if so", "in that case", "well"],
       jikaku: 12,
@@ -11717,7 +11716,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     献: {
-      bushu: ["干", "犬", "十", "并", "冂"],
+      bushu: ["干", "犬", "十", "并", "冂", "大"],
       wiki: 20956,
       eigo: ["offering", "counter for drinks", "present", "offer"],
       jikaku: 13,
@@ -13329,7 +13328,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     燃: {
-      bushu: ["火", "犬", "灬", "肉"],
+      bushu: ["火", "犬", "灬", "肉", "大"],
       wiki: 15688,
       eigo: ["burn", "blaze", "glow"],
       jikaku: 16,
@@ -14642,7 +14641,7 @@ dictionaryObject = {
       kunyomiKana: "たば"
     },
     伏: {
-      bushu: ["⺅", "犬"],
+      bushu: ["⺅", "犬", "大"],
       wiki: 12690,
       eigo: ["prostrated", "bend down", "bow", "cover", "lay (pipes)"],
       jikaku: 6,
@@ -15708,7 +15707,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     獣: {
-      bushu: ["犬", "口", "⺌", "田"],
+      bushu: ["犬", "口", "⺌", "田", "大"],
       wiki: 10855,
       eigo: ["animal", "beast"],
       jikaku: 16,
@@ -18633,7 +18632,7 @@ dictionaryObject = {
       kunyomiKana: "まこと"
     },
     獄: {
-      bushu: ["言", "犭", "犬"],
+      bushu: ["言", "犭", "犬", "大"],
       wiki: 6876,
       eigo: ["prison", "jail"],
       jikaku: 14,
@@ -22377,7 +22376,7 @@ dictionaryObject = {
       kunyomiKana: ["うと.い", "うと.む"]
     },
     黙: {
-      bushu: ["犬", "里", "灬", "黒"],
+      bushu: ["犬", "里", "灬", "黒", "大"],
       wiki: 3746,
       eigo: ["silence", "become silent", "stop speaking", "leave as is"],
       jikaku: 15,
@@ -30385,7 +30384,7 @@ dictionaryObject = {
       kunyomiKana: "あなど.る"
     },
     嶽: {
-      bushu: ["犬", "言", "山"],
+      bushu: ["犬", "言", "山", "大", "口", "犭"],
       wiki: 1118,
       eigo: "peak",
       jikaku: 17,
@@ -36589,7 +36588,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     厭: {
-      bushu: ["月", "犬", "日", "厂"],
+      bushu: ["月", "犬", "日", "厂", "大"],
       wiki: 478,
       eigo: ["get tired of", "satiate", "bore"],
       jikaku: 14,
@@ -39293,7 +39292,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     猷: {
-      bushu: ["并", "酉", "犬"],
+      bushu: ["并", "酉", "犬", "大"],
       wiki: 329,
       eigo: ["plan", "scheme", "plan", "plot", "way"],
       jikaku: 13,
@@ -40489,7 +40488,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     吠: {
-      bushu: ["犬", "口"],
+      bushu: ["犬", "口", "大"],
       wiki: 275,
       eigo: ["bark", "howl", "cry"],
       jikaku: 7,
@@ -44130,7 +44129,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     撚: {
-      bushu: ["犬", "扌", "手", "灬", "肉"],
+      bushu: ["犬", "扌", "手", "灬", "肉", "大"],
       wiki: 164,
       eigo: ["twist", "twine", "kinky"],
       jikaku: 15,
@@ -45040,7 +45039,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     哭: {
-      bushu: ["犬", "口"],
+      bushu: ["犬", "口", "大"],
       wiki: 144,
       eigo: ["weep", "moan", "wail"],
       jikaku: 10,
@@ -48186,7 +48185,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     袱: {
-      bushu: ["⺅", "犬", "衤"],
+      bushu: ["⺅", "犬", "衤", "大"],
       wiki: 100,
       eigo: "cloth wrapper",
       jikaku: 11,
@@ -49681,7 +49680,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     礒: {
-      bushu: ["王", "口", "石", "并", "羊", "亅", "戈", "", "扌", "手"],
+      bushu: ["王", "口", "石", "并", "羊", "亅", "戈", "扌", "手"],
       wiki: 82,
       eigo: ["rock", "beach", "shore"],
       jikaku: 18,
@@ -56299,7 +56298,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     獻: {
-      bushu: ["犬", "口", "卜", "儿", "冂", "匕", "厂", "虍", "鬲"],
+      bushu: ["犬", "口", "卜", "儿", "冂", "匕", "厂", "虍", "鬲", "大"],
       wiki: 36,
       eigo: ["offer", "present", "show", "display"],
       jikaku: 20,
@@ -57703,7 +57702,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     獸: {
-      bushu: ["一", "犬", "口", "田"],
+      bushu: ["一", "犬", "口", "田", "大"],
       wiki: 30,
       eigo: ["beast", "animal", "bestial"],
       jikaku: 19,
@@ -60459,7 +60458,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     獎: {
-      bushu: ["犬", "寸", "夕", "爿"],
+      bushu: ["犬", "寸", "夕", "爿", "大"],
       wiki: 20,
       eigo: ["prize", "reward", "give award to"],
       jikaku: 15,
@@ -60862,7 +60861,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     茯: {
-      bushu: ["⺅", "犬", "⺾"],
+      bushu: ["⺅", "犬", "⺾", "大"],
       wiki: 19,
       eigo: "type of mushroom",
       jikaku: 10,
@@ -65141,7 +65140,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     默: {
-      bushu: ["犬", "里", "灬", "黒"],
+      bushu: ["犬", "里", "灬", "黒", "大"],
       wiki: 11,
       eigo: ["silent", "quiet", "still", "dark"],
       jikaku: 16,
@@ -67509,7 +67508,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     紵: {
-      bushu: ["糸", "幺", "小", "亅", "宀", "", "扌", "手"],
+      bushu: ["糸", "幺", "小", "亅", "宀", "扌", "手"],
       wiki: 8,
       eigo: ["flax", "linen"],
       jikaku: 11,
@@ -68016,7 +68015,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     黶: {
-      bushu: ["犬", "黒", "日", "里", "厂", "灬"],
+      bushu: ["犬", "黒", "日", "里", "厂", "灬", "大"],
       wiki: 8,
       eigo: ["mole", "scar", "blemish"],
       jikaku: 26,
@@ -70382,7 +70381,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     壓: {
-      bushu: ["月", "犬", "土", "日", "厂"],
+      bushu: ["月", "犬", "土", "日", "厂", "大"],
       wiki: 5,
       eigo: "pressure",
       jikaku: 17,
@@ -73125,7 +73124,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     魘: {
-      bushu: ["鬼", "月", "犬", "田", "日", "儿", "匕", "厂"],
+      bushu: ["鬼", "月", "犬", "田", "日", "儿", "匕", "厂", "大"],
       wiki: 4,
       eigo: "have a nightmare",
       jikaku: 24,
@@ -74997,7 +74996,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     靨: {
-      bushu: ["犬", "日", "面", "目", "厂"],
+      bushu: ["犬", "日", "面", "目", "厂", "大"],
       wiki: 3,
       eigo: "dimple",
       jikaku: 23,
@@ -75049,7 +75048,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     飆: {
-      bushu: ["犬", "風", "虫", "几"],
+      bushu: ["犬", "風", "虫", "几", "大"],
       wiki: 3,
       eigo: "whirlwind",
       jikaku: 21,
@@ -75933,7 +75932,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     朿: {
-      bushu: ["｜", "一", "ハ", "木", "冂"],
+      bushu: ["｜", "一", "ハ", "木", "冂", "巾"],
       wiki: 2,
       eigo: "thorn",
       jikaku: 6,
@@ -77272,7 +77271,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     闃: {
-      bushu: ["犬", "目", "門"],
+      bushu: ["犬", "目", "門", "大"],
       wiki: 2,
       eigo: ["quiet", "still"],
       jikaku: 17,
@@ -78455,7 +78454,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     憖: {
-      bushu: ["｜", "犬", "心", "人", "ハ", "木"],
+      bushu: ["｜", "犬", "心", "人", "ハ", "木", "大"],
       wiki: 1,
       eigo: "thoughtlessly",
       jikaku: 16,
@@ -79261,7 +79260,7 @@ dictionaryObject = {
       kunyomiKana: null
     },
     倏: {
-      bushu: ["⺅", "犬", "夂", "攵"],
+      bushu: ["⺅", "犬", "夂", "攵", "大"],
       wiki: 1,
       eigo: ["quick", "prompt"],
       jikaku: 11,
@@ -82654,22 +82653,3 @@ dictionaryObject = {
       kunyomiKana: null
     }
   }
-
-
-let entry = dictionaryObject;
-let input = "大";
-
-if (input in entry)
-{
-    console.log("input in entry");
-    let info = entry[input].eigo;
-    let onyomikata = entry[input].onyomiKanji;
-    let onyomikana = entry[input].onyomiKana;
-    console.log(info);
-    console.log(info[1]);
-    console.log(onyomikata);
-    console.log(onyomikata[3]);
-    console.log(onyomikana[3]);
-
-
-}

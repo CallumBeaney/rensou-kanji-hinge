@@ -7,9 +7,23 @@
         <title>Rensou Kanji Hinge</title>
     </head>
 
-    <body>
-        <div> <!-- TODO: IS THIS DIV ESSENTIAL? -->
+<!-- APP LAYOUT
+      ┌─┐ ┌─┐ <--- actionButton/s
+      │-│ └─┘
+      │-│ <------- div.outputboxes, button.kanjiList   
+      └─┘
+  ┌─┐ ┌─┐ ┌─┐ <--- div.newKanji, NKactionButton, button.newestKanji
+  └─┘ └─┘ └─┘
+  ┌─────────┐ 
+  ├─────────┤ <--- resultsbox/es
+  │         │ 
+  │         │ <--- canvas (defined in index.html)
+  │─────────┘
+  └─┘└─┘└─┘ <----- button.bottomButton  
+-->
 
+    <body>
+        <div>
             <!-- N.B. This is for a popup overlay -->
             <div id="overlay" onclick="turnOverlayOff();">
                     <div id="overlayText"></div>
@@ -37,7 +51,7 @@
 
                     <!-- TOP RIGHT BUTTONS -->
                     <div class="actionButtons">
-                        <button class="actionButton" id="outputButton" onclick="output();">〒</button>
+                        <button class="actionButton" id="outputButton" onclick="outputList();">〒</button>
                         <button class="actionButton" style="text-align:center;" id="helpButton" onclick="help();">何</button>
                      </div>
 
@@ -90,14 +104,8 @@
 
                 var canvas = new handwriting.Canvas(document.getElementById('canvas'), 3);
                     canvas.setOptions({language: "ja", numOfWords: 1, numOfReturn: 6,});
-
-                // TODO: なんであるか
-                // var width = document.getElementById("demo").clientWidth;    
-                // canvas.cxt.canvas.width  = width < 400 ? width : 400;
-                // canvas.cxt.canvas.height = width < 400 ? width : 400;
-                
-                canvas.set_Undo_Redo(true, false);
-                canvas.setLineWidth(8);
+                    canvas.set_Undo_Redo(true, false);
+                    canvas.setLineWidth(8);
             
             /*  THIS CODE LOADS THE "resultbox" <BUTTONs> WITH INFO: see lines 230-237 in handwriting.canvas.js and see buttons in <DIV> class "resultsboxes" above */
                 canvas.setCallBack(function(data, err) {  
@@ -105,8 +113,7 @@
                         throw err;
                     }
                     else {
-                        // Z-logic to be commented out if significant difference between mobile handwriting and mousepad input doesn't persist.
-                        // TODO: research JS for loop syntax + limited control vs C.
+                        // Z-logic to be commented out if significant difference between mobile handwriting and mousepad input does not persist.
                         let z = 5;   
                         for (i = 0; i < 6; i++) 
                         {
@@ -126,7 +133,6 @@
             <!-- ADD DICTIONARY AND HELPER FUNCTIONS -->
             <script type="text/javascript" src="./minifiedDictionary.js"></script>  
             <script src="./helpers.js"></script>
-
             
         </div>
     </body>
