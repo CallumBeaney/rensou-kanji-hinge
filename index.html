@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="./style.css">
         <title>Rensou Kanji Hinge</title>
     </head>
@@ -23,92 +23,106 @@
 -->
 
     <body>
-        <div>
             <!-- N.B. This is for a popup overlay -->
             <div id="overlay" onclick="turnOverlayOff();">
                     <div id="overlayText"></div>
             </div>
 
-            <span style="display : inline-block">
+        <!-- NEED THIS?  -->       
+        <!-- <div class='appContainer' style="display : inline-block"> -->
                 
-                <!-- UPPER HALF OF SCREEN -->
-                <div class="resultsboxes">
-                    
-                    <!-- TOP LEFT (HIDDEN) -->
-                    <div class="actionButtons"> 
-                        <button class="actionButton" style="visibility:hidden">・</button> 
-                    </div>
+            <!--TOP HALF OF SCREEN -->
+            <div id="upperHalf">
 
-                    <!-- TOP MIDDLE COLUMN -->
-                    <div class=outputboxes id = outputboxes> 
-                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">連</button>
-                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">想</button>
-                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">漢</button>
-                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">字</button>
-                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">蝶</button>
-                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">番</button>
-                    </div>
-
-                    <!-- TOP RIGHT BUTTONS -->
-                    <div class="actionButtons">
-                        <button class="actionButton" id="outputButton" onclick="outputList();">〒</button>
-                        <button class="actionButton" style="text-align:center;" id="helpButton" onclick="help();">何</button>
-                     </div>
-
+                <!-- TOP LEFT (HIDDEN) -->
+                <div class="actionButtons"> 
+                    <button class="actionButton" style="visibility:hidden">・</button> 
                 </div>
 
-                <!-- MIDDLE 3 BUTTONS -->
-                <div class="newKanji">
-
-                    <button class="NKactionButton" id="commaButton" onclick="submitKanji(this.innerHTML, this.id);">、</button>
-                    <button class="newestKanji" id="nk" onclick="kanjiInfo(this.innerHTML, 'browser')">　</button>
-                    <button class="NKactionButton" id="stopButton"  onclick="submitKanji(this.innerHTML, this.id);">。</button>
-
-                </div>  
-                
-                    <br>
-
-                <!-- MIDDLE 6 BUTTONS -->
-                <div class="resultsboxes">
-                   
-                    <button class="resultbox startup" id="rb5" onclick="submitKanji(this.innerHTML, this.id)">漢</button>              
-                    <button class="resultbox startup" id="rb4" onclick="submitKanji(this.innerHTML, this.id)">字</button>             
-                    <button class="resultbox startup" id="rb3" onclick="submitKanji(this.innerHTML, this.id)">を</button>        
-                    <button class="resultbox startup" id="rb2" onclick="submitKanji(this.innerHTML, this.id)">書</button>        
-                    <button class="resultbox startup" id="rb1" onclick="submitKanji(this.innerHTML, this.id)">い</button>         
-                    <button class="resultbox startup" id="rb0" onclick="submitKanji(this.innerHTML, this.id)">て</button>
-                
+                <!-- TOP MIDDLE COLUMN -->
+                <div class=outputboxes id = outputboxes> 
+                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">連</button>
+                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">想</button>
+                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">漢</button>
+                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">字</button>
+                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">蝶</button>
+                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">番</button>
                 </div>
+
+                <!-- TOP RIGHT BUTTONS -->
+                <div class="actionButtons">
+                    <button class="actionButton" id="outputButton" onclick="outputList();">〒</button>
+                    <button class="actionButton" style="text-align:center;" id="helpButton" onclick="help();">何</button>
+                </div>
+
+            </div>
+
+            <!-- 3 BUTTONS -->
+            <div class="newKanji" id="newKanji">
+                <button class="NKactionButton" id="commaButton" onclick="submitKanji(this.innerHTML, this.id);">、</button>
+                <button class="newestKanji"    id="nk"          onclick="kanjiInfo(this.innerHTML, 'browser');">　</button>
+                <button class="NKactionButton" id="stopButton"  onclick="submitKanji(this.innerHTML, this.id);">。</button>
+            </div>  
+
+
+            <!-- MIDDLE 6 BUTTONS -->
+            <div class="resultsboxes" id="resultsBoxes">
+                <button class="resultbox startup" id="rb5" onclick="submitKanji(this.innerHTML, this.id)">漢</button>              
+                <button class="resultbox startup" id="rb4" onclick="submitKanji(this.innerHTML, this.id)">字</button>             
+                <button class="resultbox startup" id="rb3" onclick="submitKanji(this.innerHTML, this.id)">を</button>        
+                <button class="resultbox startup" id="rb2" onclick="submitKanji(this.innerHTML, this.id)">書</button>        
+                <button class="resultbox startup" id="rb1" onclick="submitKanji(this.innerHTML, this.id)">い</button>         
+                <button class="resultbox startup" id="rb0" onclick="submitKanji(this.innerHTML, this.id)">て</button>
+            </div>
+
+            <div class="outer">
+                <canvas id="canvas" style="border: 2px solid; cursor: crosshair; display:none"></canvas>
+            <!-- <canvas id="canvas" width="300" height="300" style="border: 2px solid; cursor: crosshair;"></canvas> -->
+            <!-- CANVAS SIZING INFO:    https://stackoverflow.com/questions/43436661/how-to-scale-canvas-on-mobile-and-desktop-devices
+                                        https://stackoverflow.com/questions/4938346/canvas-width-and-height-in-html5 -->
+            </div>
+            
+            <!-- BOTTOM BUTTONS (BELOW CANVAS) -->
+            <div class="canvasButtons" id="canvasButtons">
+                <!-- TODO: detect mobile browser & disable sendButton in such cases : https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser -->
+                <button class="bottomButton" id="eraseButton" onclick="resetColours(); canvas.erase();">消去</button>
+                <button class="bottomButton" id="sendButton"  onclick="resetColours(); canvas.recognize();">送信</button>   
+                <button class="bottomButton" id="undoButton"  onclick="resetColours(); canvas.undo();">取消</button>
+            </div>
 
             
-                <canvas id="canvas" width="300" height="300" style="border: 2px solid; cursor: crosshair;"></canvas>
-                <!-- CANVAS SIZING INFO:    https://stackoverflow.com/questions/43436661/how-to-scale-canvas-on-mobile-and-desktop-devices
-                                            https://stackoverflow.com/questions/4938346/canvas-width-and-height-in-html5 -->
-
-                <br>
-                
-                <!-- BOTTOM BUTTONS (BELOW CANVAS) -->
-                <div class="canvasButtons">
-                    <!-- TODO: detect mobile browser & disable sendButton in such cases : https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser -->
-                    <button class="bottomButton" id="eraseButton" onclick="resetColours(); canvas.erase();">消去</button>
-                    <button class="bottomButton" id="sendButton"  onclick="resetColours(); canvas.recognize();">送信</button>   
-                    <button class="bottomButton" id="undoButton"  onclick="resetColours(); canvas.undo();">取消</button>
-                
-                </div>
-
-            </span>
-        
             <script type="text/javascript" src="handwriting.canvas.js"></script>
 
-            <script type="text/javascript" defer="">    // PROVIDE SETTINGS FOR HANDWRITING CANVAS
+            <!-- CANVAS SETUP -->
+            <script type="text/javascript" defer="">    
 
+                // SET UP CANVAS HEIGHT BASED ON USER INTERFACE
+                const bodyheight = document.body.clientHeight;
+
+                const upperHalfHeight = document.getElementById('upperHalf').clientHeight;
+                const kanjiBoxHeight = document.getElementById('newKanji').clientHeight;
+                const resultsHeight = document.getElementById('resultsBoxes').clientHeight;
+                const canvasButtonsHeight = document.getElementById('canvasButtons').clientHeight;
+                
+                const remainder = bodyheight - (upperHalfHeight + kanjiBoxHeight + resultsHeight + canvasButtonsHeight);
+
+                document.getElementById("canvas").width = document.body.clientWidth;
+                document.getElementById("canvas").height = remainder - 40;
+                document.getElementById("canvas").style.display = "block"; // unhide the canvas here -- you can see this resizing happening on loadup!
+    
+
+                // PROVIDE SETTINGS FOR HANDWRITING.JS CANVAS API
                 var canvas = new handwriting.Canvas(document.getElementById('canvas'), 3);
-                    canvas.setOptions({language: "ja", numOfWords: 1, numOfReturn: 6,});
+                    
+                    canvas.setOptions({language: "ja", numOfWords: 1, numOfReturn: 6,
+                    });
                     canvas.set_Undo_Redo(true, false);
-                    canvas.setLineWidth(8);
-            
+                    canvas.setLineWidth(7);
+
+ 
             /*  THIS CODE LOADS THE "resultbox" <BUTTONs> WITH INFO: see lines 230-237 in handwriting.canvas.js and see buttons in <DIV> class "resultsboxes" above */
-                canvas.setCallBack(function(data, err) {  
+                canvas.setCallBack(function(data, err) 
+                {  
                     if (err) {                           
                         throw err;
                     }
@@ -128,12 +142,12 @@
                         }
                     }       
                 });
+
             </script>
 
             <!-- ADD DICTIONARY AND HELPER FUNCTIONS -->
             <script type="text/javascript" src="./minifiedDictionary.js"></script>  
             <script src="./helpers.js"></script>
             
-        </div>
     </body>
 </html>

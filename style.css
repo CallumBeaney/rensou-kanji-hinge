@@ -16,28 +16,49 @@
 
 html, body {
     height: 100%;
-    background-color: #ffffff;
-    /* background-color: rgb(186, 186, 203); */
-}
-html {
+    width:100%;
+    text-align:center;
+    font-family: Hiragino Kaku Gothic Pro, Hiragino Sans, Meiryo, sans-serif;
+
+
+    background-color: rgb(159, 159, 197);
+    /* background-color: #ffffff; */
+    margin-left:auto; 
+    margin-right:auto;
+    
+    /* These don't seem to affect the above: essential? */
     display: table;
-    margin: auto;
+    
 }
 body {
     display: table-cell;
     vertical-align: middle;
 }
+canvas {
+    display: block;
+}
+div.appContainer{
+    /* width: auto;
+    height: auto; */
+}
 div {
-    padding: 0%;
-    padding-bottom: 1%;
+    /* padding: 0%; */
 
     /* DEBUGGING */
-    /* border:1px solid rgb(133, 133, 133); */
+    border:1px solid rgb(133, 133, 133);
 }
 a { 
     color:#f74040; 
 }
 
+ 
+/* .outer {
+    width: 100%;
+   } */
+/*   
+   #canvas {
+    width: 100%;
+} */
 
 
 /* INPUT AREA BOTTOM OF SCREEN */
@@ -45,18 +66,23 @@ a {
 div.resultsboxes {           
     background-color:#ffffff;
     display:flex;
-    width: auto;
+    height: auto;
+    width:auto;
+    margin-left: 1%;
+    margin-right: 1%;
     text-align: center;
     justify-content: space-between;
+    max-height: 10%;
     }
     button.resultbox {
         border: none;
         text-align: center;
         aspect-ratio: 1 / 1;
-        /* text-decoration: none; */
-        display: inline-block;
         font-size: 1.3rem;
         flex: 1 1 0;
+
+        /* remove when need */
+        /* min-width: 0; */
         margin-left: 1%;
         margin-right: 1%;
     }
@@ -78,7 +104,7 @@ div.resultsboxes {
         }
 
     button.bottomButton {
-        margin:0 auto;
+        /* margin:0 auto; */
         padding-top: 0.8vh;  /* 1vh before*/
         padding-bottom: 1vh; /* 1.2vh before */
         border: none;
@@ -93,30 +119,38 @@ div.resultsboxes {
 
 /* OUTPUT AREA TOP OF SCREEN */
 
-div.outputboxes {               /* THE SCROLLABLE, VERTICAL LIST OF INPUTTED KANJI */
-    overflow-y: scroll;    
-    height: 30vh;
-    width:65%;
-    padding-bottom: 2vh;
+#upperHalf {           
+    background-color:#ad8484;
+    display:flex;
+    /* height: auto; */
+    /* width: auto; */
+    /* text-align: center; */
+    /* justify-content: space-between; */
     }
-    ::-webkit-scrollbar { 
-        /* Hide scrollbar syntax */
-        display: none;  
-    } 
-    button.kanjiList {
-        margin:0 auto;
-        display:block;
-        border: none;
-        font-size: 1.4rem;
-        color: #666666;
-        background-color: #ededed;
-        text-align: center;
-        aspect-ratio: 1 / 1;
-        border:1px solid rgb(255, 255, 255);
-    }
+    div.outputboxes {               /* THE SCROLLABLE, VERTICAL LIST OF INPUTTED KANJI */
+        overflow-y: scroll;    
+        height: 30vh;
+        width:65%;
+        padding-bottom: 2vh;
+        }
+        ::-webkit-scrollbar { 
+            /* Hide scrollbar syntax */
+            display: none;  
+        } 
+        button.kanjiList {
+            margin:0 auto;
+            display:block;
+            border: none;
+            font-size: 1.4rem;
+            color: #666666;
+            background-color: #ededed;
+            text-align: center;
+            aspect-ratio: 1 / 1;
+            border:1px solid rgb(255, 255, 255);
+        }
 
 
-div.actionButtons {             /* THE ADMIN BUTTONS IN THE TOP CORNER OF THE SCREEN */
+div.actionButtons {                 /* THE ADMIN BUTTONS IN THE TOP CORNER OF THE SCREEN */
     display: inline-table;
     margin: 0 auto;
     }
@@ -134,19 +168,21 @@ div.actionButtons {             /* THE ADMIN BUTTONS IN THE TOP CORNER OF THE SC
         /* ^keeps button to square when using flex */
     }
 
-div.newKanji {                  /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
+div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
     background-color:#ffffff;
     display: inline-block;
     width: 100%;
     text-align: center;
     margin-bottom: 1%;
+    /* justify-content: space-between; */
+
     }
     button.NKactionButton {
-        margin-top: 4%;
+        /* margin-top: 4%;
         margin-bottom: 5%;
-        margin-inline: 14%;
+        margin-inline: 14%; */
         /* display:inline-flex; */
-        vertical-align:top;
+        /* vertical-align:top; */
         font-size: 1.4rem;
         border: hidden;
         color: #ededed;
@@ -160,7 +196,7 @@ div.newKanji {                  /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
         /* margin: auto; */
         /* margin-bottom: 3%; */
         border: hidden;
-        font-size: 2.5rem;
+        font-size: 2.5rem; /* This seems to be causing the big square to be too big */
         color: #666666;
         background-color: #ededed;
         text-align: center;
@@ -185,7 +221,6 @@ div.newKanji {                  /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
         padding: 12%;
         align-items: center;
 
-        font-family: Hiragino Kaku Gothic Pro, Hiragino Sans, Meiryo, sans-serif;
         text-align: justify; 
         font-size: 1rem;
         line-height: 1.4;
