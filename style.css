@@ -19,31 +19,18 @@ html, body {
     width:100%;
     text-align:center;
     font-family: Hiragino Kaku Gothic Pro, Hiragino Sans, Meiryo, sans-serif;
-
-
     background-color: rgb(159, 159, 197);
-    /* background-color: #ffffff; */
-    margin-left:auto; 
-    margin-right:auto;
-    
-    /* These don't seem to affect the above: essential? */
-    display: table;
-    
+    display:flex;
+
+    /* TODO: apparently this compensates for iOS insanity but no effect seen */ 
+    -webkit-text-size-adjust: 100%; 
 }
 body {
-    display: table-cell;
-    vertical-align: middle;
-}
-canvas {
     display: block;
-}
-div.appContainer{
-    /* width: auto;
-    height: auto; */
+    margin-left:auto; 
+    margin-right:auto;
 }
 div {
-    /* padding: 0%; */
-
     /* DEBUGGING */
     border:1px solid rgb(133, 133, 133);
 }
@@ -52,80 +39,14 @@ a {
 }
 
  
-/* .outer {
-    width: 100%;
-   } */
-/*   
-   #canvas {
-    width: 100%;
-} */
 
 
-/* INPUT AREA BOTTOM OF SCREEN */
-
-div.resultsboxes {           
-    background-color:#ffffff;
-    display:flex;
-    height: auto;
-    width:auto;
-    margin-left: 1%;
-    margin-right: 1%;
-    text-align: center;
-    justify-content: space-between;
-    max-height: 10%;
-    }
-    button.resultbox {
-        border: none;
-        text-align: center;
-        aspect-ratio: 1 / 1;
-        font-size: 1.3rem;
-        flex: 1 1 0;
-
-        /* remove when need */
-        /* min-width: 0; */
-        margin-left: 1%;
-        margin-right: 1%;
-    }
-        button.resultbox.startup {
-            color: #ededed;
-            background-color: #666666;
-        }
-        button.resultbox.raw {
-            color: #666666;
-            background-color: #ededed;
-        }
-        button.resultbox.pass {
-            color: #ffffff;
-            background-color: #1bc459;
-        }
-        button.resultbox.failure {
-            background-color: #f74040;
-            color: #f7f7f7;
-        }
-
-    button.bottomButton {
-        /* margin:0 auto; */
-        padding-top: 0.8vh;  /* 1vh before*/
-        padding-bottom: 1vh; /* 1.2vh before */
-        border: none;
-        font-size: 0.9rem;
-        color: #ededed;
-        background-color: #666666;
-        text-align: center;
-        aspect-ratio: 3 / 1;
-    }
-        
-
-
-/* OUTPUT AREA TOP OF SCREEN */
+/* __________________OUTPUT AREA TOP OF SCREEN__________________ */
 
 #upperHalf {           
     background-color:#ad8484;
     display:flex;
-    /* height: auto; */
-    /* width: auto; */
-    /* text-align: center; */
-    /* justify-content: space-between; */
+
     }
     div.outputboxes {               /* THE SCROLLABLE, VERTICAL LIST OF INPUTTED KANJI */
         overflow-y: scroll;    
@@ -168,20 +89,17 @@ div.actionButtons {                 /* THE ADMIN BUTTONS IN THE TOP CORNER OF TH
         /* ^keeps button to square when using flex */
     }
 
+
 div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
-    background-color:#ffffff;
-    display: inline-block;
+    background-color:#e17272;
+    /* display: inline-block; */
+    display:table;
     width: 100%;
     text-align: center;
-    margin-bottom: 1%;
-    /* justify-content: space-between; */
-
+    justify-content: space-between;
     }
     button.NKactionButton {
-        /* margin-top: 4%;
-        margin-bottom: 5%;
-        margin-inline: 14%; */
-        /* display:inline-flex; */
+ 
         /* vertical-align:top; */
         font-size: 1.4rem;
         border: hidden;
@@ -189,19 +107,88 @@ div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS 
         background-color: #666666;
         text-align: center;
         aspect-ratio: 1 / 1;
-        /* max-height:fit-content; */
         /* border:1px solid rgb(255, 255, 255); */
     }
     button.newestKanji {    
         /* margin: auto; */
         /* margin-bottom: 3%; */
+        /* margin-left:5%;
+        margin-right:5%; */
         border: hidden;
-        font-size: 2.5rem; /* This seems to be causing the big square to be too big */
         color: #666666;
         background-color: #ededed;
         text-align: center;
         aspect-ratio: 1 / 1;
+        
+        /* This seems to be causing the kanji square to be too big */
+       font-size: 2.5rem;
     }
+
+
+
+/* __________________INPUT AREA BOTTOM OF SCREEN__________________ */
+
+
+#lowerHalf {           
+    background-color:#7ebe8e;
+    /* display: inline-flexbox; */
+    }
+div.bottomPadding
+{
+    /* display: inline-table; */
+    /* margin: 0 auto; */
+}
+    div.resultsboxes {           
+        background-color:#ffffff;
+        display:flex;
+        height: auto;
+        width:auto;
+        /* margin-top: 1%; */
+        /* padding-left: 5%;
+        padding-right: 5%; */
+        /* justify-content: space-between; */
+        }
+        button.resultbox {
+            border: none;
+            text-align: center;
+            aspect-ratio: 1 / 1;
+            font-size: 1.3rem;
+            
+            /* THESE TWO ADJUST FOR BOTH IPHONE AND ANDROID LAYOUTS. DO NOT REMOVE MIN-WIDTH OR CHANGE THE FLEX SETTING */
+            flex: 1 1 0;
+            min-width: 0;
+        }
+            button.resultbox.startup {
+                color: #ededed;
+                background-color: #666666;
+            }
+            button.resultbox.raw {
+                color: #666666;
+                background-color: #ededed;
+            }
+            button.resultbox.pass {
+                color: #ffffff;
+                background-color: #1bc459;
+            }
+            button.resultbox.failure {
+                background-color: #f74040;
+                color: #f7f7f7;
+            }
+
+button.bottomButton {
+    /* margin:0 auto; */
+    padding-top: 0.8vh;  /* 1vh before*/
+    padding-bottom: 1vh; /* 1.2vh before */
+    border: none;
+    font-size: 0.9rem;
+    color: #ededed;
+    background-color: #666666;
+    text-align: center;
+    aspect-ratio: 3 / 1;
+}
+        
+
+
 
 
                        /*_________OVERLAY INFORMATION__________*/
@@ -283,5 +270,3 @@ fg {
     line-height: 1.1;
 } 
 /* Thanks to MysticWhiteDragon on SO for this furigana solution: https://stackoverflow.com/a/54324347 */
-
-
