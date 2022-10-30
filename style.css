@@ -19,7 +19,8 @@ html, body {
     width:100%;
     text-align:center;
     font-family: Hiragino Kaku Gothic Pro, Hiragino Sans, Meiryo, sans-serif;
-    background-color: rgb(159, 159, 197);
+    /* background-color: rgb(159, 159, 197); */
+    background-color:#ffffff;
     display:flex;
 
     /* TODO: apparently this compensates for iOS insanity but no effect seen */ 
@@ -32,7 +33,7 @@ body {
 }
 div {
     /* DEBUGGING */
-    border:1px solid rgb(133, 133, 133);
+    /* border:1px solid rgb(133, 133, 133); */
 }
 a { 
     color:#f74040; 
@@ -44,7 +45,8 @@ a {
 /* __________________OUTPUT AREA TOP OF SCREEN__________________ */
 
 #upperHalf {           
-    background-color:#ad8484;
+    /* background-color:#ad8484; */
+    background-color:#ffffff;
     display:flex;
 
     }
@@ -55,7 +57,6 @@ a {
         padding-bottom: 2vh;
         }
         ::-webkit-scrollbar { 
-            /* Hide scrollbar syntax */
             display: none;  
         } 
         button.kanjiList {
@@ -76,22 +77,23 @@ div.actionButtons {                 /* THE ADMIN BUTTONS IN THE TOP CORNER OF TH
     margin: 0 auto;
     }
     button.actionButton {
+        background-color: #666666;
         margin: auto;
         margin-top: 25%;
         display:table;
         border: hidden;
         font-size: 1.4rem;
         color: #ededed;
-        background-color: #666666;
         text-align: center !important;
-        aspect-ratio: 1 / 1;
         max-height:fit-content;  
+        aspect-ratio: 1 / 1;
         /* ^keeps button to square when using flex */
     }
 
 
 div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
-    background-color:#e17272;
+    /* background-color:#e17272; */
+    background-color:#ffffff;
     /* display: inline-block; */
     display:table;
     width: 100%;
@@ -111,9 +113,9 @@ div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS 
     }
     button.newestKanji {    
         /* margin: auto; */
-        /* margin-bottom: 3%; */
-        /* margin-left:5%;
-        margin-right:5%; */
+        margin-bottom: 3%;
+        margin-left:8%;
+        margin-right:8%;
         border: hidden;
         color: #666666;
         background-color: #ededed;
@@ -121,7 +123,7 @@ div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS 
         aspect-ratio: 1 / 1;
         
         /* This seems to be causing the kanji square to be too big */
-       font-size: 2.5rem;
+       font-size: 3rem;
     }
 
 
@@ -153,6 +155,7 @@ div.bottomPadding
             text-align: center;
             aspect-ratio: 1 / 1;
             font-size: 1.3rem;
+            margin:0.5%;
             
             /* THESE TWO ADJUST FOR BOTH IPHONE AND ANDROID LAYOUTS. DO NOT REMOVE MIN-WIDTH OR CHANGE THE FLEX SETTING */
             flex: 1 1 0;

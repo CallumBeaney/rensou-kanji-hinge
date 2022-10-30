@@ -75,13 +75,12 @@
                 <button class="resultbox startup" id="rb0" onclick="submitKanji(this.innerHTML, this.id)">て</button>
             </div>
 
+            <!-- CANVAS -->
             <div class="outer">
-                <canvas id="canvas" style="border: 2px solid; cursor: crosshair; display:none"></canvas>
-            <!-- <canvas id="canvas" width="300" height="300" style="border: 2px solid; cursor: crosshair;"></canvas> -->
-            <!-- CANVAS SIZING INFO:    https://stackoverflow.com/questions/43436661/how-to-scale-canvas-on-mobile-and-desktop-devices
-                                        https://stackoverflow.com/questions/4938346/canvas-width-and-height-in-html5 -->
+                <canvas id="canvas" style="border: 2px solid; cursor: crosshair; text-align: center; display:none"></canvas>
             </div>
             
+
             <!-- BOTTOM BUTTONS (BELOW CANVAS) -->
             <div class="canvasButtons" id="canvasButtons">
                 <!-- TODO: detect mobile browser & disable sendButton in such cases : https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser -->
@@ -106,7 +105,7 @@
                 
                 const remainder = bodyheight - (upperHalfHeight + kanjiBoxHeight + resultsHeight + canvasButtonsHeight);
 
-                document.getElementById("canvas").width = document.body.clientWidth;
+                document.getElementById("canvas").width = document.body.clientWidth - 4;
                 document.getElementById("canvas").height = remainder - 40;
                 document.getElementById("canvas").style.display = "block"; // unhide the canvas here -- you can see this resizing happening on loadup!
     
