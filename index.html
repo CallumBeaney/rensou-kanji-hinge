@@ -27,14 +27,15 @@
             <div id="overlay" onclick="turnOverlayOff();">      <!-- This is for a popup overlay -->
                     <div id="overlayText"></div>
             </div>
-                
+
+        <div id="appframe">                
 
         <!--TOP HALF OF SCREEN -->
-            <div id="upperHalf">
+            <div class="upperHalf" id="upperHalf">
 
                 <!-- TOP LEFT (HIDDEN) -->
                 <div class="actionButtons"> 
-                    <button class="actionButton" style="visibility:hidden">・</button> 
+                    <button class="actionButton" id="hiddenButton" style="visibility:hidden">・</button> 
                 </div>
 
                 <!-- TOP MIDDLE COLUMN -->
@@ -89,10 +90,14 @@
                 <button class="bottomButton" id="undoButton"  onclick="resetColours(); canvas.undo();">取消</button>
             </div>
 
+        </div>
             
         <!-- CANVAS SETUP -->
 
+            <script src="./helpers.js"></script> <!-- Order is important: helpers.js must go first as it handles GUI appearance in the OS checking function -->
+
             <script type="text/javascript" src="handwriting.canvas.js"></script>
+            
             <script type="text/javascript" defer="">    
 
                 // SET UP CANVAS HEIGHT BASED ON USER INTERFACE
@@ -103,10 +108,18 @@
                 const resultsHeight = document.getElementById('resultsBoxes').clientHeight;
                 const canvasButtonsHeight = document.getElementById('canvasButtons').clientHeight;
                 
-                const remainder = bodyheight - (upperHalfHeight + kanjiBoxHeight + resultsHeight + canvasButtonsHeight);
+                const remainder = bodyheight - (upperHalfHeight + kanjiBoxHeight + resultsHeight + canvasButtonsHeight) - 18;
 
                 document.getElementById("canvas").width = document.body.clientWidth - 4;
-                document.getElementById("canvas").height = remainder - 40;
+                document.getElementById("canvas").height = remainder;
+
+                // if (os != "IOS") {
+                //     document.getElementById("canvas").height = remainder - 20;
+                // }
+                // else {
+                //     document.getElementById("canvas").height = remainder - 20;
+                // }
+
                 document.getElementById("canvas").style.display = "block"; // unhide the canvas here -- you can see this resizing happening on loadup!
     
 
@@ -146,7 +159,35 @@
 
             <!-- ADD DICTIONARY AND HELPER FUNCTIONS -->
             <script type="text/javascript" src="./minifiedDictionary.js"></script>  
-            <script src="./helpers.js"></script>
             
     </body>
 </html>
+
+<!--
+                  // GET BROWSER TYPE AND MAKE ALTERATIONS FOR IOS
+                const os = (() => {
+                    if (/windows/i.test(navigator.userAgent)) {
+                        // Do nothing
+                        return "Windows"
+                    }
+                    else if (/iphone/i.test(navigator.userAgent) || /ipad/i.test(navigator.userAgent)) {
+                        
+                        document.getElementById("nk").className = "newestKanjiIOS";
+                        document.getElementById("commaButton").className =  "NKactionButtonIOS";
+                        document.getElementById("stopButton").className =  "NKactionButtonIOS";
+                        
+                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">連</button>
+                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">想</button>
+                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">漢</button>
+                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">字</button>
+                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">蝶</button>
+                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">番</button>
+                        
+                        return "iOS";
+                    }
+                    else if (/macintosh/i.test(navigator.userAgent)) {
+                        // Do nothing
+                        return "Mac OS"
+                    }
+                })();
+-->

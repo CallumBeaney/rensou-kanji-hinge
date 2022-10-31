@@ -1,22 +1,33 @@
-let firstStroke = 0;
+ // GET BROWSER TYPE AND MAKE ALTERATIONS FOR IOS
+ const os = (() => {
+    if (/windows/i.test(navigator.userAgent)) {
+        return "Windows";
+    }
+    else if (/iphone/i.test(navigator.userAgent) || /ipad/i.test(navigator.userAgent)) {
+        constructGUI("IOS");
+        return "IOS";
+    }
+    else if (/macintosh/i.test(navigator.userAgent)) {
+        return "Mac OS";
+    }
+})();
+
+// Use this when constructing HTML as a way to change large groups of _classes_ rather than ID-defined elements
+const OS_VAL = os == "IOS" ? "IOS " : " ";
+
+let firstInputCheck = 0;
 
 function submitKanji(newKanji, buttonid)
 {
-    if (firstStroke === 0)
+    if (firstInputCheck === 0)
     {   
         // Clear the title 連想漢字蝶番 upon first user input
         document.getElementById("outputboxes").innerHTML = "";
-        firstStroke = 1;
+        firstInputCheck = 1;
     }
-
 
     /* These just let the user move to a different kanji if they get stuck/break up their kanji list */
-    if (buttonid === "stopButton")
-    {
-        passKanji(newKanji);
-        return;
-    }
-    if (buttonid === "commaButton")
+    if (buttonid === "stopButton" || buttonid === "commaButton")
     {
         passKanji(newKanji);
         return;
@@ -43,7 +54,7 @@ function submitKanji(newKanji, buttonid)
     catch(err) 
     {
         // Change CSS colour to red failure colour on <id=rb_> HTML objects?
-        document.getElementById(buttonid).className = "resultbox failure";
+        document.getElementById(buttonid).className = "resultbox" + OS_VAL + "failure";
         return;
     }
 
@@ -62,11 +73,11 @@ function submitKanji(newKanji, buttonid)
         {
             passKanji(newKanji);
             document.getElementById(buttonid).innerHTML = newKanji;
-            document.getElementById(buttonid).className = "resultbox pass"
+            document.getElementById(buttonid).className = "resultbox" + OS_VAL + "pass"
             return;
         }
         else {
-            document.getElementById(buttonid).className = "resultbox failure";
+            document.getElementById(buttonid).className = "resultbox" + OS_VAL + "failure";
             return;
         }
     }
@@ -79,19 +90,19 @@ function passKanji(kanji)
     resetColours(); 
     for (i = 0; i < 6; i++) {
         // Mustn't refactor this loop into resetColours() because that gets used by the HTML canvas Undo and Erase buttons
-        document.getElementById("rb" + i).innerHTML = ""; 
+        document.getElementById("rb" + i).innerHTML = "　"; 
     }
 
     // 1. Update new kanji div; 2. Update previous kanji list; 3. Scroll to bottom of output div.
     document.getElementById("nk").innerHTML = kanji;
-    document.getElementById("outputboxes").innerHTML += '<button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">' + kanji + '</button>';
+    document.getElementById("outputboxes").innerHTML += '<button class="kanjiList' + OS_VAL + '" onclick="kanjiInfo(this.innerHTML)">' + kanji + '</button>';
     updateScroll();
 }
 
 function resetColours()
 {
     for (i = 0; i < 6; i++) {
-        document.getElementById("rb" + i).className = "resultbox raw";
+        document.getElementById("rb" + i).className = "resultbox" + OS_VAL + "raw";
     }
 }
 
@@ -117,16 +128,13 @@ function help()
 }
 
 
-function kanjiInfo(kanji, mode)
+function kanjiInfo(kanji, mode)             // TODO: fix up outputList() function
 {    
-    // TODO: fix up outputList() function
-
     // for external output mode
     if (kanji === "。" || kanji === "、")
     {
         let toSend = [kanji];
         document.getElementById("overlayText").innerHTML += toSend;
-        console.log(toSend);
         return;
     }
 
@@ -185,7 +193,7 @@ function kanjiInfo(kanji, mode)
 
     if (mode === "externalOutput") // User wants to send themselves e.g. a CSV
     {
-            let toSend = [kanji, translation, yomikata, bushu, dictionary[kanji].jikaku.toString(), dictionary[kanji].wiki.toString(), heisigIndex];    
+            // let toSend = [kanji, translation, yomikata, bushu, dictionary[kanji].jikaku.toString(), dictionary[kanji].wiki.toString(), heisigIndex];    
             // document.getElementById("overlayText").innerHTML += toSend;
             document.getElementById("overlayText").innerHTML = "<center style='font-size:1.4rem;'><br><br>in development<br>発展つつある</center>";
 
@@ -270,8 +278,8 @@ function buildFurigana(kanji, kana, type)
 // TODO: clipboard copy from <outputboxes>: https://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
 function outputList()
 {   
-
-    let elements = document.querySelectorAll('.kanjiList');    
+    let query = ".kanjiList" + OS_VAL;
+    let elements = document.querySelectorAll(query);    
     
     Array.from(elements).forEach((element, index) => {
         kanjiInfo(element.innerHTML, "externalOutput");
@@ -282,6 +290,25 @@ function outputList()
 
 
 /*  UI FUNCTIONS  */
+
+function constructGUI(os) // This changes classes to iOS-centric ones should it be needed.
+{
+    document.getElementById("nk").className = "newestKanjiIOS";
+    document.getElementById("commaButton").className =  "NKactionButtonIOS";
+    document.getElementById("stopButton").className =  "NKactionButtonIOS";
+    document.getElementById("upperHalf").className = "upperHalfIOS";
+    document.getElementById("outputButton").className = "actionButtonIOS";
+    document.getElementById("helpButton").className = "actionButtonIOS";
+    document.getElementById("hiddenButton").className = "actionButtonIOS";
+
+    let introText = ["連", "想", "漢", "字", "蝶", "番"];
+    document.getElementById("outputboxes").innerHTML = "";
+    
+    for (i = 0; i < 6; i++)
+    {   
+        document.getElementById("outputboxes").innerHTML += '<button class="kanjiList' + os + '" onclick="kanjiInfo(this.innerHTML)">' + introText[i] + '</button>';
+    }   
+}
 
 function updateScroll() 
 {

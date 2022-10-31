@@ -41,17 +41,16 @@ a {
 
 /* __________________OUTPUT AREA TOP OF SCREEN__________________ */
 
-#upperHalf {           
+div.upperHalf {           
     /* background-color:#ad8484; */
     background-color:#ffffff;
     display:flex;
-
+    height: 32vh;
+    padding-bottom: 2vh;
     }
     div.outputboxes {               /* THE SCROLLABLE, VERTICAL LIST OF INPUTTED KANJI */
         overflow-y: scroll;    
-        height: 30vh;
         width:65%;
-        padding-bottom: 2vh;
         }
         ::-webkit-scrollbar { 
             display: none;  
@@ -66,7 +65,13 @@ a {
             text-align: center;
             aspect-ratio: 1 / 1;
             border:1px solid rgb(255, 255, 255);
+            padding: 2% 3%;
         }
+
+
+
+
+
 
 
 div.actionButtons {                 /* THE ADMIN BUTTONS IN THE TOP CORNER OF THE SCREEN */
@@ -89,15 +94,14 @@ div.actionButtons {                 /* THE ADMIN BUTTONS IN THE TOP CORNER OF TH
 
 
 div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
-    /* background-color:#e17272; */
-    background-color:#ffffff;
-    display:flexbox;
+    background-color:#e17272;
+    /* background-color:#ffffff; */
+    /* display:flexbox; */
     width: 100%;
     text-align: center;
     justify-content: space-between;
     }
     button.NKactionButton {
- 
         /* vertical-align:top; TODO: DECIDE UPON */
         font-size: 1.4rem;
         border: hidden;
@@ -109,7 +113,7 @@ div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS 
     }
     button.newestKanji {    
         /* margin: auto; */
-        margin-bottom: 3%;
+        margin-bottom: 2%;
         margin-left:8%;
         margin-right:8%;
         border: hidden;
@@ -117,10 +121,11 @@ div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS 
         background-color: #ededed;
         text-align: center;
         aspect-ratio: 1 / 1;
-        
+        padding:1% 3%;        
         /* This seems to be causing the kanji square to be too big on iOS but reason not forthcoming */
-       font-size: 3rem;
+        font-size: 3rem;
     }
+
 
 
 
@@ -146,8 +151,9 @@ div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS 
             border: none;
             text-align: center;
             aspect-ratio: 1 / 1;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin:0.5%;
+            padding: 3.5%;
             
             /* THESE TWO ADJUST FOR BOTH IPHONE AND ANDROID LAYOUTS. DO NOT REMOVE MIN-WIDTH OR CHANGE THE FLEX SETTING */
             flex: 1 1 0;
@@ -172,14 +178,13 @@ div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS 
 
 button.bottomButton {
     /* margin:0 auto; */
-    padding-top: 0.8vh;
-    padding-bottom: 1vh;
+  
     border: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    padding: 2% 3%;
     color: #ededed;
     background-color: #666666;
     text-align: center;
-    aspect-ratio: 3 / 1;
 }
         
 
@@ -250,9 +255,9 @@ button.bottomButton {
             line-height: 1.3;
         }
                                   
-fg:before {                             /* ____________FURIGANA INSIDE KANJI TABLE */
-    content: attr(t);           
-    display: block;
+fg:before {                              /* ____________FURIGANA INSIDE KANJI TABLE */
+    content: attr(t);                   /* Thanks to MysticWhiteDragon on SO for this furigana solution: */
+    display: block;                     /* https://stackoverflow.com/a/54324347 */
     font-size: 50%;
     text-align: start;
     line-height: 1.2;
@@ -264,4 +269,88 @@ fg {
     text-align: center;
     line-height: 1.1;
 } 
-/* Thanks to MysticWhiteDragon on SO for this furigana solution: https://stackoverflow.com/a/54324347 */
+
+
+
+/* ================== IPHONE SIZINGS ================== */
+
+    
+div.upperHalfIOS {           
+    background-color:#ffffff;
+    display:flex;
+    height: 25vh;
+    padding-bottom: 2vh;
+    }
+    button.kanjiListIOS {
+        margin:0 auto;
+        overflow-y: scroll;    
+        /* display:block; */
+        border: none;
+        color: #666666;
+        background-color: #ededed;
+        text-align: center;
+        border:1px solid rgb(255, 255, 255);
+        font-size: 1.6rem;
+        padding: 3% 4%;
+    }
+
+button.actionButtonIOS {
+    margin-top: 25%;
+    display:flex;
+    border: hidden;
+    font-size: 1.4rem;
+    /* padding:auto; */
+    padding: 30% 45%;
+    background-color: #666666;
+    color: #ededed;
+}
+
+button.newestKanjiIOS {
+    margin-bottom: 1%;
+    margin-left:8%;
+    margin-right:8%;
+    border: hidden;
+    color: #666666;
+    background-color: #ededed;
+    text-align: center;
+    font-size: 3rem;
+    padding:1% 2%;
+}
+button.NKactionButtonIOS {
+    /* vertical-align:top; TODO: DECIDE UPON */
+    font-size: 1.5rem;
+    border: hidden;
+    color: #ededed;
+    background-color: #666666;
+    text-align: center;
+    padding: 2% 3%;
+}
+
+button.resultboxIOS {
+    border: none;
+    text-align: center;
+    font-size: 1.7rem;
+    margin:0.5%;    
+    padding: 3.5%;
+    /* THESE TWO ADJUST FOR BOTH IPHONE AND ANDROID LAYOUTS. DO NOT REMOVE MIN-WIDTH OR CHANGE THE FLEX SETTING */
+    flex: 1 1 0;
+    min-width: 0;
+    }
+    button.resultboxIOS.startup {
+        color: #ededed;
+        background-color: #666666;
+    }
+    button.resultboxIOS.raw {
+        color: #666666;
+        background-color: #ededed;
+    }
+    button.resultboxIOS.pass {
+        color: #ffffff;
+        background-color: #1bc459;
+    }
+    button.resultboxIOS.failure {
+        background-color: #f74040;
+        color: #f7f7f7;
+    }
+
+    
