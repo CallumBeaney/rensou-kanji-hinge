@@ -21,13 +21,14 @@ html, body {
     font-family: Hiragino Kaku Gothic Pro, Hiragino Sans, Meiryo, sans-serif;
     /* background-color: rgb(159, 159, 197); */
     background-color:#ffffff;
-    display:flex;
-
+    display:flexbox;
+    -webkit-text-size-adjust: none; 
     /* TODO: apparently this compensates for iOS insanity but no effect seen */ 
-    -webkit-text-size-adjust: 100%; 
+    /* -webkit-text-size-adjust: 100%;  */
+
 }
 body {
-    display: block;
+    /* display: block; */
     margin-left:auto; 
     margin-right:auto;
 }
@@ -85,9 +86,11 @@ div.actionButtons {                 /* THE ADMIN BUTTONS IN THE TOP CORNER OF TH
         font-size: 1.4rem;
         color: #ededed;
         text-align: center !important;
-        max-height:fit-content;  
+
         aspect-ratio: 1 / 1;
         /* ^keeps button to square when using flex */
+
+        /* max-height:fit-content;   */
     }
 
 
@@ -95,10 +98,12 @@ div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS 
     /* background-color:#e17272; */
     background-color:#ffffff;
     /* display: inline-block; */
-    display:table;
+    display:flexbox;
     width: 100%;
     text-align: center;
     justify-content: space-between;
+
+
     }
     button.NKactionButton {
  
@@ -192,9 +197,9 @@ button.bottomButton {
         
 
 
+    /* __________________ OVERLAY INFORMATION __________________ */
 
 
-                       /*_________OVERLAY INFORMATION__________*/
 #overlay {
     position: fixed;  /* Sit on top of the page content     */
     display: none;   /* Overlay is hidden by default       */
