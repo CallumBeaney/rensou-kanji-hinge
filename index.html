@@ -23,15 +23,13 @@
 -->
 
     <body>
-            <!-- N.B. This is for a popup overlay -->
-            <div id="overlay" onclick="turnOverlayOff();">
+
+            <div id="overlay" onclick="turnOverlayOff();">      <!-- This is for a popup overlay -->
                     <div id="overlayText"></div>
             </div>
-
-        <!-- NEED THIS?  -->       
-        <!-- <div class='appContainer' style="display : inline-block"> -->
                 
-            <!--TOP HALF OF SCREEN -->
+
+        <!--TOP HALF OF SCREEN -->
             <div id="upperHalf">
 
                 <!-- TOP LEFT (HIDDEN) -->
@@ -65,6 +63,8 @@
             </div>  
 
 
+        <!--BOTTOM HALF OF SCREEN -->
+
             <!-- MIDDLE 6 BUTTONS -->
             <div class="resultsboxes" id="resultsBoxes">
                 <button class="resultbox startup" id="rb5" onclick="submitKanji(this.innerHTML, this.id)">漢</button>              
@@ -83,16 +83,16 @@
 
             <!-- BOTTOM BUTTONS (BELOW CANVAS) -->
             <div class="canvasButtons" id="canvasButtons">
-                <!-- TODO: detect mobile browser & disable sendButton in such cases : https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser -->
+                <!-- TODO: remove send button on mobile browser once app complete : https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser -->
                 <button class="bottomButton" id="eraseButton" onclick="resetColours(); canvas.erase();">消去</button>
                 <button class="bottomButton" id="sendButton"  onclick="resetColours(); canvas.recognize();">送信</button>   
                 <button class="bottomButton" id="undoButton"  onclick="resetColours(); canvas.undo();">取消</button>
             </div>
 
             
-            <script type="text/javascript" src="handwriting.canvas.js"></script>
+        <!-- CANVAS SETUP -->
 
-            <!-- CANVAS SETUP -->
+            <script type="text/javascript" src="handwriting.canvas.js"></script>
             <script type="text/javascript" defer="">    
 
                 // SET UP CANVAS HEIGHT BASED ON USER INTERFACE

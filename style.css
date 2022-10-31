@@ -22,15 +22,11 @@ html, body {
     /* background-color: rgb(159, 159, 197); */
     background-color:#ffffff;
     display:flexbox;
-    -webkit-text-size-adjust: none; 
     /* TODO: apparently this compensates for iOS insanity but no effect seen */ 
     /* -webkit-text-size-adjust: 100%;  */
-
-}
-body {
-    /* display: block; */
     margin-left:auto; 
     margin-right:auto;
+
 }
 div {
     /* DEBUGGING */
@@ -89,25 +85,20 @@ div.actionButtons {                 /* THE ADMIN BUTTONS IN THE TOP CORNER OF TH
 
         aspect-ratio: 1 / 1;
         /* ^keeps button to square when using flex */
-
-        /* max-height:fit-content;   */
     }
 
 
 div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
     /* background-color:#e17272; */
     background-color:#ffffff;
-    /* display: inline-block; */
     display:flexbox;
     width: 100%;
     text-align: center;
     justify-content: space-between;
-
-
     }
     button.NKactionButton {
  
-        /* vertical-align:top; */
+        /* vertical-align:top; TODO: DECIDE UPON */
         font-size: 1.4rem;
         border: hidden;
         color: #ededed;
@@ -127,7 +118,7 @@ div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS 
         text-align: center;
         aspect-ratio: 1 / 1;
         
-        /* This seems to be causing the kanji square to be too big */
+        /* This seems to be causing the kanji square to be too big on iOS but reason not forthcoming */
        font-size: 3rem;
     }
 
@@ -137,23 +128,19 @@ div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS 
 
 
 #lowerHalf {           
-    background-color:#7ebe8e;
-    /* display: inline-flexbox; */
+    /* background-color:#7ebe8e; */
     }
-div.bottomPadding
-{
-    /* display: inline-table; */
-    /* margin: 0 auto; */
-}
     div.resultsboxes {           
         background-color:#ffffff;
         display:flex;
         height: auto;
         width:auto;
-        /* margin-top: 1%; */
-        /* padding-left: 5%;
-        padding-right: 5%; */
-        /* justify-content: space-between; */
+
+        /* TODO: decide on aesthetics below */
+            /* margin-top: 1%; */
+            /* padding-left: 5%;
+            padding-right: 5%; */
+            /* justify-content: space-between; */
         }
         button.resultbox {
             border: none;
@@ -185,8 +172,8 @@ div.bottomPadding
 
 button.bottomButton {
     /* margin:0 auto; */
-    padding-top: 0.8vh;  /* 1vh before*/
-    padding-bottom: 1vh; /* 1.2vh before */
+    padding-top: 0.8vh;
+    padding-bottom: 1vh;
     border: none;
     font-size: 0.9rem;
     color: #ededed;
