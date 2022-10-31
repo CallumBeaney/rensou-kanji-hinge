@@ -94,8 +94,8 @@ div.actionButtons {                 /* THE ADMIN BUTTONS IN THE TOP CORNER OF TH
 
 
 div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
-    background-color:#e17272;
-    /* background-color:#ffffff; */
+    /* background-color:#e17272; */
+    background-color:#ffffff;
     /* display:flexbox; */
     width: 100%;
     text-align: center;
