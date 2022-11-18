@@ -3,16 +3,16 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="./src/style.css">
         <title>Rensou Kanji Hinge</title>
     </head>
 
 <!-- APP LAYOUT
       ┌─┐ ┌─┐ <--- actionButton/s
       │-│ └─┘
-      │-│ <------- div.outputboxes, button.kanjiList   
+      │-│ <------- div.outputboxes: button.kanjiList   
       └─┘
-  ┌─┐ ┌─┐ ┌─┐ <--- div.newKanji, NKactionButton, button.newestKanji
+  ┌─┐ ┌─┐ ┌─┐ <--- div.newKanji: button.NKactionButton, button.newestKanji
   └─┘ └─┘ └─┘
   ┌─────────┐ 
   ├─────────┤ <--- resultsbox/es
@@ -24,21 +24,21 @@
 
     <body>
 
-            <div id="overlay" onclick="turnOverlayOff();">      <!-- This is for a popup overlay -->
-                    <div id="overlayText"></div>
-            </div>
+        <div id="overlay" onclick="turnOverlayOff();">      <!-- This is for a popup overlay -->
+                <div id="overlayText"></div>
+        </div>
 
         <div id="appframe">                
 
         <!--TOP HALF OF SCREEN -->
             <div class="upperHalf" id="upperHalf">
 
-                <!-- TOP LEFT (HIDDEN) -->
+            <!-- TOP LEFT (HIDDEN) -->
                 <div class="actionButtons"> 
                     <button class="actionButton" id="hiddenButton" style="visibility:hidden">・</button> 
                 </div>
 
-                <!-- TOP MIDDLE COLUMN -->
+            <!-- TOP MIDDLE COLUMN -->
                 <div class=outputboxes id = outputboxes> 
                     <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">連</button>
                     <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">想</button>
@@ -48,15 +48,16 @@
                     <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">番</button>
                 </div>
 
-                <!-- TOP RIGHT BUTTONS -->
+            <!-- TOP RIGHT BUTTONS -->
                 <div class="actionButtons">
-                    <button class="actionButton" id="outputButton" onclick="outputList();">〒</button>
+                    <button class="actionButton" id="outputButton" onclick="outputList('send');">〒</button>
+                    <button class="actionButton" id="copyButton" onclick="outputList('copy');">写</button>
                     <button class="actionButton" style="text-align:center;" id="helpButton" onclick="help();">何</button>
                 </div>
 
             </div>
 
-            <!-- 3 BUTTONS -->
+        <!-- 3 MIDDLE BUTTONS -->
             <div class="newKanji" id="newKanji">
                 <button class="NKactionButton" id="commaButton" onclick="submitKanji(this.innerHTML, this.id);">、</button>
                 <button class="newestKanji"    id="nk"          onclick="kanjiInfo(this.innerHTML, 'browser');">　</button>
@@ -64,7 +65,7 @@
             </div>  
 
 
-        <!--BOTTOM HALF OF SCREEN -->
+    <!--BOTTOM HALF OF SCREEN -->
 
             <!-- MIDDLE 6 BUTTONS -->
             <div class="resultsboxes" id="resultsBoxes">
@@ -84,7 +85,6 @@
 
             <!-- BOTTOM BUTTONS (BELOW CANVAS) -->
             <div class="canvasButtons" id="canvasButtons">
-                <!-- TODO: remove send button on mobile browser once app complete : https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser -->
                 <button class="bottomButton" id="eraseButton" onclick="resetColours(); canvas.erase();">消去</button>
                 <button class="bottomButton" id="sendButton"  onclick="resetColours(); canvas.recognize();">送信</button>   
                 <button class="bottomButton" id="undoButton"  onclick="resetColours(); canvas.undo();">取消</button>
@@ -92,102 +92,13 @@
 
         </div>
             
-        <!-- CANVAS SETUP -->
-
-            <script src="./helpers.js"></script> <!-- Order is important: helpers.js must go first as it handles GUI appearance in the OS checking function -->
-
-            <script type="text/javascript" src="handwriting.canvas.js"></script>
+    <!-- CODE INSERTIONS -->
             
-            <script type="text/javascript" defer="">    
-
-                // SET UP CANVAS HEIGHT BASED ON USER INTERFACE
-                const bodyheight = document.body.clientHeight;
-
-                const upperHalfHeight = document.getElementById('upperHalf').clientHeight;
-                const kanjiBoxHeight = document.getElementById('newKanji').clientHeight;
-                const resultsHeight = document.getElementById('resultsBoxes').clientHeight;
-                const canvasButtonsHeight = document.getElementById('canvasButtons').clientHeight;
-                
-                const remainder = bodyheight - (upperHalfHeight + kanjiBoxHeight + resultsHeight + canvasButtonsHeight) - 18;
-
-                document.getElementById("canvas").width = document.body.clientWidth - 4;
-                document.getElementById("canvas").height = remainder;
-
-                // if (os != "IOS") {
-                //     document.getElementById("canvas").height = remainder - 20;
-                // }
-                // else {
-                //     document.getElementById("canvas").height = remainder - 20;
-                // }
-
-                document.getElementById("canvas").style.display = "block"; // unhide the canvas here -- you can see this resizing happening on loadup!
-    
-
-                // PROVIDE SETTINGS FOR HANDWRITING.JS CANVAS API
-                var canvas = new handwriting.Canvas(document.getElementById('canvas'), 3);
-                    
-                    canvas.setOptions({language: "ja", numOfWords: 1, numOfReturn: 6,
-                    });
-                    canvas.set_Undo_Redo(true, false);
-                    canvas.setLineWidth(7);
-
- 
-            /*  THIS CODE LOADS THE "resultbox" <BUTTONs> WITH INFO: see lines 230-237 in handwriting.canvas.js and see buttons in <DIV> class "resultsboxes" above */
-                canvas.setCallBack(function(data, err) 
-                {  
-                    if (err) {                           
-                        throw err;
-                    }
-                    else {
-                        // Z-logic to be commented out if significant difference between mobile handwriting and mousepad input does not persist.
-                        let z = 5;   
-                        for (i = 0; i < 6; i++) 
-                        {
-                            if (data[i] == null ) {
-                                continue;
-                            }
-                            else {
-                                // document.getElementById("rb" + i).innerHTML = data[i];
-                                document.getElementById("rb" + z).innerHTML = data[i];
-                            }
-                            z = z - 1;
-                        }
-                    }       
-                });
-
-            </script>
-
-            <!-- ADD DICTIONARY AND HELPER FUNCTIONS -->
-            <script type="text/javascript" src="./minifiedDictionary.js"></script>  
+        <script type = "text/javascript" src="./src/OSsetup.js"></script>
+        <script type = "text/javascript" src="./src/helpers.js"></script> <!-- Order is important: helpers.js must go first as it handles GUI appearance in the OS checking function -->
+        <script type = "text/javascript" src="./src/handwriting API/handwriting.canvas.js"></script>
+        <script type = "text/javascript" src="./src/canvasSetup.js"></script> <!-- This configures the handwriting canvas and hooks the API into the HTML Canvas on line 81-->
+        <script type = "text/javascript" src="./src/minifiedDictionary.js"></script>  
             
     </body>
 </html>
-
-<!--
-                  // GET BROWSER TYPE AND MAKE ALTERATIONS FOR IOS
-                const os = (() => {
-                    if (/windows/i.test(navigator.userAgent)) {
-                        // Do nothing
-                        return "Windows"
-                    }
-                    else if (/iphone/i.test(navigator.userAgent) || /ipad/i.test(navigator.userAgent)) {
-                        
-                        document.getElementById("nk").className = "newestKanjiIOS";
-                        document.getElementById("commaButton").className =  "NKactionButtonIOS";
-                        document.getElementById("stopButton").className =  "NKactionButtonIOS";
-                        
-                        <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">連</button>
-                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">想</button>
-                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">漢</button>
-                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">字</button>
-                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">蝶</button>
-                    <button class="kanjiList" onclick="kanjiInfo(this.innerHTML)">番</button>
-                        
-                        return "iOS";
-                    }
-                    else if (/macintosh/i.test(navigator.userAgent)) {
-                        // Do nothing
-                        return "Mac OS"
-                    }
-                })();
--->

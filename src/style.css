@@ -2,9 +2,9 @@
 
       ┌─┐ ┌─┐ <--- actionButton/s
       │-│ └─┘
-      │-│ <------- div.outputboxes, button.kanjiList   
+      │-│ <------- div.outputboxes: button.kanjiList   
       └─┘
-  ┌─┐ ┌─┐ ┌─┐ <--- div.newKanji, NKactionButton, button.newestKanji
+  ┌─┐ ┌─┐ ┌─┐ <--- div.newKanji: button.NKactionButton, button.newestKanji
   └─┘ └─┘ └─┘
   ┌─────────┐ 
   ├─────────┤ <--- resultsbox/es
@@ -19,24 +19,15 @@ html, body {
     width:100%;
     text-align:center;
     font-family: Hiragino Kaku Gothic Pro, Hiragino Sans, Meiryo, sans-serif;
-    /* background-color: rgb(159, 159, 197); */
     background-color:#ffffff;
     display:flexbox;
-    /* TODO: apparently this compensates for iOS insanity but no effect seen */ 
-    /* -webkit-text-size-adjust: 100%;  */
     margin-left:auto; 
     margin-right:auto;
-
-}
-div {
-    /* DEBUGGING */
-    /* border:1px solid rgb(133, 133, 133); */
 }
 a { 
     color:#f74040; 
 }
 
- 
 
 
 /* __________________OUTPUT AREA TOP OF SCREEN__________________ */
@@ -48,7 +39,7 @@ div.upperHalf {
     height: 32vh;
     padding-bottom: 2vh;
     }
-    div.outputboxes {               /* THE SCROLLABLE, VERTICAL LIST OF INPUTTED KANJI */
+    div.outputboxes {                   /* THE SCROLLABLE, VERTICAL LIST OF INPUTTED KANJI */
         overflow-y: scroll;    
         width:65%;
         }
@@ -69,12 +60,7 @@ div.upperHalf {
         }
 
 
-
-
-
-
-
-div.actionButtons {                 /* THE ADMIN BUTTONS IN THE TOP CORNER OF THE SCREEN */
+div.actionButtons {                     /* THE ADMIN BUTTONS IN THE TOP CORNER OF THE SCREEN */
     display: inline-table;
     margin: 0 auto;
     }
@@ -93,7 +79,7 @@ div.actionButtons {                 /* THE ADMIN BUTTONS IN THE TOP CORNER OF TH
     }
 
 
-div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
+div.newKanji {                          /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS */
     /* background-color:#e17272; */
     background-color:#ffffff;
     /* display:flexbox; */
@@ -102,7 +88,6 @@ div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS 
     justify-content: space-between;
     }
     button.NKactionButton {
-        /* vertical-align:top; TODO: DECIDE UPON */
         font-size: 1.4rem;
         border: hidden;
         color: #ededed;
@@ -122,7 +107,6 @@ div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS 
         text-align: center;
         aspect-ratio: 1 / 1;
         padding:1% 3%;        
-        /* This seems to be causing the kanji square to be too big on iOS but reason not forthcoming */
         font-size: 3rem;
     }
 
@@ -178,7 +162,7 @@ div.newKanji {                      /* THESE ARE THE 3 BUTTONS ABOVE THE CANVAS 
 
 button.bottomButton {
     /* margin:0 auto; */
-  
+    display: inline-block;
     border: none;
     font-size: 1rem;
     padding: 2% 3%;
@@ -202,12 +186,13 @@ button.bottomButton {
     right: 0;   /* Do not remove */
     bottom: 0; /* Do not remove */
     background-color: rgba(0,0,0,0.95);
+    overflow-y: auto; /* TODO: double-check */
+
     }
     #overlayText{                               /* THE HELP/ABOUT OVERLAY PAGE */
         position:relative;
         padding: 12%;
         align-items: center;
-
         text-align: justify; 
         font-size: 1rem;
         line-height: 1.4;
@@ -224,7 +209,7 @@ button.bottomButton {
         }
 
 
-  .tg {                             /* ____________KANJIINFO() TABLE INFO IN OVERLAY */
+  .tg {                             /* _____________THE KANJIINFO() FUNCTION's TABLE INFO IN OVERLAY */
     border-collapse:collapse;
     border-spacing:0;
     /* align-content: center; */
@@ -352,5 +337,3 @@ button.resultboxIOS {
         background-color: #f74040;
         color: #f7f7f7;
     }
-
-    

@@ -1,3 +1,5 @@
+// This file from Chen-Yu Ho's Handwriting.js API (https://www.chenyuho.com/project/handwritingjs/).  
+
 (function() {
 
     // Establish the root object, `window` (`self`) in the browser, 

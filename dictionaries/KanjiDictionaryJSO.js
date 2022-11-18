@@ -1,27 +1,25 @@
 /*  This JS object is built from the JSON file, which is in turn built from the Compiled Kanji Reference Dictionary spreadsheet. 
+    Please note that here, dictionary entries are ordered by the "wiki" variable in each key:value pair -- that is, 年 is #1 it has the most (2082013) appearances on the Japanese Wikipedia. 
 
-Please note that dictionary entries are ordered by the "wiki" variable in each key:value pair 
-    -- that is, 年 is #1 it has the most (2082013) appearances on the Japanese Wikipedia.    
+    SOURCES: 
+
+          EDRDG's [KANJIDIC](http://www.edrdg.org/wiki/index.php/KANJIDIC_Project).
+          Michael Raine & Jim Breen's [KRADFILE](http://www.edrdg.org/krad/kradinf.html).
+          Shang's *[Kanji Frequency on Wikipedia](https://docs.google.com/spreadsheets/d/18uV916nNLcGE7FqjWH4SJSxlvuT8mM4J865u0WvqlHU/edit?usp=sharing)* spreadsheet. 
+
     KEY :
-      bushu        = 部首      = radicals (components of the kanji)
-      eigo         = 英語      = kanji's english meaning
-      jikaku       = 字画      = kanji stroke count
-      heisig       = ・・      = Heisig's index number
-      kanjidicBan  = ・・      = The number for the EDRGD "KANJIDIC" dictionary **
-      yomikata     = 読み方    = The entry kanji's pronunciations.
-      onyomiKanji  = 音読み漢字 = Words using the kanji's onyomi, in kanji form
-      onyomiKana   = 音読み仮名 = Words using the kanji's onyomi, in kana form
-      kunyomiKanji = 訓読み漢字 = Words using the kanji's kunyomi, in kanji form
-      kunyomiKana  = 訓読み仮名 = Words using the kanji's kunyomi, in kana form
+          bushu        = 部首      = radicals (components of the kanji)
+          eigo         = 英語      = kanji's english meaning
+          jikaku       = 字画      = kanji stroke count
+          heisig       = ・・      = Heisig's index number
+          kanjidicBan  = ・・      = The number for the EDRGD "KANJIDIC" dictionary **
+          yomikata     = 読み方    = The entry kanji's pronunciations.
+          onyomiKanji  = 音読み漢字 = Words using the kanji's onyomi, in kanji form
+          onyomiKana   = 音読み仮名 = Words using the kanji's onyomi, in kana form
+          kunyomiKanji = 訓読み漢字 = Words using the kanji's kunyomi, in kanji form
+          kunyomiKana  = 訓読み仮名 = Words using the kanji's kunyomi, in kana form
 
-      ** This variable is essential for maintaining order when referencing the CKRD and when cross-referencing other dictionaries using the EDRGD KANJIDIC system
-*/
-
-/* To make edits, 
-  UNMINIFIY: https://unminify.com/
-  MINIFY:    https://codebeautify.org/minify-js
-
-  Change to "const dictionary = {..." in minified file.
+    ** This variable is essential for maintaining order when referencing the CKRD and when cross-referencing other dictionaries using the EDRGD KANJIDIC system 
 */
 
 dictionaryObject = {

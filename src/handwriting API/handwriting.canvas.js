@@ -1,4 +1,5 @@
-// Code added lines 159-161
+// This file from Chen-Yu Ho's Handwriting.js API (https://www.chenyuho.com/project/handwritingjs/).  
+// Code added lines 160-162
 
 (function(window, document) {
 
