@@ -337,3 +337,24 @@ button.resultboxIOS {
         background-color: #f74040;
         color: #f7f7f7;
     }
+
+    
+
+/* TODO: refine sizing */
+
+@media only screen and (min-width: 480px) 
+{
+    .appframe {
+        padding: 0% 20%;
+        /* background-color:#f74040;  */
+    }
+}
+
+
+@media only screen and (min-width: 768px) 
+{
+    .appframe {
+        padding: 0% 35%;
+        /* background-color: #1bc459; */
+    }
+}

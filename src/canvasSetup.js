@@ -13,7 +13,8 @@ const canvasButtonsHeight = document.getElementById('canvasButtons').clientHeigh
 
 const remainder = bodyheight - (upperHalfHeight + kanjiBoxHeight + resultsHeight + canvasButtonsHeight) - 18;
 
-document.getElementById("canvas").width = document.body.clientWidth - 4;
+// document.getElementById("canvas").width = document.body.clientWidth - 4;
+document.getElementById("canvas").width = document.getElementById("resultsBoxes").clientWidth - 4; // This version accounts for change to size with .appframe class
 document.getElementById("canvas").height = remainder;
 
 document.getElementById("canvas").style.display = "block"; // unhide the canvas here -- otherwise you can see this resizing happening on loadup!

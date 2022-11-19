@@ -123,7 +123,7 @@ function kanjiInfo(kanji, mode)
 
     let heisigIndex;
         if (dictionary[kanji].heisig === null || dictionary[kanji].heisig === undefined) {   
-            heisigIndex = "unlisted"   
+            heisigIndex = "unlisted";   
         } else { 
             heisigIndex = dictionary[kanji].heisig;   
         }
