@@ -190,7 +190,7 @@ button.bottomButton {
     left: 0;     /* Do not remove */
     right: 0;   /* Do not remove */
     bottom: 0; /* Do not remove */
-    background-color: rgba(0,0,0,0.90);
+    background-color: rgba(0,0,0,0.95);
     overflow-y: auto; /* TODO: double-check */
 
     }
