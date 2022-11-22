@@ -168,8 +168,9 @@ button.bottomButton {
     /* margin:0 auto; */
     display: inline-block;
     border: none;
-    font-size: 0.9rem;
-    padding: 2% 2%;
+    font-size: 1.0rem;
+    padding: 2% 3%;
+    margin: 1% 1% 0% 1%;
     color: #ededed;
     background-color: #666666;
     text-align: center;
@@ -354,8 +355,15 @@ button.resultboxIOS {
     }
 }
 
+@media only screen and (min-width: 650px) 
+{
+    .appframe {
+        padding: 0% 25%;
+        /* background-color: #1bc459; */
+    }
+}
 
-@media only screen and (min-width: 768px) 
+@media only screen and (min-width: 800px) 
 {
     .appframe {
         padding: 0% 35%;
