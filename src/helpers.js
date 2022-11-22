@@ -39,7 +39,7 @@ function submitKanji(newKanji, buttonid)
     }
 
     const exceptions = ["　", "。", "、"];
-    if (exceptions.includes(prevKanji))
+    if (exceptions.includes(prevKanji)) // this checks the LAST kanji that was written, not the PRESENT one!
     {
         passKanji(newKanji);
         return;
@@ -101,9 +101,12 @@ function help()
     + "<br>This is a mobile webapp for practicing hand-writing kanji by chaining them by their shared components."
     + "<center><br>例：虫虹工紅、寸吋囗吐土<br><br></center>"
     + "Write a kanji in the white box. Tap your kanji when it appears in one of the grey boxes to add it to the list. " 
-    + "Tap ､ or ｡ to start a new sequence. 〒 to export. If you want to know more about a kanji, tap on it!"
-    + "<br></br>"
-    + "<a href='https://callumbeaney.github.io/website/'>Callum Beaney</a> made this based on how he used to practice kanji on a notepad at work. The kanji dictionary is built from EDRDG's <a href='http://www.edrdg.org/wiki/index.php/KANJIDIC_Project'>KANJIDIC</a> & <a href='http://www.edrdg.org/krad/kradinf.html'>RADKFILE</a> and Shang's Kanji Frequency <a href='https://docs.google.com/spreadsheets/d/18uV916nNLcGE7FqjWH4SJSxlvuT8mM4J865u0WvqlHU/edit#gid=0'>spreadsheet</a>. The canvas API is Chen-Yu Ho's <a href='https://www.chenyuho.com/project/handwritingjs/'>Handwriting.JS</a>. Read the source code <a href='https://github.com/CallumBeaney/rensou-kanji-hinge'>here</a>. Report a bug <a href='https://github.com/CallumBeaney/rensou-kanji-hinge/issues'>here</a>.";
+    + "Tap ､ or ｡ to start a new sequence. 写 to copy to clipboard. "
+    // + "〒 to export. "
+    + "If you want to know more about a kanji, tap on it!"
+    + "<br><br>"
+    + "<a href='https://callumbeaney.github.io/website/'>Callum Beaney</a> made this based on how he used to practice kanji on a notepad at work. Read the source code <a href='https://github.com/CallumBeaney/rensou-kanji-hinge'>here</a>. Report a bug <a href='https://github.com/CallumBeaney/rensou-kanji-hinge/issues'>here</a>."
+    + " Tap anywhere to return.";
 
     turnOverlayOn();
 }
@@ -199,7 +202,8 @@ function kanjiInfo(kanji, mode)
         if (typeof dictionary[kanji].yomikata === 'object' && dictionary[kanji].yomikata.length >= 7) 
         {   
             output += '<td class="tg-right smalltext">' + yomikata + "</td>";
-        } else {
+        } 
+        else {
             output += '<td class="tg-right">' + yomikata + "</td>";
         }
 
@@ -268,7 +272,7 @@ function outputList(mode)
     let query = ".kanjiList" + OS_VAL;
     let elements = document.querySelectorAll(query);    
     
-    // TODO Can you strip "Array.from" from this?
+    // TODO: Can you strip "Array.from" from this?
     //      Appears so but double check
     Array.from(elements).forEach((element, index) => {
         kanjiInfo(element.innerHTML, mode);
@@ -281,7 +285,7 @@ function outputList(mode)
         document.getElementById('overlayText').insertAdjacentHTML("afterbegin", "The following list of characters has been copied to your clipboard: <br><br>");
     }
     else if (mode === "send") {
-
+        // TODO: develop this functionality!
         document.getElementById("overlayText").innerHTML += "<center style='font-size:1.4rem;'><br><br>in development<br>発展つつある</center>";
     }
 
@@ -294,7 +298,7 @@ async function copy_to_clipboard()
 
     try {
         await navigator.clipboard.writeText(text);
-        /* Resolved - text copied to clipboard successfully */
+        /* Passed - text copied to clipboard successfully */
     } catch (err) {
         console.error('Failed to copy: ', err);
         /* Rejected - text failed to copy to the clipboard */

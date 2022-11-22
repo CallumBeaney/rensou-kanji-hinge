@@ -160,12 +160,16 @@ div.newKanji {                          /* THESE ARE THE 3 BUTTONS ABOVE THE CAN
                 color: #f7f7f7;
             }
 
+div.canvasButtons {
+    display: flex;
+    align-content: flex-start;
+}
 button.bottomButton {
     /* margin:0 auto; */
     display: inline-block;
     border: none;
-    font-size: 1rem;
-    padding: 2% 3%;
+    font-size: 0.9rem;
+    padding: 2% 2%;
     color: #ededed;
     background-color: #666666;
     text-align: center;
@@ -185,7 +189,7 @@ button.bottomButton {
     left: 0;     /* Do not remove */
     right: 0;   /* Do not remove */
     bottom: 0; /* Do not remove */
-    background-color: rgba(0,0,0,0.95);
+    background-color: rgba(0,0,0,0.90);
     overflow-y: auto; /* TODO: double-check */
 
     }
