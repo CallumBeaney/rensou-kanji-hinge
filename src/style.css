@@ -20,7 +20,7 @@ html, body {
     text-align:center;
     font-family: Hiragino Kaku Gothic Pro, Hiragino Sans, Meiryo, sans-serif;
     background-color:#ffffff;
-    display:flexbox;
+    display: flexbox;
     margin-left:auto; 
     margin-right:auto;
 }
@@ -167,7 +167,7 @@ div.canvasButtons {
 button.bottomButton {
     /* margin:0 auto; */
     display: inline-block;
-    border: none;
+    border:#ffffff;
     font-size: 1.0rem;
     padding: 2% 3%;
     margin: 1% 1% 0% 1%;
