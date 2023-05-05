@@ -1,11 +1,12 @@
 # 連想漢字蝶番　Rensou Kanji Hinge 
-
-<img style="width:250px;" src="./images/demo.gif"></img>
-
+###  Try Rensou Kanji Hinge [HERE](https://callumbeaney.github.io/rensou-kanji-hinge/)
+### Try a Flutter rebuild with Chinese language functionality [HERE](https://github.com/CallumBeaney/kanji-hanzi-chainer)  
+  
+<br>  
+<img style="width:220px;" src="./images/demo.gif"></img>
+  
 # 情報と使用法・ABOUT & USAGE 
-
-[USE HERE](https://callumbeaney.github.io/rensou-kanji-hinge/)
-
+  
 漢字の部首を連想することで漢字の手習いの為の携帯サイトです。描きながら、直上の六つの四角に自動手書き認識ソフトは描いた漢字を推測します。選びが成功すれば、成功欄に追加されます。部首を共有する漢字を思い出せない場合｢、｣と｢。｣ボタンを押すと新しい列を始めます。ある漢字の情報が欲しければその漢字を押してください。
 
 This is a smartphone-oriented web app for practicing hand-writing kanji by chaining them by their shared components, based on how I used to furtively practice kanji on a notepad when I worked in a restaurant:
